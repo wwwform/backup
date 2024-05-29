@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Bem Vindo ao Site do Geração Eleita </title>
+    <title>Geração Eleita</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -92,7 +92,7 @@
 </head>
 <body>
     <header>
-        <h1>Geração Eleita - Palavra do Dia</h1>
+        <h1>Bem Vindo ao Site do Geração Eleita</h1>
         <h2>Palavra do Dia</h2>
     </header>
     <button onclick="generateVerse()">Clique aqui para receber a palavra do dia</button>
@@ -389,9 +389,6 @@
             "Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei. - Mateus 11:28",
             "Eis que estou convosco todos os dias, até à consumação dos séculos. - Mateus 28:20",
     // Sinta-se à vontade para adicionar mais versículos conforme necessário
-
-
-            // Adicione mais versículos conforme necessário
         ];
 
         async function generateVerse() {
@@ -417,7 +414,6 @@
         function askToSend() {
             document.getElementById('sendOptionsContainer').style.display = 'block';
         }
-
         function sendToWhatsAppContact() {
             const verseText = document.getElementById('verse').innerText;
             const message = `Confira este versículo da Bíblia: ${verseText}`;
