@@ -13,7 +13,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background: url('foto de fundo') no-repeat center center fixed;
+            background: url('foto de fundo.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
         }
@@ -99,9 +99,9 @@
     <script>
         async function generateVerse() {
             try {
-                const response = await fetch('https://labs.bible.org/api/?passage=random&type=json');
+                const response = await fetch('https://www.abibliadigital.com.br/api/verses/nvi/random');
                 const data = await response.json();
-                const verse = `${data[0].bookname} ${data[0].chapter}:${data[0].verse} - ${data[0].text}`;
+                const verse = `${data.book.name} ${data.chapter}:${data.number} - ${data.text}`;
                 document.getElementById('verse').innerText = verse;
                 document.getElementById('imageContainer').style.display = 'block';
                 document.getElementById('optionsContainer').style.display = 'block';
@@ -113,8 +113,8 @@
 
         function generateImage() {
             const verseText = document.getElementById('verse').innerText;
-            const imageUrl = `https://via.placeholder.com/400x200?text=${encodeURIComponent(verseText)}`;
-            const imageElement = `<img src="${imageUrl}" alt="Versículo da Bíblia">`;
+            const imageUrl = `https://picsum.photos/400/200?blur=2&random=1`;
+            const imageElement = `<img src="${imageUrl}" alt="Versículo da Bíblia"><div class="overlay">${verseText}</div>`;
             document.getElementById('image').innerHTML = imageElement;
         }
 
