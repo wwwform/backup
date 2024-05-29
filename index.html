@@ -75,6 +75,16 @@
             display: none;
             text-align: center;
         }
+        .send-options {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
@@ -91,9 +101,15 @@
         <div id="image"></div>
     </div>
     <div class="options" id="optionsContainer">
-        <p>Deseja enviar para um grupo do WhatsApp?</p>
-        <button onclick="sendToWhatsApp()">Sim</button>
-        <button onclick="hideSendOptions()">Não</button>
+        <p>Deseja enviar este versículo para alguém?</p>
+        <button onclick="askToSend()">Enviar</button>
+    </div>
+    <div class="send-options" id="sendOptionsContainer" style="display:none;">
+        <p>Como você gostaria de compartilhar este versículo?</p>
+        <button onclick="sendToWhatsApp()">Para um contato</button>
+        <button onclick="sendToWhatsAppGroup()">Para um grupo</button>
+        <button onclick="putInStatus()">Colocar no Status</button>
+        <button onclick="hideSendOptions()">Cancelar</button>
     </div>
 
     <script>
@@ -112,9 +128,8 @@
         }
 
         function generateImage() {
-            const verseText = document.getElementById('verse').innerText;
             const imageUrl = `https://picsum.photos/400/200?blur=2&random=1`;
-            const imageElement = `<img src="${imageUrl}" alt="Versículo da Bíblia"><div class="overlay">${verseText}</div>`;
+            const imageElement = `<img src="${imageUrl}" alt="Versículo da Bíblia">`;
             document.getElementById('image').innerHTML = imageElement;
         }
 
@@ -122,23 +137,37 @@
             document.getElementById('imageContainer').style.display = 'none';
         }
 
+        function askToSend() {
+            document.getElementById('sendOptionsContainer').style.display = 'block';
+        }
+
         function sendToWhatsApp() {
             const verseText = document.getElementById('verse').innerText;
-            const imageElement = document.getElementById('image').querySelector('img');
-            let message;
-            if (imageElement) {
-                const imageUrl = imageElement.src;
-                message = `Confira este versículo da Bíblia: ${verseText}\n\n${imageUrl}`;
-            } else {
-                message = `Confira este versículo da Bíblia: ${verseText}`;
-            }
+            const message = `Confira este versículo da Bíblia: ${verseText}`;
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            hideSendOptions();
+        }
+
+        function sendToWhatsAppGroup() {
+            const verseText = document.getElementById('verse').innerText;
+            const message = `Confira este versículo da Bíblia: ${verseText}`;
             const groupLink = "https://chat.whatsapp.com/SEU_LINK_DE_GRUPO"; // Substitua pelo link do seu grupo do WhatsApp
             const whatsappUrl = `${groupLink}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
+            hideSendOptions();
         }
 
         function hideSendOptions() {
-            document.getElementById('optionsContainer').style.display = 'none';
+            document.getElementById('sendOptionsContainer').style.display = 'none';
+        }
+
+        function putInStatus() {
+            const verseText = document.getElementById('verse').innerText;
+            // Implemente a lógica para colocar o versículo no status
+            const statusMessage = `Colocando no status: ${verseText}`;
+            alert(statusMessage);
+            hideSendOptions();
         }
     </script>
 </body>
