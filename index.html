@@ -106,9 +106,9 @@
     </div>
     <div class="send-options" id="sendOptionsContainer" style="display:none;">
         <p>Como você gostaria de compartilhar este versículo?</p>
-        <button onclick="sendToWhatsApp()">Para um contato</button>
+        <button onclick="sendToWhatsAppContact()">Para um contato</button>
         <button onclick="sendToWhatsAppGroup()">Para um grupo</button>
-        <button onclick="putInStatus()">Colocar no Status</button>
+        <button onclick="addToWhatsAppStatus()">Adicionar ao Status</button>
         <button onclick="hideSendOptions()">Cancelar</button>
     </div>
 
@@ -128,8 +128,9 @@
         }
 
         function generateImage() {
+            const verseText = document.getElementById('verse').innerText;
             const imageUrl = `https://picsum.photos/400/200?blur=2&random=1`;
-            const imageElement = `<img src="${imageUrl}" alt="Versículo da Bíblia">`;
+            const imageElement = `<img src="${imageUrl}" alt="Versículo da Bíblia"><div class="overlay">${verseText}</div>`;
             document.getElementById('image').innerHTML = imageElement;
         }
 
@@ -141,7 +142,7 @@
             document.getElementById('sendOptionsContainer').style.display = 'block';
         }
 
-        function sendToWhatsApp() {
+        function sendToWhatsAppContact() {
             const verseText = document.getElementById('verse').innerText;
             const message = `Confira este versículo da Bíblia: ${verseText}`;
             const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
@@ -152,22 +153,21 @@
         function sendToWhatsAppGroup() {
             const verseText = document.getElementById('verse').innerText;
             const message = `Confira este versículo da Bíblia: ${verseText}`;
-            const groupLink = "https://chat.whatsapp.com/SEU_LINK_DE_GRUPO"; // Substitua pelo link do seu grupo do WhatsApp
+            // Substitua pelo link do seu grupo do WhatsApp
+            const groupLink = "https://chat.whatsapp.com/SEU_LINK_DE_GRUPO";
             const whatsappUrl = `${groupLink}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             hideSendOptions();
         }
 
-        function hideSendOptions() {
-            document.getElementById('sendOptionsContainer').style.display = 'none';
+        function addToWhatsAppStatus() {
+            // Esta funcionalidade requer integração com a API do WhatsApp e não pode ser implementada diretamente via HTML/JavaScript.
+            alert('Adicionar ao status do WhatsApp não é suportado neste código.');
+            hideSendOptions();
         }
 
-        function putInStatus() {
-            const verseText = document.getElementById('verse').innerText;
-            // Implemente a lógica para colocar o versículo no status
-            const statusMessage = `Colocando no status: ${verseText}`;
-            alert(statusMessage);
-            hideSendOptions();
+        function hideSendOptions() {
+            document.getElementById('sendOptionsContainer').style.display = 'none';
         }
     </script>
 </body>
