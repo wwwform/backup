@@ -13,7 +13,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background: url('foto de fundo.jpg') no-repeat center center fixed;
+            background: url('foto de fundo') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
         }
@@ -116,18 +116,20 @@
     </div>
 
     <script>
+        const versiculos = [
+            "João 3:16 - Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.",
+            "Romanos 8:28 - E sabemos que todas as coisas contribuem juntamente para o bem daqueles que amam a Deus, daqueles que são chamados segundo o seu propósito.",
+            "Filipenses 4:13 - Posso todas as coisas naquele que me fortalece.",
+            // Adicione mais versículos conforme necessário
+        ];
+
         async function generateVerse() {
-            try {
-                const response = await fetch('https://www.abibliadigital.com.br/api/verses/nvi/random');
-                const data = await response.json();
-                const verse = `${data.book.name} ${data.chapter}:${data.number} - ${data.text}`;
-                document.getElementById('verse').innerText = verse;
-                document.getElementById('imageContainer').style.display = 'block';
-                document.getElementById('optionsContainer').style.display = 'block';
-                document.getElementById('image').innerHTML = '';
-            } catch (error) {
-                console.error('Erro ao buscar o versículo:', error);
-            }
+            const index = Math.floor(Math.random() * versiculos.length);
+            const verse = versiculos[index];
+            document.getElementById('verse').innerText = verse;
+            document.getElementById('imageContainer').style.display = 'block';
+            document.getElementById('optionsContainer').style.display = 'block';
+            document.getElementById('image').innerHTML = '';
         }
 
         function generateImage() {
