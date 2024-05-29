@@ -13,7 +13,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background: url('foto de fundo.jpg') no-repeat center center fixed;
+            background: url('foto-de-fundo.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
         }
@@ -55,6 +55,7 @@
             margin-top: 20px;
             display: none;
             text-align: center;
+            position: relative; /* Adicionado */
         }
         .image img {
             max-width: 100%;
@@ -71,6 +72,7 @@
             color: white;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
             z-index: 1;
+            pointer-events: none; /* Não afeta o clique */
         }
         .options {
             margin-top: 20px;
@@ -132,7 +134,7 @@
         function generateImage() {
             const verseText = document.getElementById('verse').innerText;
             const imageUrl = `https://picsum.photos/400/200?blur=2&random=1`;
-            const imageElement = `<div class="overlay">${verseText}</div><img src="${imageUrl}" alt="Versículo da Bíblia">`;
+            const imageElement = `<img src="${imageUrl}" alt="Versículo da Bíblia"><div class="overlay">${verseText}</div>`;
             document.getElementById('image').innerHTML = imageElement;
         }
 
