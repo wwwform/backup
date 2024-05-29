@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geração Eleita - Palavra do Dia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: url('https://via.placeholder.com/1920x1080') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2em;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        h2 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .verse {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #fff;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .image {
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+        .image img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #555;
+            border-radius: 10px;
+        }
+        .options {
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Seja bem-vindo ao site do Geração Eleita</h1>
+        <h2>Palavra do Dia</h2>
+    </header>
+    <button onclick="generateVerse()">Clique aqui para receber a palavra do dia</button>
+    <div class="verse" id="verse"></div>
+    <div class="image" id="imageContainer">
+        <p>Deseja gerar uma imagem deste versículo?</p>
+        <button onclick="generateImage()">Sim</button>
+        <button onclick="hideImageOptions()">Não</button>
+        <div id="image"></div>
+    </div>
+    <div class="options" id="optionsContainer">
+        <p>Deseja enviar para um grupo do WhatsApp?</p>
+        <button onclick="sendToWhatsApp()">Sim</button>
+        <button onclick="hideSendOptions()">Não</button>
+    </div>
+
+    <script>
+        async function generateVerse() {
+            try {
+                const response = await fetch('https://labs.bible.org/api/?passage=random&type=json');
+                const data = await response.json();
+                const verse = `${data[0].bookname} ${data[0].chapter}:${data[0].verse} - ${data[0].text}`;
+                document.getElementById('verse').innerText = verse;
+                document.getElementById('imageContainer').style.display = 'block';
+                document.getElementById('optionsContainer').style.display = 'block';
+                document.getElementById('image').innerHTML = '';
+            } catch (error) {
+                console.error('Erro ao buscar o versículo:', error);
+            }
+        }
+
+        function generateImage() {
+            const verseText = document.getElementById('verse').innerText;
+            const imageUrl = `https://via.placeholder.com/400x200?text=${encodeURIComponent(verseText)}`;
+            const imageElement = `<img src="${imageUrl}" alt="Versículo da Bíblia">`;
+            document.getElementById('image').innerHTML = imageElement;
+        }
+
+        function hideImageOptions() {
+            document.getElementById('imageContainer').style.display = 'none';
+        }
+
+        function sendToWhatsApp() {
+            const verseText = document.getElementById('verse').innerText;
+            const imageElement = document.getElementById('image').querySelector('img');
+            let message;
+            if (imageElement) {
+                const imageUrl = imageElement.src;
+                message = `Confira este versículo da Bíblia: ${verseText}\n\n${imageUrl}`;
+            } else {
+                message = `Confira este versículo da Bíblia: ${verseText}`;
+            }
+            const groupLink = "https://chat.whatsapp.com/SEU_LINK_DE_GRUPO"; // Substitua pelo link do seu grupo do WhatsApp
+            const whatsappUrl = `${groupLink}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function hideSendOptions() {
+            document.getElementById('optionsContainer').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
