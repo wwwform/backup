@@ -95,7 +95,7 @@
         <h1>Bem Vindo ao Site do Geração Eleita</h1>
         <h2>Palavra do Dia</h2>
     </header>
-    <button onclick="generateVerse()Clique aqui para receber a palavra do dia</button>
+    <button onclick="generateVerse()">Clique aqui para receber a palavra do dia</button>
     <div class="verse" id="verse"></div>
     <div class="image" id="imageContainer">
         <p>Deseja gerar uma imagem deste versículo?</p>
@@ -392,7 +392,7 @@
             "Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei. - Mateus 11:28",
             "Eis que estou convosco todos os dias, até à consumação dos séculos. - Mateus 28:20".
             // Sinta-se à vontade para adicionar mais versículos conforme necessário
-        ];
+            ];
 
         async function generateVerse() {
             const index = Math.floor(Math.random() * versiculos.length);
