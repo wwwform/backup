@@ -16,8 +16,6 @@
             background: url('Logo GE') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adiciona sombra ao texto */
-            padding-bottom: 100px; /* Espaço inferior */
         }
         header {
             text-align: center;
@@ -27,7 +25,7 @@
             margin: 0;
             font-size: 2em;
             color: #fff;
-            background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+            background-color: rgba(0, 0, 0, 0.5);
             padding: 10px;
             border-radius: 5px;
         }
@@ -47,16 +45,14 @@
         .verse {
             margin-top: 20px;
             font-size: 18px;
-            color: #fff;
+            color: #000;
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+            background-color: rgba(255, 255, 255, 0.7);
             padding: 10px;
             border-radius: 5px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adiciona sombra ao texto */
         }
         .image {
             margin-top: 20px;
-            display: none;
             text-align: center;
             position: relative;
         }
@@ -75,26 +71,22 @@
             color: white;
             text-align: center;
             z-index: 1;
-            background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
-            padding: 5px;
-            border-radius: 5px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adiciona sombra ao texto */
         }
         .options {
             margin-top: 20px;
-            display: none;
             text-align: center;
         }
         .send-options {
             position: fixed;
             bottom: 20px;
             left: 20px;
-            right: 20px; /* Garantir que o container fique centralizado */
+            right: 20px;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             z-index: 999;
+            text-align: center;
         }
     </style>
 </head>
@@ -122,15 +114,15 @@
         <button onclick="hideSendOptions()">Cancelar</button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         const versiculos = [
             "João 3:16 - Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.",
             "Romanos 8:28 - E sabemos que todas as coisas contribuem juntamente para o bem daqueles que amam a Deus, daqueles que são chamados segundo o seu propósito.",
-            "Mateus 28:20 - Eis que estou convosco todos os dias, até à consumação dos séculos."
+            "Eis que estou convosco todos os dias, até à consumação dos séculos. - Mateus 28:20",
+            // Sinta-se à vontade para adicionar mais versículos conforme necessário
         ];
 
-        function generateVerse() {
+        async function generateVerse() {
             const index = Math.floor(Math.random() * versiculos.length);
             const verse = versiculos[index];
             document.getElementById('verse').innerText = verse;
@@ -141,7 +133,7 @@
 
         function generateImage() {
             const verseText = document.getElementById('verse').innerText;
-            const imageUrl = `https://picsum.photos/400/200?blur=2&random=${Math.floor(Math.random() * 1000)}`;
+            const imageUrl = `https://picsum.photos/400/200?blur=2&random=1`;
             const imageElement = `<div style="position: relative;"><img src="${imageUrl}" alt="Versículo da Bíblia"><div class="overlay">${verseText}</div></div>`;
             document.getElementById('image').innerHTML = imageElement;
         }
@@ -154,54 +146,20 @@
             document.getElementById('sendOptionsContainer').style.display = 'block';
         }
 
-        async function sendToWhatsAppContact() {
-            const imageElement = document.querySelector('.image div');
-            const canvas = await html2canvas(imageElement);
-            const imageDataUrl = canvas.toDataURL('image/png');
-            
-            // Envia a imagem ao servidor
-            const response = await fetch('http://localhost:3000/upload', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ image: imageDataUrl }),
-            });
-
-            const result = await response.json();
-            if (result.link) {
-                const message = `Confira este versículo da Bíblia: ${result.link}`;
-                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-                window.open(whatsappUrl, '_blank');
-            } else {
-                alert('Falha ao enviar imagem');
-            }
+        function sendToWhatsAppContact() {
+            const verseText = document.getElementById('verse').innerText;
+            const message = `Confira este versículo da Bíblia: ${verseText}`;
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
             hideSendOptions();
         }
 
-        async function sendToWhatsAppGroup() {
-            const imageElement = document.querySelector('.image div');
-            const canvas = await html2canvas(imageElement);
-            const imageDataUrl = canvas.toDataURL('image/png');
-
-            // Envia a imagem ao servidor
-            const response = await fetch('http://localhost:3000/upload', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ image: imageDataUrl }),
-            });
-
-            const result = await response.json();
-            if (result.link) {
-                const message = `Confira este versículo da Bíblia: ${result.link}`;
-                const groupLink = "https://chat.whatsapp.com/HPZi1jXzsTeDtOIotiCXJV";
-                const whatsappUrl = `${groupLink}?text=${encodeURIComponent(message)}`;
-                window.open(whatsappUrl, '_blank');
-            } else {
-                alert('Falha ao enviar imagem');
-            }
+        function sendToWhatsAppGroup() {
+            const verseText = document.getElementById('verse').innerText;
+            const message = `Confira este versículo da Bíblia: ${verseText}`;
+            const groupLink = "https://chat.whatsapp.com/HPZi1jXzsTeDtOIotiCXJV";
+            const whatsappUrl = `${groupLink}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
             hideSendOptions();
         }
 
