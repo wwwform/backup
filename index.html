@@ -97,13 +97,13 @@
     </header>
     <button onclick="generateVerse()">Clique aqui para receber a palavra do dia</button>
     <div class="verse" id="verse"></div>
-    <div class="image" id="imageContainer">
+    <div class="image" id="imageContainer" style="display:none;">
         <p>Deseja gerar uma imagem deste versículo?</p>
         <button onclick="generateImage()">Sim</button>
         <button onclick="hideImageOptions()">Não</button>
         <div id="image"></div>
     </div>
-    <div class="options" id="optionsContainer">
+    <div class="options" id="optionsContainer" style="display:none;">
         <p>Deseja enviar este versículo para alguém?</p>
         <button onclick="askToSend()">Enviar</button>
     </div>
@@ -114,15 +114,15 @@
         <button onclick="hideSendOptions()">Cancelar</button>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
     <script>
         const versiculos = [
             "João 3:16 - Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.",
             "Romanos 8:28 - E sabemos que todas as coisas contribuem juntamente para o bem daqueles que amam a Deus, daqueles que são chamados segundo o seu propósito.",
             "Eis que estou convosco todos os dias, até à consumação dos séculos. - Mateus 28:20",
-            // Sinta-se à vontade para adicionar mais versículos conforme necessário
         ];
 
-        async function generateVerse() {
+        function generateVerse() {
             const index = Math.floor(Math.random() * versiculos.length);
             const verse = versiculos[index];
             document.getElementById('verse').innerText = verse;
@@ -131,11 +131,15 @@
             document.getElementById('image').innerHTML = '';
         }
 
-        function generateImage() {
+        async function generateImage() {
             const verseText = document.getElementById('verse').innerText;
-            const imageUrl = `https://picsum.photos/400/200?blur=2&random=1`;
-            const imageElement = `<div style="position: relative;"><img src="${imageUrl}" alt="Versículo da Bíblia"><div class="overlay">${verseText}</div></div>`;
+            const imageElement = `<div style="position: relative; color: white; text-align: center; background-color: rgba(0, 0, 0, 0.7); padding: 10px; border-radius: 5px;"><div class="overlay">${verseText}</div></div>`;
             document.getElementById('image').innerHTML = imageElement;
+
+            const imageContainer = document.querySelector('.image div');
+            const canvas = await html2canvas(imageContainer);
+            const imageDataUrl = canvas.toDataURL('image/png');
+            document.getElementById('image').innerHTML = `<img src="${imageDataUrl}" alt="Versículo da Bíblia">`;
         }
 
         function hideImageOptions() {
