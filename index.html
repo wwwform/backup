@@ -90,42 +90,44 @@
 
         /* Estilo do rodapé */
         footer {
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: rgba(51, 51, 51, 0.8);
             color: #fff;
             text-align: center;
             padding: 10px 0;
-            position: relative;
+            position: absolute;
             bottom: 0;
             width: 100%;
         }
 
-        /* Estilo adicional para o formulário */
-        .form-group {
-            margin-bottom: 15px;
+        /* Estilo para a seção de redes sociais */
+        .social-section {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: #f3f3f3;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
+        .social-section .photos {
+            display: flex;
+            flex-direction: column;
+            margin-right: 20px;
         }
 
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
+        .social-section .photos img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
         }
 
-        .form-group button {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s;
+        .social-section .instagram-link {
+            display: flex;
+            align-items: center;
         }
 
-        .form-group button:hover {
-            background-color: #218838;
+        .social-section .instagram-link img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -155,7 +157,7 @@
             </div>
             <div class="form-group">
                 <button id="gerar-versiculo">Gerar Versículo</button>
-                <button id="enviar-whatsapp">Deseja enviar para o WhatsApp?</button>
+                <button id="enviar-whatsapp">Deseja Enviar para o WhatsApp?</button>
             </div>
         </div>
         <div id="nossas-fotos" class="content">
@@ -183,16 +185,24 @@
             <h2>Programações</h2>
             <p>Nosso ensaio é toda Segunda-Feira, as 19:30.</p>
             <p>Todo primeiro domingo do mês, certamente no dia da Ceia pela manhã as 08:00, nós temos a consagração com a direção dos Jovens, todos estão convidados.</p>
-            <p>A cada 15 dias, temos um estudo biblico na quinta-feira.</p>
+            <p>A cada 15 dias, temos um estudo biblico na quinta-feira, as 19:30.</p>
         </div>
     </main>
-    <footer>
-        <div class="social-link">
+    <div class="social-section">
+        <div class="photos">
+            <img src="conjunto.jpg" alt="Conjunto">
+            <img src="igreja.jpg" alt="Igreja">
+            <img src="pastor.jpg" alt="Pastor">
+        </div>
+        <div class="instagram-link">
             <a href="https://instagram.com/seu_perfil" target="_blank">
-                <img src="instagram.jpeg" alt="Instagram" class="social-logo" style="width: 30px; height: 30px;">
+                <img src="instagram.jpeg" alt="Instagram">
                 Siga-nos no Instagram
             </a>
         </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Geração Eleita. Todos os direitos reservados.</p>
     </footer>
     <script>
         // JavaScript para navegação
