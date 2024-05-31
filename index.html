@@ -185,20 +185,15 @@
     </nav>
     <main>
         <div id="home" class="content active">
-            <h2>Bem-vindo ao Meu Site</h2>
-            <p>Este é o conteúdo da página inicial.</p>
+            <h2>Bem-vindo ao Site do Geração Eleita</h2>
+            <p>Aqui vamos estar mostrando todos os assuntos referentes ao conjunto Geração Eleita, da Igreja Assembleia de Deus ministério Criação de Deus. Nosso Pastor Presidente é o Clóvis de Carvalho Bassani</p>
         </div>
         <div id="palavra-do-dia" class="content">
             <h2>Palavra do Dia</h2>
-            <p>Este é o conteúdo da Palavra do Dia.</p>
-            <div class="form-group">
-                <label for="versiculo">Versículo</label>
-                <textarea id="versiculo" rows="3"></textarea>
-            </div>
-            <div class="form-group">
-                <button id="gerar-versiculo">Gerar Versículo</button>
-                <button id="enviar-whatsapp">Enviar para o WhatsApp</button>
-            </div>
+            <textarea id="versiculo" readonly style="width: 100%; height: 100px;"></textarea>
+            <br>
+            <button id="gerar-versiculo">Gerar Versículo</button>
+            <button id="enviar-whatsapp">Enviar para o WhatsApp</button>
         </div>
         <div id="nossas-fotos" class="content">
             <h2>Nossas Fotos</h2>
@@ -211,62 +206,47 @@
                     <img src="foto2.jpg" alt="Foto 2">
                     <div class="caption">Legenda da Foto 2</div>
                 </div>
-                <div class="gallery-item">
-                    <video controls>
-                        <source src="video1.mp4" type="video/mp4">
-                        Seu navegador não suporta o elemento de vídeo.
-                    </video>
-                    <div class="caption">Legenda do Vídeo 1</div>
-                </div>
-                <!-- Adicione mais fotos e vídeos conforme necessário -->
+                <!-- Adicione mais fotos aqui -->
             </div>
         </div>
         <div id="programacoes" class="content">
             <h2>Programações</h2>
-            <p>Este é o conteúdo da página de Programações.</p>
+            <p>Detalhes das próximas programações.</p>
         </div>
         <div id="sobre" class="content">
             <h2>Sobre</h2>
-            <p>Este é o conteúdo da página Sobre.</p>
+            <p>Informações sobre o site e o conjunto Geração Eleita.</p>
+        </div>
+        <div class="social-section">
+            <div class="photos">
+                <img src="conjunto.jpg" alt="Foto do Conjunto">
+                <img src="igreja.jpg" alt="Foto da Igreja">
+                <img src="pastor.jpg" alt="Foto do Pastor">
+            </div>
+            <div class="instagram-link">
+                <img src="instagram-logo.png" alt="Instagram Logo">
+                <a href="https://www.instagram.com/seu_perfil" target="_blank">Siga-nos no Instagram</a>
+            </div>
         </div>
     </main>
-    <div class="social-section">
-        <div class="photos">
-            <img src="conjunto.jpg" alt="Conjunto">
-            <img src="igreja.jpg" alt="Igreja">
-            <img src="pastor.jpg" alt="Pastor">
-        </div>
-        <div class="instagram-link">
-            <a href="https://instagram.com/seu_perfil" target="_blank">
-                <img src="logo-instagram.png" alt="Instagram">
-                Siga-nos no Instagram
-            </a>
-        </div>
-    </div>
     <footer>
-        <p>&copy; 2024 Meu Site. Todos os direitos reservados.</p>
+        <p>Rodapé do site</p>
     </footer>
     <script>
-        // JavaScript para navegação
-        document.querySelectorAll('.menu-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelectorAll('.content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                document.getElementById(this.dataset.target).classList.add('active');
-                if (window.innerWidth <= 768) {
-                    document.getElementById('menu').classList.remove('showing');
-                }
-            });
-        });
-
-        // Toggle menu
         document.getElementById('menu-toggle').addEventListener('click', () => {
             document.getElementById('menu').classList.toggle('showing');
         });
 
-        // Array de versículos para geração
+        document.querySelectorAll('.menu-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.content').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(link.getAttribute('data-target')).classList.add('active');
+            });
+        });
+
         const versiculos = [
             "Versículo 1: Exemplo de texto do versículo.",
             "Versículo 2: Exemplo de texto do versículo.",
