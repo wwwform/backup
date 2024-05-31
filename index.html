@@ -13,6 +13,7 @@
             padding: 0;
             background: url('Logo GE') no-repeat center center fixed;
             background-size: cover;
+            color: #fff; /* Alterar a cor do texto geral para branco */
         }
 
         /* Estilo do cabeçalho e do menu de navegação */
@@ -139,10 +140,11 @@
 </head>
 <body>
     <header>
-        <h1>Meu Site</h1>
+        <h1>Geração Eleita</h1>
     </header>
     <nav>
-        <ul>
+        <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+        <ul id="menu">
             <li><a href="#home" class="menu-link" data-target="home">Home</a></li>
             <li><a href="#palavra-do-dia" class="menu-link" data-target="palavra-do-dia">Palavra do Dia</a></li>
             <li><a href="#nossas-fotos" class="menu-link" data-target="nossas-fotos">Nossas Fotos</a></li>
@@ -218,8 +220,15 @@
                     content.classList.remove('active');
                 });
                 document.getElementById(this.dataset.target).classList.add('active');
+                if (window.innerWidth <= 768) {
+                    document.getElementById('menu').classList.remove('showing');
+                }
             });
         });
+        
+        // Toggle menu
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('menu').classList.toggle('showing');
 
         // Array de versículos para geração
         const versiculos = [
