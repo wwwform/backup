@@ -117,22 +117,25 @@
             gap: 10px;
         }
 
-        .gallery-item {
-            width: calc(33.333% - 20px);
-            margin-bottom: 20px;
+        .moment {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
         }
 
-        .gallery-item img, .gallery-item video {
+
+        .moment-item {
+            flex: 1;
+            min-width: 300px;
+            margin: 10px;
+        }
+
+        .moment-item img, .moment-item video {
             width: 100%;
             height: auto;
             display: block;
         }
 
-        .gallery-item .caption {
-            text-align: center;
-            margin-top: 5px;
-            color: #fff; /* Alterado para branco */
-        }
 
         /* Estilo do rodapé */
         footer {
@@ -210,20 +213,31 @@
         <div id="nossas-fotos" class="content">
             <h2>Nossas Fotos</h2>
             <div class="gallery">
-                <div class="gallery-item">
-                    <img src="foto1.jpg" alt="Foto 1">
-                    <div class="caption">Legenda da Foto 1</div>
+                <div class="moment">
+                    <div class="moment-item">
+                        <img src="foto1.jpg" alt="Foto 1">
+                        <div class="caption">Legenda da Foto 1</div>
+                    </div>
+                    <div class="moment-item">
+                        <video controls>
+                            <source src="video1.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                        <div class="caption">Legenda do Vídeo 1</div>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="foto2.jpg" alt="Foto 2">
-                    <div class="caption">Legenda da Foto 2</div>
-                </div>
-                <div class="gallery-item">
-                    <video controls>
-                        <source src="video1.mp4" type="video/mp4">
-                        Seu navegador não suporta o elemento de vídeo.
-                    </video>
-                    <div class="caption">Legenda do Vídeo 1</div>
+                <div class="moment">
+                    <div class="moment-item">
+                        <img src="foto2.jpg" alt="Foto 2">
+                        <div class="caption">Legenda da Foto 2</div>
+                    </div>
+                    <div class="moment-item">
+                        <video controls>
+                            <source src="video2.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                        <div class="caption">Legenda do Vídeo 2</div>
+                    </div>
                 </div>
                 <!-- Adicione mais fotos e vídeos conforme necessário -->
             </div>
