@@ -80,24 +80,6 @@
             });
         });
 
-        // Função para gerar versículo
-        document.getElementById('gerar-versiculo').addEventListener('click', function () {
-            fetch('biblia.json')
-                .then(response => response.json())
-                .then(data => {
-                    const randomIndex = Math.floor(Math.random() * data.versiculos.length);
-                    const versiculo = data.versiculos[randomIndex];
-                    document.getElementById('versiculo').value = versiculo.texto;
-                });
-        });
-
-        // Função para enviar versículo para WhatsApp
-        document.getElementById('enviar-whatsapp').addEventListener('click', function () {
-            const versiculo = document.getElementById('versiculo').value;
-            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(versiculo)}`;
-            window.open(url, '_blank');
-        });
-
         // Função para carregar a Bíblia
         document.addEventListener('DOMContentLoaded', function () {
             loadBible();
@@ -159,6 +141,29 @@
                 })
                 .catch(error => console.error('Erro ao carregar a Bíblia:', error));
         }
+
+        // Função para gerar um versículo aleatório
+        document.getElementById('gerar-versiculo').addEventListener('click', function () {
+            fetch('biblia.xml')
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(data, 'text/xml');
+                    const verses = xmlDoc.getElementsByTagName('versiculo');
+                    const randomIndex = Math.floor(Math.random() * verses.length);
+                    const verse = verses[randomIndex];
+                    const verseText = `${verse.getAttribute('numero')}: ${verse.textContent}`;
+                    document.getElementById('versiculo').value = verseText;
+                })
+                .catch(error => console.error('Erro ao carregar versículo:', error));
+        });
+
+        // Função para enviar versículo para WhatsApp
+        document.getElementById('enviar-whatsapp').addEventListener('click', function () {
+            const versiculo = document.getElementById('versiculo').value;
+            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(versiculo)}`;
+            window.open(url, '_blank');
+        });
     </script>
 </body>
 </html>
