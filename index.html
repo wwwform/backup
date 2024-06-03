@@ -6,7 +6,6 @@
     <title>Geração Eleita</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* CSS básico para o layout do site */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -16,7 +15,6 @@
             color: #fff;
         }
 
-        /* Estilo do cabeçalho e do menu de navegação */
         header {
             background-color: rgba(51, 51, 51, 0.8);
             color: #fff;
@@ -69,7 +67,6 @@
             background-color: rgba(85, 85, 85, 0.8);
         }
 
-        /* Estilo para telas menores */
         @media (max-width: 768px) {
             nav .menu-toggle {
                 display: block;
@@ -91,7 +88,6 @@
             }
         }
 
-        /* Estilo do conteúdo principal */
         main {
             padding: 20px;
         }
@@ -104,13 +100,11 @@
             display: block;
         }
 
-        /* Estilo do texto dentro das seções de conteúdo */
         .content h2, .content p {
             color: #fff;
-            text-shadow: black 0.1em 0.1em 0.2em;
+            text-shadow: black 0.1em 0.1em 0.2em
         }
 
-        /* Estilo para a seção de fotos */
         .gallery {
             display: flex;
             flex-wrap: wrap;
@@ -135,7 +129,6 @@
             display: block;
         }
 
-        /* Estilo do rodapé */
         footer {
             background-color: none;
             color: #fff;
@@ -146,7 +139,6 @@
             width: 100%;
         }
 
-        /* Estilo para a seção de redes sociais */
         .social-section {
             display: flex;
             align-items: center;
@@ -188,7 +180,7 @@
             <li><a href="#home" class="menu-link" data-target="home">Home</a></li>
             <li><a href="#palavra-do-dia" class="menu-link" data-target="palavra-do-dia">Palavra do Dia</a></li>
             <li><a href="#nossas-fotos" class="menu-link" data-target="nossas-fotos">Nossas Fotos</a></li>
-            <li><a href="#programacoes" class="menu-link" data-target="programacoes">Programações</a></li>
+            <li><a href="#Programações" class="menu-link" data-target="Programações">Programações</a></li>
             <li><a href="#biblia" class="menu-link" data-target="biblia">Bíblia</a></li>
         </ul>
     </nav>
@@ -240,11 +232,11 @@
                 </div>
             </div>
         </div>
-        <div id="programacoes" class="content">
+        <div id="Programações" class="content">
             <h2>Programações</h2>
             <p>Nosso ensaio é toda Segunda-Feira, as 19:30.</p>
             <p>Todo primeiro domingo do mês, temos a consagração com a direção dos Jovens,as 08:00, todos estão convidados.</p>
-            <p>A cada 15 dias, temos um estudo bíblico na quinta-feira, as 19:30.</p>
+            <p>A cada 15 dias, temos um estudo biblico na quinta-feira, as 19:30.</p>
         </div>
         <div id="biblia" class="content">
             <h2>Bíblia</h2>
@@ -265,6 +257,7 @@
             </a>
         </div>
     </div>
+   
     <footer>
         <p>&copy; 2024 Geração Eleita. Todos os direitos reservados.</p>
     </footer>
@@ -273,7 +266,7 @@
             document.getElementById('menu').classList.toggle('showing');
         });
 
-                document.querySelectorAll('.menu-link').forEach(link => {
+        document.querySelectorAll('.menu-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 document.querySelectorAll('.content').forEach(section => {
@@ -282,7 +275,7 @@
                 document.getElementById(link.getAttribute('data-target')).classList.add('active');
             });
         });
-
+        
         // Array de versículos para geração
         const versiculos = [
             "João 3:16 - Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.",
@@ -303,37 +296,40 @@
             window.open(whatsappUrl, '_blank');
         });
 
-        // Carregar e exibir a Bíblia
-        fetch('https://raw.githubusercontent.com/wwwform/VEGeracaoE/main/data/biblia.json')
-            .then(response => response.json())
+        // Carregar e exibir a Bíblia a partir de um XML
+        fetch('biblia.xml')
+            .then(response => response.text())
+            .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
             .then(data => {
+                const books = data.querySelectorAll('book');
                 const bookList = document.getElementById('book-list');
                 const chapterList = document.getElementById('chapter-list');
                 const verseList = document.getElementById('verse-list');
 
-                // Exibir a lista de livros
-                Object.keys(data).forEach(book => {
+                books.forEach(book => {
+                    const bookName = book.getAttribute('name');
                     const bookItem = document.createElement('li');
                     const bookLink = document.createElement('a');
                     bookLink.href = '#';
-                    bookLink.textContent = book;
+                    bookLink.textContent = bookName;
                     bookLink.addEventListener('click', () => {
-                        // Limpar capítulos e versículos
                         chapterList.innerHTML = '';
                         verseList.innerHTML = '';
-                        // Exibir a lista de capítulos
-                        Object.keys(data[book]).forEach(chapter => {
+                        const chapters = book.querySelectorAll('chapter');
+                        chapters.forEach(chapter => {
+                            const chapterNumber = chapter.getAttribute('number');
                             const chapterItem = document.createElement('li');
                             const chapterLink = document.createElement('a');
                             chapterLink.href = '#';
-                            chapterLink.textContent = `Capítulo ${chapter}`;
+                            chapterLink.textContent = `Capítulo ${chapterNumber}`;
                             chapterLink.addEventListener('click', () => {
-                                // Limpar versículos
                                 verseList.innerHTML = '';
-                                // Exibir a lista de versículos
-                                Object.keys(data[book][chapter]).forEach(verse => {
+                                const verses = chapter.querySelectorAll('verse');
+                                verses.forEach(verse => {
+                                    const verseNumber = verse.getAttribute('number');
+                                    const verseText = verse.textContent;
                                     const verseItem = document.createElement('p');
-                                    verseItem.textContent = `${verse} - ${data[book][chapter][verse]}`;
+                                    verseItem.textContent = `${verseNumber} - ${verseText}`;
                                     verseList.appendChild(verseItem);
                                 });
                             });
