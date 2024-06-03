@@ -585,57 +585,56 @@
 
         // Carregar e exibir a Bíblia
         fetch('https://raw.githubusercontent.com/wwwform/VEGeracaoE/main/data/biblia.json')
-    .then(response => response.json())
-    .then(data => {
-        console.log(data); // Adicione esta linha
-        const bookList = document.getElementById('book-list');
-        const chapterList = document.getElementById('chapter-list');
-        const verseList = document.getElementById('verse-list');
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Adicione esta linha
+                const bookList = document.getElementById('book-list');
+                const chapterList = document.getElementById('chapter-list');
+                const verseList = document.getElementById('verse-list');
 
-        // Exibir a lista de livros
-        Object.keys(data).forEach(book => {
-            const bookItem = document.createElement('li');
-            const bookLink = document.createElement('a');
-            bookLink.href = '#';
-            bookLink.textContent = book;
-            bookLink.addEventListener('click', () => {
-                // Limpar capítulos e versículos
-                chapterList.innerHTML = '';
-                verseList.innerHTML = '';
-                // Exibir a lista de capítulos
-                Object.keys(data[book]).forEach(chapter => {
-                    const chapterItem = document.createElement('li');
-                    const chapterLink = document.createElement('a');
-                    chapterLink.href = '#';
-                    chapterLink.textContent = `Capítulo ${chapter}`;
-                    chapterLink.addEventListener('click', () => {
-                        // Limpar versículos
+                // Exibir a lista de livros
+                Object.keys(data).forEach(book => {
+                    const bookItem = document.createElement('li');
+                    const bookLink = document.createElement('a');
+                    bookLink.href = '#';
+                    bookLink.textContent = book;
+                    bookLink.addEventListener('click', () => {
+                        // Limpar capítulos e versículos
+                        chapterList.innerHTML = '';
                         verseList.innerHTML = '';
-                        // Exibir a lista de versículos
-                        Object.keys(data[book][chapter]).forEach(verse => {
-                            const verseItem = document.createElement('p');
-                            verseItem.textContent = `${verse} - ${data[book][chapter][verse]}`;
-                            verseList.appendChild(verseItem);
+                        // Exibir a lista de capítulos
+                        Object.keys(data[book]).forEach(chapter => {
+                            const chapterItem = document.createElement('li');
+                            const chapterLink = document.createElement('a');
+                            chapterLink.href = '#';
+                            chapterLink.textContent = `Capítulo ${chapter}`;
+                            chapterLink.addEventListener('click', () => {
+                            // Limpar versículos
+                            verseList.innerHTML = '';
+                            // Exibir a lista de versículos
+                            Object.keys(data[book][chapter]).forEach(verse => {
+                                    const verseItem = document.createElement('p');
+                                    verseItem.textContent = `${verse} - ${data[book][chapter][verse]}`;
+                                    verseList.appendChild(verseItem);
+                            });
                         });
+                            chapterItem.appendChild(chapterLink);
+                            chapterList.appendChild(chapterItem);
                     });
-                    chapterItem.appendChild(chapterLink);
-                    chapterList.appendChild(chapterItem);
                 });
+                    bookItem.appendChild(bookLink);
+                    bookList.appendChild(bookItem);
             });
-            bookItem.appendChild(bookLink);
-            bookList.appendChild(bookItem);
+
+                // Selecionar o primeiro livro por padrão
+                const firstBook = bookList.querySelector('li a');
+                    if (firstBook) {
+                    firstBook.click();
+            }
+        })
+            .catch(error => {
+                console.error('Ocorreu um erro ao carregar a Bíblia:', error);
         });
-
-        // Selecionar o primeiro livro por padrão
-        const firstBook = bookList.querySelector('li a');
-        if (firstBook) {
-            firstBook.click();
-        }
-    })
-    .catch(error => {
-        console.error('Ocorreu um erro ao carregar a Bíblia:', error);
-    });
-
     </script>
 </body>
 </html>
