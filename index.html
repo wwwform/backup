@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geração Eleita</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -266,89 +267,91 @@
         });
 
         document.querySelectorAll('.menu-link').forEach(link => {
-            link.addEventListener('click', (e) => {
+            link.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelectorAll('.content').forEach(section => {
-                    section.classList.remove('active');
+                const targetId = this.getAttribute('data-target');
+                document.querySelectorAll('.content').forEach(content => {
+                    content.classList.remove('active');
                 });
-                document.getElementById(link.getAttribute('data-target')).classList.add('active');
+                document.getElementById(targetId).classList.add('active');
             });
         });
-        
-        // Array de versículos para geração
-        const versiculos = [
-            "João 3:16 - Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.",
-            "Romanos 8:28 - E sabemos que todas as coisas contribuem juntamente para o bem daqueles que amam a Deus, daqueles que são chamados segundo o seu propósito.",
-            "Mateus 28:20 - Eis que estou convosco todos os dias, até à consumação dos séculos.",
-        ];
 
-        // Função para gerar um versículo aleatório
-        document.getElementById('gerar-versiculo').addEventListener('click', () => {
-            const randomIndex = Math.floor(Math.random() * versiculos.length);
-            document.getElementById('versiculo').value = versiculos[randomIndex];
+        document.getElementById('gerar-versiculo').addEventListener('click', function () {
+            fetch('biblia.json')
+                .then(response => response.json())
+                .then(data => {
+                    const randomIndex = Math.floor(Math.random() * data.versiculos.length);
+                    const versiculo = data.versiculos[randomIndex];
+                    document.getElementById('versiculo').value = versiculo.texto;
+                });
         });
 
-        // Função para enviar o versículo para o WhatsApp
-        document.getElementById('enviar-whatsapp').addEventListener('click', () => {
+        document.getElementById('enviar-whatsapp').addEventListener('click', function () {
             const versiculo = document.getElementById('versiculo').value;
-            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(versiculo)}`;
-            window.open(whatsappUrl, '_blank');
+            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(versiculo)}`;
+            window.open(url, '_blank');
         });
 
-        // Carregar e exibir a Bíblia a partir de um XML
-        fetch('biblia.xml')
-        .then(response => response.text())
-        .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-        .then(data => {
-            const books = data.querySelectorAll('book');
-            const bookList = document.getElementById('book-list');
-            const chapterList = document.getElementById('chapter-list');
-            const verseList = document.getElementById('verse-list');
+        document.addEventListener('DOMContentLoaded', function () {
+            loadBible();
+        });
 
-            books.forEach(book => {
-                const bookName = book.getAttribute('name');
-                const bookItem = document.createElement('li');
-                const bookLink = document.createElement('a');
-                bookLink.href = '#';
-                bookLink.textContent = bookName;
-                bookItem.appendChild(bookLink);
-                bookList.appendChild(bookItem);
-            });
+        function loadBible() {
+            fetch('biblia.xml')
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(data, 'text/xml');
+                    const books = xmlDoc.getElementsByTagName('livro');
+                    const bookList = document.getElementById('book-list');
 
-            // Adicionar evento de clique aos links dos livros da Bíblia
-            document.querySelectorAll('#book-list a').forEach(bookLink => {
-                bookLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const bookName = bookLink.textContent;
-                    chapterList.innerHTML = '';
-                    verseList.innerHTML = '';
-                    const chapters = data.querySelector(`book[name="${bookName}"]`).querySelectorAll('chapter');
-                    chapters.forEach(chapter => {
-                        const chapterNumber = chapter.getAttribute('number');
-                        const chapterItem = document.createElement('li');
-                        const chapterLink = document.createElement('a');
-                        chapterLink.href = '#';
-                        chapterLink.textContent = `Capítulo ${chapterNumber}`;
-                        chapterLink.addEventListener('click', () => {
-                            verseList.innerHTML = '';
-                            const verses = chapter.querySelectorAll('verse');
-                            verses.forEach(verse => {
-                                const verseNumber = verse.getAttribute('number');
-                                const verseText = verse.textContent;
-                                const verseItem = document.createElement('p');
-                                verseItem.textContent = `${verseNumber} - ${verseText}`;
-                                verseList.appendChild(verseItem);
-                            });
+                    for (let i = 0; i < books.length; i++) {
+                        const book = books[i];
+                        const listItem = document.createElement('li');
+                        const bookLink = document.createElement('a');
+                        bookLink.href = '#';
+                        bookLink.textContent = book.getAttribute('nome');
+                        bookLink.setAttribute('data-book-id', i);
+                        listItem.appendChild(bookLink);
+                        bookList.appendChild(listItem);
+
+                        bookLink.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            const bookId = this.getAttribute('data-book-id');
+                            const chapters = books[bookId].getElementsByTagName('capitulo');
+                            const chapterList = document.getElementById('chapter-list');
+                            chapterList.innerHTML = '';
+
+                            for (let j = 0; j < chapters.length; j++) {
+                                const chapter = chapters[j];
+                                const chapterLink = document.createElement('a');
+                                chapterLink.href = '#';
+                                chapterLink.textContent = `Capítulo ${chapter.getAttribute('numero')}`;
+                                chapterLink.setAttribute('data-book-id', bookId);
+                                chapterLink.setAttribute('data-chapter-id', j);
+                                chapterList.appendChild(chapterLink);
+
+                                chapterLink.addEventListener('click', function (e) {
+                                    e.preventDefault();
+                                    const bookId = this.getAttribute('data-book-id');
+                                    const chapterId = this.getAttribute('data-chapter-id');
+                                    const verses = books[bookId].getElementsByTagName('capitulo')[chapterId].getElementsByTagName('versiculo');
+                                    const verseList = document.getElementById('verse-list');
+                                    verseList.innerHTML = '';
+
+                                    for (let k = 0; k < verses.length; k++) {
+                                        const verse = verses[k];
+                                        const verseItem = document.createElement('p');
+                                        verseItem.textContent = `${verse.getAttribute('numero')}: ${verse.textContent}`;
+                                        verseList.appendChild(verseItem);
+                                    }
+                                });
+                            }
                         });
-                        chapterItem.appendChild(chapterLink);
-                        chapterList.appendChild(chapterItem);
-                    });
+                    }
                 });
-            });
-        })
-        .catch(error => {
-            console.error('Ocorreu um erro ao carregar a Bíblia:', error);
-        });
+        }
     </script>
 </body>
 </html>
