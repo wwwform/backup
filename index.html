@@ -103,11 +103,11 @@
         .content.active {
             display: block;
         }
-        
+
         /* Estilo do texto dentro das seções de conteúdo */
         .content h2, .content p {
-            color: #fff; text-shadow: black 0.1em 0.1em 0.2em /* Alterado para branco */
-      
+            color: #fff;
+            text-shadow: black 0.1em 0.1em 0.2em;
         }
 
         /* Estilo para a seção de fotos */
@@ -123,7 +123,6 @@
             margin-bottom: 40px;
         }
 
-
         .moment-item {
             flex: 1;
             min-width: 300px;
@@ -135,7 +134,6 @@
             height: auto;
             display: block;
         }
-
 
         /* Estilo do rodapé */
         footer {
@@ -190,8 +188,8 @@
             <li><a href="#home" class="menu-link" data-target="home">Home</a></li>
             <li><a href="#palavra-do-dia" class="menu-link" data-target="palavra-do-dia">Palavra do Dia</a></li>
             <li><a href="#nossas-fotos" class="menu-link" data-target="nossas-fotos">Nossas Fotos</a></li>
-            <li><a href="#Programações" class="menu-link" data-target="Programações">Programações</a></li>
-            <li><a href="#biblia" class="menu-link" data-target="biblia">Bíblia</a></li> <!-- Novo item do menu -->
+            <li><a href="#programacoes" class="menu-link" data-target="programacoes">Programações</a></li>
+            <li><a href="#biblia" class="menu-link" data-target="biblia">Bíblia</a></li>
         </ul>
     </nav>
     <main>
@@ -218,6 +216,7 @@
                     <div class="moment-item">
                         <img src="foto1.jpg" alt="Foto 1">
                         <div class="caption">Legenda da Foto 1</div>
+                    </div>
                     <div class="moment-item">
                         <video controls>
                             <source src="video1.mp4" type="video/mp4">
@@ -239,22 +238,21 @@
                         <div class="caption">Legenda do Vídeo 2</div>
                     </div>
                 </div>
-                <!-- Adicione mais fotos e vídeos conforme necessário -->
             </div>
         </div>
-        <div id="Programações" class="content">
+        <div id="programacoes" class="content">
             <h2>Programações</h2>
             <p>Nosso ensaio é toda Segunda-Feira, as 19:30.</p>
             <p>Todo primeiro domingo do mês, temos a consagração com a direção dos Jovens,as 08:00, todos estão convidados.</p>
-            <p>A cada 15 dias, temos um estudo biblico na quinta-feira, as 19:30.</p>
+            <p>A cada 15 dias, temos um estudo bíblico na quinta-feira, as 19:30.</p>
         </div>
-        <div id="biblia" class="content"> <!-- Nova seção para a Bíblia -->
+        <div id="biblia" class="content">
             <h2>Bíblia</h2>
             <nav>
                 <ul id="book-list"></ul>
             </nav>
-            <div id="chapter-list"></div> <!-- Este div será preenchido com os capítulos -->
-            <div id="verse-list"></div> <!-- Este div será preenchido com os versículos -->
+            <div id="chapter-list"></div>
+            <div id="verse-list"></div>
         </div>
     </main>
     <div class="social-section">
@@ -275,7 +273,7 @@
             document.getElementById('menu').classList.toggle('showing');
         });
 
-        document.querySelectorAll('.menu-link').forEach(link => {
+                document.querySelectorAll('.menu-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 document.querySelectorAll('.content').forEach(section => {
@@ -284,7 +282,7 @@
                 document.getElementById(link.getAttribute('data-target')).classList.add('active');
             });
         });
-        
+
         // Array de versículos para geração
         const versiculos = [
             "João 3:16 - Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.",
@@ -355,8 +353,7 @@
             })
             .catch(error => {
                 console.error('Ocorreu um erro ao carregar a Bíblia:', error);
-            });        
+            });
     </script>
 </body>
 </html>
-
