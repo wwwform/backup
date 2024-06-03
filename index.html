@@ -297,58 +297,58 @@
 
         // Carregar e exibir a Bíblia a partir de um XML
         fetch('biblia.xml')
-            .then(response => response.text())
-            .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-            .then(data => {
-                const books = data.querySelectorAll('book');
-                const bookList = document.getElementById('book-list');
-                const chapterList = document.getElementById('chapter-list');
-                const verseList = document.getElementById('verse-list');
+        .then(response => response.text())
+        .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+        .then(data => {
+            const books = data.querySelectorAll('book');
+            const bookList = document.getElementById('book-list');
+            const chapterList = document.getElementById('chapter-list');
+            const verseList = document.getElementById('verse-list');
 
-                books.forEach(book => {
-                    const bookName = book.getAttribute('name');
-                    const bookItem = document.createElement('li');
-                    const bookLink = document.createElement('a');
-                    bookLink.href = '#';
-                    bookLink.textContent = bookName;
-                    bookLink.addEventListener('click', () => {
-                        chapterList.innerHTML = '';
-                        verseList.innerHTML = '';
-                        const chapters = book.querySelectorAll('chapter');
-                        chapters.forEach(chapter => {
-                            const chapterNumber = chapter.getAttribute('number');
-                            const chapterItem = document.createElement('li');
-                            const chapterLink = document.createElement('a');
-                            chapterLink.href = '#';
-                            chapterLink.textContent = `Capítulo ${chapterNumber}`;
-                            chapterLink.addEventListener('click', () => {
-                                verseList.innerHTML = '';
-                                const verses = chapter.querySelectorAll('verse');
-                                verses.forEach(verse => {
-                                    const verseNumber = verse.getAttribute('number');
-                                    const verseText = verse.textContent;
-                                    const verseItem = document.createElement('p');
-                                    verseItem.textContent = `${verseNumber} - ${verseText}`;
-                                    verseList.appendChild(verseItem);
-                                });
-                            });
-                            chapterItem.appendChild(chapterLink);
-                            chapterList.appendChild(chapterItem);
-                        });
-                    });
-                    bookItem.appendChild(bookLink);
-                    bookList.appendChild(bookItem);
-                });
-
-                // Selecionar o primeiro livro por padrão
-                const firstBook = bookList.querySelector('li a');
-                if (firstBook) {
-                    firstBook.click();
-                }
-            })
-            .catch(error => {
-                console.error('Ocorreu um erro ao carregar a Bíblia:', error);
+            books.forEach(book => {
+                const bookName = book.getAttribute('name');
+                const bookItem = document.createElement('li');
+                const bookLink = document.createElement('a');
+                bookLink.href = '#';
+                bookLink.textContent = bookName;
+                bookItem.appendChild(bookLink);
+                bookList.appendChild(bookItem);
             });
+
+            // Adicionar evento de clique aos links dos livros da Bíblia
+            document.querySelectorAll('#book-list a').forEach(bookLink => {
+                bookLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const bookName = bookLink.textContent;
+                    chapterList.innerHTML = '';
+                    verseList.innerHTML = '';
+                    const chapters = data.querySelector(`book[name="${bookName}"]`).querySelectorAll('chapter');
+                    chapters.forEach(chapter => {
+                        const chapterNumber = chapter.getAttribute('number');
+                        const chapterItem = document.createElement('li');
+                        const chapterLink = document.createElement('a');
+                        chapterLink.href = '#';
+                        chapterLink.textContent = `Capítulo ${chapterNumber}`;
+                        chapterLink.addEventListener('click', () => {
+                            verseList.innerHTML = '';
+                            const verses = chapter.querySelectorAll('verse');
+                            verses.forEach(verse => {
+                                const verseNumber = verse.getAttribute('number');
+                                const verseText = verse.textContent;
+                                const verseItem = document.createElement('p');
+                                verseItem.textContent = `${verseNumber} - ${verseText}`;
+                                verseList.appendChild(verseItem);
+                            });
+                        });
+                        chapterItem.appendChild(chapterLink);
+                        chapterList.appendChild(chapterItem);
+                    });
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Ocorreu um erro ao carregar a Bíblia:', error);
+        });
     </script>
 </body>
 </html>
