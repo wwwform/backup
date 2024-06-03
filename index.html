@@ -180,7 +180,7 @@
             <li><a href="#home" class="menu-link" data-target="home">Home</a></li>
             <li><a href="#palavra-do-dia" class="menu-link" data-target="palavra-do-dia">Palavra do Dia</a></li>
             <li><a href="#nossas-fotos" class="menu-link" data-target="nossas-fotos">Nossas Fotos</a></li>
-            <li><a href="#programacoes" class="menu-link" data-target="programacoes">Programações</a></li>
+            <li><a href="#Programações" class="menu-link" data-target="Programações">Programações</a></li>
             <li><a href="#biblia" class="menu-link" data-target="biblia">Bíblia</a></li>
         </ul>
     </nav>
@@ -232,11 +232,11 @@
                 </div>
             </div>
         </div>
-        <div id="programacoes" class="content">
+        <div id="Programações" class="content">
             <h2>Programações</h2>
             <p>Nosso ensaio é toda Segunda-Feira, as 19:30.</p>
             <p>Todo primeiro domingo do mês, temos a consagração com a direção dos Jovens,as 08:00, todos estão convidados.</p>
-            <p>A cada 15 dias, temos um estudo bíblico na quinta-feira, as 19:30.</p>
+            <p>A cada 15 dias, temos um estudo biblico na quinta-feira, as 19:30.</p>
         </div>
         <div id="biblia" class="content">
             <h2>Bíblia</h2>
@@ -247,16 +247,25 @@
             <div id="verse-list"></div>
         </div>
     </main>
+    <div class="social-section">
+        <div class="photos">
+            <img src="Logo Igreja.jpeg" alt="Igreja">
+            <img src="Foto Pastor.jpeg" alt="Pastor">
+            <a href="https://instagram.com/seu_perfil" target="_blank">
+                <img src="instagram.jpeg" alt="Instagram">
+                Siga-nos no Instagram
+            </a>
+        </div>
+    </div>
+   
     <footer>
         <p>&copy; 2024 Geração Eleita. Todos os direitos reservado.</p>
     </footer>
     <script>
-        // Função para alternar o menu
         document.getElementById('menu-toggle').addEventListener('click', () => {
             document.getElementById('menu').classList.toggle('showing');
         });
 
-        // Função para alternar entre as seções
         document.querySelectorAll('.menu-link').forEach(link => {
             link.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -268,7 +277,22 @@
             });
         });
 
-        // Função para carregar a Bíblia
+        document.getElementById('gerar-versiculo').addEventListener('click', function () {
+            fetch('biblia.json')
+                .then(response => response.json())
+                .then(data => {
+                    const randomIndex = Math.floor(Math.random() * data.versiculos.length);
+                    const versiculo = data.versiculos[randomIndex];
+                    document.getElementById('versiculo').value = versiculo.texto;
+                });
+        });
+
+        document.getElementById('enviar-whatsapp').addEventListener('click', function () {
+            const versiculo = document.getElementById('versiculo').value;
+            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(versiculo)}`;
+            window.open(url, '_blank');
+        });
+
         document.addEventListener('DOMContentLoaded', function () {
             loadBible();
         });
@@ -326,32 +350,8 @@
                             }
                         });
                     }
-                })
-                .catch(error => console.error('Erro ao carregar a Bíblia:', error));
+                });
         }
-
-        // Função para gerar um versículo aleatório
-        document.getElementById('gerar-versiculo').addEventListener('click', function () {
-            fetch('biblia.xml')
-                .then(response => response.text())
-                .then(data => {
-                    const parser = new DOMParser();
-                    const xmlDoc = parser.parseFromString(data, 'text/xml');
-                    const verses = xmlDoc.getElementsByTagName('versiculo');
-                    const randomIndex = Math.floor(Math.random() * verses.length);
-                    const verse = verses[randomIndex];
-                    const verseText = `${verse.getAttribute('numero')}: ${verse.textContent}`;
-                    document.getElementById('versiculo').value = verseText;
-                })
-                .catch(error => console.error('Erro ao carregar versículo:', error));
-        });
-
-        // Função para enviar versículo para WhatsApp
-        document.getElementById('enviar-whatsapp').addEventListener('click', function () {
-            const versiculo = document.getElementById('versiculo').value;
-            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(versiculo)}`;
-            window.open(url, '_blank');
-        });
     </script>
 </body>
 </html>
