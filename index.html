@@ -218,7 +218,6 @@
                     <div class="moment-item">
                         <img src="foto1.jpg" alt="Foto 1">
                         <div class="caption">Legenda da Foto 1</div>
-                    </div>
                     <div class="moment-item">
                         <video controls>
                             <source src="video1.mp4" type="video/mp4">
@@ -310,7 +309,6 @@
         fetch('https://raw.githubusercontent.com/wwwform/VEGeracaoE/main/data/biblia.json')
             .then(response => response.json())
             .then(data => {
-                console.log(data); // Adicione esta linha
                 const bookList = document.getElementById('book-list');
                 const chapterList = document.getElementById('chapter-list');
                 const verseList = document.getElementById('verse-list');
@@ -334,26 +332,16 @@
                             chapterLink.addEventListener('click', () => {
                                 // Limpar versículos
                                 verseList.innerHTML = '';
-                                // Exibir a lista de capítulos
-                                Object.keys(data[book]).forEach(chapter => {
-                                    const chapterItem = document.createElement('li');
-                                    const chapterLink = document.createElement('a');
-                                    chapterLink.href = '#';
-                                    chapterLink.textContent = `Capítulo ${chapter}`;
-                                    chapterLink.addEventListener('click', () => {
-                                        // Limpar versículos
-                                        verseList.innerHTML = '';
-                                        // Exibir a lista de versículos
-                                        Object.keys(data[book][chapter]).forEach(verse => {
-                                            const verseItem = document.createElement('p');
-                                            verseItem.textContent = `${verse} - ${data[book][chapter][verse]}`;
-                                            verseList.appendChild(verseItem);
-                                        });
-                                    });
+                                // Exibir a lista de versículos
+                                Object.keys(data[book][chapter]).forEach(verse => {
+                                    const verseItem = document.createElement('p');
+                                    verseItem.textContent = `${verse} - ${data[book][chapter][verse]}`;
+                                    verseList.appendChild(verseItem);
+                                });
+                            });
                             chapterItem.appendChild(chapterLink);
                             chapterList.appendChild(chapterItem);
                         });
-
                     });
                     bookItem.appendChild(bookLink);
                     bookList.appendChild(bookItem);
@@ -371,3 +359,4 @@
     </script>
 </body>
 </html>
+
