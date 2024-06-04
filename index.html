@@ -170,23 +170,31 @@
         }
 
         #bible {
-            display: flex; /* Usar flexbox para organizar os elementos */
-            flex-direction: column; /* Organizar os elementos em coluna */
+            display: flex;
+            flex-direction: column;
         }
 
         #bible a {
-            color: #007bff; /* Cor azul para os links */
-            text-decoration: none; /* Remover sublinhado padrão */
-            margin-left: 10px; /* Adicionar espaço entre os links */
-            cursor: pointer; /* Cursor de apontador para indicar que é clicável */
+            color: #007bff;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
         }
 
         #bible a:hover {
-            text-decoration: underline; /* Sublinhar o link ao passar o mouse sobre ele */
+            text-decoration: underline;
         }
 
-        #bible div {
-            margin-bottom: 5px; /* Adicionar espaço entre os elementos */
+        #book-list,
+        #chapter-list,
+        #verse-list {
+            margin: 10px 0;
+        }
+
+        #chapter-list a,
+        #verse-list p {
+            margin-left: 20px;
         }
     </style>
 </head>
@@ -205,7 +213,6 @@
         </ul>
     </nav>
     <main>
-        <div id="bible"></div>
         <div id="home" class="content active">
             <h2>Bem-vindo ao Site do Geração Eleita</h2>
             <p>Aqui vamos estar mostrando todos os assuntos referentes ao conjunto Geração Eleita, da Igreja Evangélica Assembléia de Deus ministério Criação de Deus. Nosso Pastor Presidente é o Clóvis de Carvalho Bassani</p>
@@ -222,7 +229,6 @@
                 <button id="enviar-whatsapp">Deseja Enviar para o WhatsApp?</button>
             </div>
         </div>
-        <div id="nossas-fotos"
         <div id="nossas-fotos" class="content">
             <h2>Nossas Fotos</h2>
             <div class="gallery">
@@ -280,89 +286,142 @@
         </div>
     </div>
     <footer>
-        <p>&copy; 2024 Geração Eleita. Todos os direitos reservados.</p>
+        <p>&copy; 2023 Geração Eleita. Todos os direitos reservados.</p>
     </footer>
     <script>
-        document.getElementById('menu-toggle').addEventListener('click', () => {
-            document.getElementById('menu').classList.toggle('showing');
-        });
-        document.querySelectorAll('.menu-link').forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('data-target');
-                document.querySelectorAll('.content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                document.getElementById(targetId).classList.add('active');
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuToggle = document.getElementById("menu-toggle");
+            const menu = document.getElementById("menu");
+            const links = document.querySelectorAll(".menu-link");
+            const contents = document.querySelectorAll(".content");
+
+            menuToggle.addEventListener("click", function() {
+                menu.classList.toggle("showing");
             });
-        });
-        document.getElementById('gerar-versiculo').addEventListener('click', function () {
-            fetch('versiculos.json')
-                .then(response => response.json())
-                .then(data => {
-                    const randomIndex = Math.floor(Math.random() * data.versiculos.length);
-                    const versiculo = data.versiculos[randomIndex];
-                    document.getElementById('versiculo').value = versiculo.texto;
+
+            links.forEach(link => {
+                link.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    const target = link.getAttribute("data-target");
+
+                    contents.forEach(content => {
+                        content.classList.remove("active");
+                    });
+
+                    document.getElementById(target).classList.add("active");
                 });
-        });
-        document.getElementById('enviar-whatsapp').addEventListener('click', function () {
-            const versiculo = document.getElementById('versiculo').value;
-            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(versiculo)}`;
-            window.open(url, '_blank');
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-            loadBible();
-        });
-        function loadBible() {
-            fetch('https://raw.githubusercontent.com/thiagobodruk/biblia/master/xml/nvi.min.xml')
-                .then(response => response.text())
-                .then(data => {
-                    const parser = new DOMParser();
-                    const xmlDoc = parser.parseFromString(data, 'text/xml');
-                    const books = xmlDoc.getElementsByTagName('book');
-                    const bookList = document.getElementById('book-list');
-                    for (let i = 0; i < books.length; i++) {
-                        const book = books[i];
-                        const listItem = document.createElement('li');
-                        const bookLink = document.createElement('a');
-                        bookLink.href = '#';
-                        bookLink.textContent = book.getAttribute('name');
-                        bookLink.setAttribute('data-book-id', i);
-                        listItem.appendChild(bookLink);
-                        bookList.appendChild(listItem);
-                        bookLink.addEventListener('click', function (e) {
-                            e.preventDefault();
-                            const bookId = this.getAttribute('data-book-id');
-                            const chapters = book.getElementsByTagName('c');
-                            const chapterList = document.getElementById('chapter-list');
-                            chapterList.innerHTML = '';
-                            for (let j = 0; j < chapters.length; j++) {
-                                const chapter = chapters[j];
-                                const chapterLink = document.createElement('a');
-                                chapterLink.href = '#';
-                                chapterLink.textContent = `Capítulo ${chapter.getAttribute('n')}`;
-                                chapterLink.setAttribute('data-book-id', bookId);
-                                chapterLink.setAttribute('data-chapter-id', j);
-                                chapterList.appendChild(chapterLink);
-                                chapterLink.addEventListener('click', function (e) {
-                                    e.preventDefault();
-                                    const bookId = this.getAttribute('data-book-id');
-                                    const chapterId = this.getAttribute('data-chapter-id');
-                                    const verses = chapter.getElementsByTagName('v');
-                                    const verseList = document.getElementById('verse-list');
-                                    verseList.innerHTML = '';
-                                    for (let k = 0; k < verses.length; k++) {
-                                        const verse = verses[k];
-                                        const verseItem = document.createElement('p');
-                                        verseItem.textContent = `${verse.getAttribute('n')}: ${verse.textContent}`;
-                                        verseList.appendChild(verseItem);
-                                    }
-                                });
-                            }
-                        });
-                    }
+            });
+
+            const livros = {
+                "Gênesis": 50,
+                "Êxodo": 40,
+                "Levítico": 27,
+                "Números": 36,
+                "Deuteronômio": 34,
+                "Josué": 24,
+                "Juízes": 21,
+                "Rute": 4,
+                "1° Samuel": 31,
+                "2° Samuel": 24,
+                "1° Reis": 22,
+                "2° Reis": 25,
+                "1° Crônicas": 29,
+                "2° Crônicas": 36,
+                "Esdras": 10,
+                "Neemias": 13,
+                "Ester": 10,
+                "Jó": 42,
+                "Salmos": 150,
+                "Provérbios": 31,
+                "Eclesiastes": 12,
+                "Cânticos": 8,
+                "Isaías": 66,
+                "Jeremias": 52,
+                "Lamentações": 5,
+                "Ezequiel": 48,
+                "Daniel": 12,
+                "Oséias": 14,
+                "Joel": 3,
+                "Amós": 9,
+                "Obadias": 1,
+                "Jonas": 4,
+                "Miquéias": 7,
+                "Naum": 3,
+                "Habacuque": 3,
+                "Sofonias": 3,
+                "Ageu": 2,
+                "Zacarias": 14,
+                "Malaquias": 4,
+                "Mateus": 28,
+                "Marcos": 16,
+                "Lucas": 24,
+                "João": 21,
+                "Atos": 28,
+                "Romanos": 16,
+                "1° Coríntios": 16,
+                "2° Coríntios": 13,
+                "Gálatas": 6,
+                "Efésios": 6,
+                "Filipenses": 4,
+                "Colossenses": 4,
+                "1° Tessalonicenses": 5,
+                "2° Tessalonicenses": 3,
+                "1° Timóteo": 6,
+                "2° Timóteo": 4,
+                "Tito": 3,
+                "Filemom": 1,
+                "Hebreus": 13,
+                "Tiago": 5,
+                "1° Pedro": 5,
+                "2° Pedro": 3,
+                "1° João": 5,
+                "2° João": 1,
+                "3° João": 1,
+                "Judas": 1,
+                "Apocalipse": 22
+            };
+
+            const bookList = document.getElementById('book-list');
+            const chapterList = document.getElementById('chapter-list');
+            const verseList = document.getElementById('verse-list');
+
+            for (const livro in livros) {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.textContent = livro;
+                a.href = '#';
+                a.addEventListener('click', function() {
+                    mostrarCapitulos(livro);
                 });
-        }
+                li.appendChild(a);
+                bookList.appendChild(li);
+            }
+
+            function mostrarCapitulos(livro) {
+                chapterList.innerHTML = '';
+                verseList.innerHTML = '';
+                const numCapitulos = livros[livro];
+                for (let i = 1; i <= numCapitulos; i++) {
+                    const a = document.createElement('a');
+                    a.textContent = `Capítulo ${i}`;
+                    a.href = '#';
+                    a.addEventListener('click', function() {
+                        mostrarVersiculos(livro, i);
+                    });
+                    chapterList.appendChild(a);
+                }
+            }
+
+            function mostrarVersiculos(livro, capitulo) {
+                verseList.innerHTML = '';
+                const numVersiculos = 50; // Substituir pelo número real de versículos
+                for (let i = 1; i <= numVersiculos; i++) {
+                    const p = document.createElement('p');
+                    p.textContent = `Versículo ${i}`;
+                    verseList.appendChild(p);
+                }
+            }
+        });
     </script>
 </body>
 </html>
