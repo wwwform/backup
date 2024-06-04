@@ -301,6 +301,7 @@
             fetch('biblia.xml')
                 .then(response => response.text())
                 .then(data => {
+                    console.log(data);
                     const parser = new DOMParser();
                     const xmlDoc = parser.parseFromString(data, 'text/xml');
                     const books = xmlDoc.getElementsByTagName('livro');
