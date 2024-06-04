@@ -102,7 +102,7 @@
 
         .content h2, .content p {
             color: #fff;
-            text-shadow: black 0.1em 0.1em 0.2em
+            text-shadow: black 0.1em 0.1em 0.2em;
         }
 
         .gallery {
@@ -170,23 +170,23 @@
         }
 
         #bible {
-            display: flex; /* Usar flexbox para organizar os elementos */
-            flex-direction: column; /* Organizar os elementos em coluna */
+            display: flex;
+            flex-direction: column;
         }
 
         #bible a {
-            color: #007bff; /* Cor azul para os links */
-            text-decoration: none; /* Remover sublinhado padrão */
-            margin-left: 10px; /* Adicionar espaço entre os links */
-            cursor: pointer; /* Cursor de apontador para indicar que é clicável */
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 10px;
+            cursor: pointer;
         }
 
         #bible a:hover {
-            text-decoration: underline; /* Sublinhar o link ao passar o mouse sobre ele */
+            text-decoration: underline;
         }
 
         #bible div {
-            margin-bottom: 5px; /* Adicionar espaço entre os elementos */
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -205,7 +205,6 @@
         </ul>
     </nav>
     <main>
-        <div id="bible"></div>
         <div id="home" class="content active">
             <h2>Bem-vindo ao Site do Geração Eleita</h2>
             <p>Aqui vamos estar mostrando todos os assuntos referentes ao conjunto Geração Eleita, da Igreja Evangélica Assembléia de Deus ministério Criação de Deus. Nosso Pastor Presidente é o Clóvis de Carvalho Bassani</p>
@@ -222,7 +221,6 @@
                 <button id="enviar-whatsapp">Deseja Enviar para o WhatsApp?</button>
             </div>
         </div>
-        <div id="nossas-fotos"
         <div id="nossas-fotos" class="content">
             <h2>Nossas Fotos</h2>
             <div class="gallery">
@@ -286,6 +284,7 @@
         document.getElementById('menu-toggle').addEventListener('click', () => {
             document.getElementById('menu').classList.toggle('showing');
         });
+
         document.querySelectorAll('.menu-link').forEach(link => {
             link.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -296,6 +295,7 @@
                 document.getElementById(targetId).classList.add('active');
             });
         });
+
         document.getElementById('gerar-versiculo').addEventListener('click', function () {
             fetch('versiculos.json')
                 .then(response => response.json())
@@ -305,14 +305,17 @@
                     document.getElementById('versiculo').value = versiculo.texto;
                 });
         });
+
         document.getElementById('enviar-whatsapp').addEventListener('click', function () {
             const versiculo = document.getElementById('versiculo').value;
             const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(versiculo)}`;
             window.open(url, '_blank');
         });
+
         document.addEventListener('DOMContentLoaded', function () {
             loadBible();
         });
+
         function loadBible() {
             fetch('https://raw.githubusercontent.com/thiagobodruk/biblia/master/xml/nvi.min.xml')
                 .then(response => response.text())
@@ -321,6 +324,7 @@
                     const xmlDoc = parser.parseFromString(data, 'text/xml');
                     const books = xmlDoc.getElementsByTagName('book');
                     const bookList = document.getElementById('book-list');
+
                     for (let i = 0; i < books.length; i++) {
                         const book = books[i];
                         const listItem = document.createElement('li');
@@ -330,12 +334,14 @@
                         bookLink.setAttribute('data-book-id', i);
                         listItem.appendChild(bookLink);
                         bookList.appendChild(listItem);
+
                         bookLink.addEventListener('click', function (e) {
                             e.preventDefault();
                             const bookId = this.getAttribute('data-book-id');
-                            const chapters = book.getElementsByTagName('c');
+                            const chapters = books[bookId].getElementsByTagName('c');
                             const chapterList = document.getElementById('chapter-list');
                             chapterList.innerHTML = '';
+
                             for (let j = 0; j < chapters.length; j++) {
                                 const chapter = chapters[j];
                                 const chapterLink = document.createElement('a');
@@ -344,13 +350,14 @@
                                 chapterLink.setAttribute('data-book-id', bookId);
                                 chapterLink.setAttribute('data-chapter-id', j);
                                 chapterList.appendChild(chapterLink);
+
                                 chapterLink.addEventListener('click', function (e) {
                                     e.preventDefault();
-                                    const bookId = this.getAttribute('data-book-id');
                                     const chapterId = this.getAttribute('data-chapter-id');
-                                    const verses = chapter.getElementsByTagName('v');
+                                    const verses = chapters[chapterId].getElementsByTagName('v');
                                     const verseList = document.getElementById('verse-list');
                                     verseList.innerHTML = '';
+
                                     for (let k = 0; k < verses.length; k++) {
                                         const verse = verses[k];
                                         const verseItem = document.createElement('p');
