@@ -278,7 +278,7 @@
         });
 
         document.getElementById('gerar-versiculo').addEventListener('click', function () {
-            fetch('biblia.json')
+            fetch('versiculos.json')
                 .then(response => response.json())
                 .then(data => {
                     const randomIndex = Math.floor(Math.random() * data.versiculos.length);
