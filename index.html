@@ -169,7 +169,11 @@
             margin-right: 10px;
         }
 
-         /* Estilo para os links da Bíblia */
+        #bible {
+            display: flex; /* Usar flexbox para organizar os elementos */
+            flex-direction: column; /* Organizar os elementos em coluna */
+        }
+
         #bible a {
             color: #007bff; /* Cor azul para os links */
             text-decoration: none; /* Remover sublinhado padrão */
@@ -183,13 +187,6 @@
 
         #bible div {
             margin-bottom: 5px; /* Adicionar espaço entre os elementos */
-        }
-
-        /* Adiciona espaço entre os elementos */
-        #book-list li,
-        #chapter-list a,
-        #verse-list p {
-            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -225,6 +222,7 @@
                 <button id="enviar-whatsapp">Deseja Enviar para o WhatsApp?</button>
             </div>
         </div>
+        <div id="nossas-fotos"
         <div id="nossas-fotos" class="content">
             <h2>Nossas Fotos</h2>
             <div class="gallery">
