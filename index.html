@@ -1,269 +1,368 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bíblia Online</title>
+    <title>Geração Eleita</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
             margin: 0;
             padding: 0;
+            background: url('Logo GE') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
         }
 
         header {
-            background-color: #333;
-            color: white;
-            padding: 15px;
+            background-color: rgba(51, 51, 51, 0.8);
+            color: #fff;
+            padding: 10px 0;
             text-align: center;
         }
 
         nav {
-            background-color: #444;
-            overflow: hidden;
+            background-color: rgba(68, 68, 68, 0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
         }
 
         nav ul {
-            list-style-type: none;
-            margin: 0;
+            list-style: none;
             padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: row;
         }
 
         nav ul li {
-            float: left;
+            margin: 0 15px;
         }
 
         nav ul li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
+            color: #fff;
             text-decoration: none;
+            padding: 10px;
+            display: block;
+            transition: background 0.3s;
         }
 
         nav ul li a:hover {
-            background-color: #555;
+            background-color: rgba(85, 85, 85, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            nav .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            nav ul.showing {
+                display: flex;
+            }
+        }
+
+        main {
+            padding: 20px;
         }
 
         .content {
             display: none;
-            padding: 20px;
         }
 
         .content.active {
             display: block;
         }
 
-        .menu-link {
-            cursor: pointer;
+        .content h2, .content p {
+            color: #fff;
+            text-shadow: black 0.1em 0.1em 0.2em
         }
 
-        /* Estilos para a lista de livros, capítulos e versículos */
-        #book-list, #chapter-list, #verse-list {
-            margin: 20px 0;
-            padding: 0;
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        #book-list li, #chapter-list a, #verse-list p {
-            margin: 5px 0;
+        .moment {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
         }
 
-        /* Estilos responsivos */
-        @media (max-width: 600px) {
-            nav ul li {
-                float: none;
-            }
-            nav ul li a {
-                text-align: left;
-                padding: 10px;
-            }
+        .moment-item {
+            flex: 1;
+            min-width: 300px;
+            margin: 10px;
+        }
+
+        .moment-item img, .moment-item video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        footer {
+            background-color: none;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .social-section {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: none;
+        }
+
+        .social-section .photos {
+            display: flex;
+            flex-direction: column;
+            margin-right: 20px;
+        }
+
+        .social-section .photos img {
+            width: 50px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .social-section .instagram-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .social-section .instagram-link img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        #bible {
+            display: flex; /* Usar flexbox para organizar os elementos */
+            flex-direction: column; /* Organizar os elementos em coluna */
+        }
+
+        #bible a {
+            color: #007bff; /* Cor azul para os links */
+            text-decoration: none; /* Remover sublinhado padrão */
+            margin-left: 10px; /* Adicionar espaço entre os links */
+            cursor: pointer; /* Cursor de apontador para indicar que é clicável */
+        }
+
+        #bible a:hover {
+            text-decoration: underline; /* Sublinhar o link ao passar o mouse sobre ele */
+        }
+
+        #bible div {
+            margin-bottom: 5px; /* Adicionar espaço entre os elementos */
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Bíblia</h1>
+        <h1>Geração Eleita</h1>
     </header>
     <nav>
+        <div class="menu-toggle" id="menu-toggle">&#9776;</div>
         <ul id="menu">
-            <li><a href="#" class="menu-link" data-target="genesis">Gênesis</a></li>
-            <li><a href="#" class="menu-link" data-target="exodo">Êxodo</a></li>
-            <li><a href="#" class="menu-link" data-target="levitico">Levítico</a></li>
-            <li><a href="#" class="menu-link" data-target="numeros">Números</a></li>
-            <li><a href="#" class="menu-link" data-target="deuteronomio">Deuteronômio</a></li>
-            <li><a href="#" class="menu-link" data-target="josue">Josué</a></li>
-            <li><a href="#" class="menu-link" data-target="juizes">Juízes</a></li>
-            <li><a href="#" class="menu-link" data-target="rute">Rute</a></li>
-            <li><a href="#" class="menu-link" data-target="samuel1">1° Samuel</a></li>
-            <li><a href="#" class="menu-link" data-target="samuel2">2° Samuel</a></li>
-            <li><a href="#" class="menu-link" data-target="reis1">1° Reis</a></li>
-            <li><a href="#" class="menu-link" data-target="reis2">2° Reis</a></li>
+            <li><a href="#home" class="menu-link" data-target="home">Home</a></li>
+            <li><a href="#palavra-do-dia" class="menu-link" data-target="palavra-do-dia">Palavra do Dia</a></li>
+            <li><a href="#nossas-fotos" class="menu-link" data-target="nossas-fotos">Nossas Fotos</a></li>
+            <li><a href="#Programações" class="menu-link" data-target="Programações">Programações</a></li>
+            <li><a href="#biblia" class="menu-link" data-target="biblia">Bíblia</a></li>
         </ul>
     </nav>
     <main>
-        <div id="genesis" class="content">
-            <h2>Gênesis</h2>
-            <ul id="book-list"></ul>
+        <div id="bible"></div>
+        <div id="home" class="content active">
+            <h2>Bem-vindo ao Site do Geração Eleita</h2>
+            <p>Aqui vamos estar mostrando todos os assuntos referentes ao conjunto Geração Eleita, da Igreja Evangélica Assembléia de Deus ministério Criação de Deus. Nosso Pastor Presidente é o Clóvis de Carvalho Bassani</p>
+        </div>
+        <div id="palavra-do-dia" class="content">
+            <h2>Palavra do Dia</h2>
+            <p>Nós preparamos para todos a palavra do dia, por favor clique em gerar no botão abaixo e receba o que o Senhor preparou para hoje.</p>
+            <div class="form-group">
+                <textarea id="versiculo" readonly style="width: 100%; height: 100px;"></textarea>
+                <br>
+            </div>
+            <div class="form-group">
+                <button id="gerar-versiculo">Gerar Versículo</button>
+                <button id="enviar-whatsapp">Deseja Enviar para o WhatsApp?</button>
+            </div>
+        </div>
+        <div id="nossas-fotos"
+        <div id="nossas-fotos" class="content">
+            <h2>Nossas Fotos</h2>
+            <div class="gallery">
+                <div class="moment">
+                    <div class="moment-item">
+                        <img src="foto1.jpg" alt="Foto 1">
+                        <div class="caption">Legenda da Foto 1</div>
+                    </div>
+                    <div class="moment-item">
+                        <video controls>
+                            <source src="video1.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                        <div class="caption">Legenda do Vídeo 1</div>
+                    </div>
+                </div>
+                <div class="moment">
+                    <div class="moment-item">
+                        <img src="foto2.jpg" alt="Foto 2">
+                        <div class="caption">Legenda da Foto 2</div>
+                    </div>
+                    <div class="moment-item">
+                        <video controls>
+                            <source src="video2.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                        <div class="caption">Legenda do Vídeo 2</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="Programações" class="content">
+            <h2>Programações</h2>
+            <p>Nosso ensaio é toda Segunda-Feira, as 19:30.</p>
+            <p>Todo primeiro domingo do mês, temos a consagração com a direção dos Jovens,as 08:00, todos estão convidados.</p>
+            <p>A cada 15 dias, temos um estudo biblico na quinta-feira, as 19:30.</p>
+        </div>
+        <div id="biblia" class="content">
+            <h2>Bíblia</h2>
+            <nav>
+                <ul id="book-list"></ul>
+            </nav>
             <div id="chapter-list"></div>
             <div id="verse-list"></div>
         </div>
-        <div id="exodo" class="content">
-            <h2>Êxodo</h2>
-            <!-- Conteúdo de Êxodo -->
-        </div>
-        <div id="levitico" class="content">
-            <h2>Levítico</h2>
-            <!-- Conteúdo de Levítico -->
-        </div>
-        <div id="numeros" class="content">
-            <h2>Números</h2>
-            <!-- Conteúdo de Números -->
-        </div>
-        <div id="deuteronomio" class="content">
-            <h2>Deuteronômio</h2>
-            <!-- Conteúdo de Deuteronômio -->
-        </div>
-        <div id="josue" class="content">
-            <h2>Josué</h2>
-            <!-- Conteúdo de Josué -->
-        </div>
-        <div id="juizes" class="content">
-            <h2>Juízes</h2>
-            <!-- Conteúdo de Juízes -->
-        </div>
-        <div id="rute" class="content">
-            <h2>Rute</h2>
-            <!-- Conteúdo de Rute -->
-        </div>
-        <div id="samuel1" class="content">
-            <h2>1° Samuel</h2>
-            <!-- Conteúdo de 1° Samuel -->
-        </div>
-        <div id="samuel2" class="content">
-            <h2>2° Samuel</h2>
-            <!-- Conteúdo de 2° Samuel -->
-        </div>
-        <div id="reis1" class="content">
-            <h2>1° Reis</h2>
-            <!-- Conteúdo de 1° Reis -->
-        </div>
-        <div id="reis2" class="content">
-            <h2>2° Reis</h2>
-            <!-- Conteúdo de 2° Reis -->
-        </div>
     </main>
+    <div class="social-section">
+        <div class="photos">
+            <img src="Logo Igreja.jpeg" alt="Igreja">
+            <img src="Foto Pastor.jpeg" alt="Pastor">
+            <a href="https://instagram.com/seu_perfil" target="_blank">
+                <img src="instagram.jpeg" alt="Instagram">
+                Siga-nos no Instagram
+            </a>
+        </div>
+    </div>
     <footer>
-        <p>Todos os direitos reservados.</p>
+        <p>&copy; 2024 Geração Eleita. Todos os direitos reservados.</p>
     </footer>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const menuToggle = document.getElementById("menu-toggle");
-            const menu = document.getElementById("menu");
-            const links = document.querySelectorAll(".menu-link");
-            const contents = document.querySelectorAll(".content");
-
-            links.forEach(link => {
-                link.addEventListener("click", function(event) {
-                    event.preventDefault();
-                    const target = link.getAttribute("data-target");
-
-                    contents.forEach(content => {
-                        content.classList.remove("active");
-                    });
-
-                    document.getElementById(target).classList.add("active");
-                });
-            });
-
-            const livros = {
-                "Gênesis": 50,
-                "Êxodo": 40,
-                "Levítico": 27,
-                "Números": 36,
-                "Deuteronômio": 34,
-                "Josué": 24,
-                "Juízes": 21,
-                "Rute": 4,
-                "1° Samuel": 31,
-                "2° Samuel": 24,
-                "1° Reis": 22,
-                "2° Reis": 25,
-                "1° Crônicas": 29,
-                "2° Crônicas": 36,
-                "Esdras": 10,
-                "Neemias": 13,
-                "Ester": 10,
-                "Jó": 42,
-                "Salmos": 150,
-                "Provérbios": 31,
-                "Eclesiastes": 12,
-                "Cânticos": 8,
-                "Isaías": 66,
-                "Jeremias": 52,
-                "Lamentações": 5,
-                "Ezequiel": 48,
-                "Daniel": 12,
-                "Oséias": 14,
-                "Joel": 3,
-                "Amós": 9,
-                "Obadias": 1,
-                "Jonas": 4,
-                "Miquéias": 7,
-                "Naum": 3,
-                "Habacuque": 3,
-                "Sofonias": 3,
-                "Ageu": 2,
-                "Zacarias": 14,
-                "Malaquias": 4,
-                "Mateus": 28,
-                "Marcos": 16,
-                "Lucas": 24,
-                "João": 21,
-                "Atos": 28,
-                "Romanos": 16,
-                "1° Coríntios": 16,
-                "2° Coríntios": 13,
-                "Gálatas": 6,
-                "Efésios": 6,
-                "Filipenses": 4,
-                "Colossenses": 4,
-                "1° Tessalonicenses": 5,
-                "2° Tessalonicenses": 3,
-                "1° Timóteo": 6,
-                "2° Timóteo": 4,
-                "Tito": 3,
-                "Filemom": 1,
-                "Hebreus": 13,
-                "Tiago": 5,
-                "1° Pedro": 5,
-                "2° Pedro": 3,
-                "1° João": 5,
-                "2° João": 1,
-                "3° João": 1,
-                "Judas": 1,
-                "Apocalipse": 22
-            };
-
-            const bookList = document.getElementById("book-list");
-
-            for (const livro in livros) {
-                const li = document.createElement("li");
-                li.textContent = livro;
-                bookList.appendChild(li);
-
-                const chapters = livros[livro];
-                const chapterList = document.createElement("div");
-                chapterList.className = "chapters";
-                for (let i = 1; i <= chapters; i++) {
-                    const chapterLink = document.createElement("a");
-                    chapterLink.href = "#";
-                    chapterLink.textContent = "Capítulo " + i;
-                    chapterList.appendChild(chapterLink);
-                }
-                li.appendChild(chapterList);
-            }
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('menu').classList.toggle('showing');
         });
+        document.querySelectorAll('.menu-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-target');
+                document.querySelectorAll('.content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+        document.getElementById('gerar-versiculo').addEventListener('click', function () {
+            fetch('versiculos.json')
+                .then(response => response.json())
+                .then(data => {
+                    const randomIndex = Math.floor(Math.random() * data.versiculos.length);
+                    const versiculo = data.versiculos[randomIndex];
+                    document.getElementById('versiculo').value = versiculo.texto;
+                });
+        });
+        document.getElementById('enviar-whatsapp').addEventListener('click', function () {
+            const versiculo = document.getElementById('versiculo').value;
+            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(versiculo)}`;
+            window.open(url, '_blank');
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            loadBible();
+        });
+        function loadBible() {
+            fetch('https://raw.githubusercontent.com/thiagobodruk/biblia/master/xml/nvi.min.xml')
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(data, 'text/xml');
+                    const books = xmlDoc.getElementsByTagName('book');
+                    const bookList = document.getElementById('book-list');
+                    for (let i = 0; i < books.length; i++) {
+                        const book = books[i];
+                        const listItem = document.createElement('li');
+                        const bookLink = document.createElement('a');
+                        bookLink.href = '#';
+                        bookLink.textContent = book.getAttribute('name');
+                        bookLink.setAttribute('data-book-id', i);
+                        listItem.appendChild(bookLink);
+                        bookList.appendChild(listItem);
+                        bookLink.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            const bookId = this.getAttribute('data-book-id');
+                            const chapters = book.getElementsByTagName('c');
+                            const chapterList = document.getElementById('chapter-list');
+                            chapterList.innerHTML = '';
+                            for (let j = 0; j < chapters.length; j++) {
+                                const chapter = chapters[j];
+                                const chapterLink = document.createElement('a');
+                                chapterLink.href = '#';
+                                chapterLink.textContent = `Capítulo ${chapter.getAttribute('n')}`;
+                                chapterLink.setAttribute('data-book-id', bookId);
+                                chapterLink.setAttribute('data-chapter-id', j);
+                                chapterList.appendChild(chapterLink);
+                                chapterLink.addEventListener('click', function (e) {
+                                    e.preventDefault();
+                                    const bookId = this.getAttribute('data-book-id');
+                                    const chapterId = this.getAttribute('data-chapter-id');
+                                    const verses = chapter.getElementsByTagName('v');
+                                    const verseList = document.getElementById('verse-list');
+                                    verseList.innerHTML = '';
+                                    for (let k = 0; k < verses.length; k++) {
+                                        const verse = verses[k];
+                                        const verseItem = document.createElement('p');
+                                        verseItem.textContent = `${verse.getAttribute('n')}: ${verse.textContent}`;
+                                        verseList.appendChild(verseItem);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+        }
     </script>
 </body>
 </html>
