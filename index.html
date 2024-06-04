@@ -38,8 +38,9 @@
         }
 
         nav .menu-toggle {
-            display: block;
-            
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
         }
 
         nav ul {
@@ -67,11 +68,9 @@
         }
 
         @media (max-width: 768px) {
-            nav ul {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                text-align: center;
+        nav ul {
+            flex-direction: column;
+        
             }
 
             nav ul {
@@ -87,7 +86,7 @@
 
             nav ul.showing {
                 display: flex;
-            
+            }
         }
 
         main {
@@ -172,23 +171,24 @@
         }
 
         #bible {
-            display: block; /* Usar flexbox para organizar os elementos */
-            max-height: 500px; /* Define uma altura máxima para o container da Bíblia */
-            margin: 0 10px; /* Adiciona margem nas laterais */
+            display: flex; /* Usar flexbox para organizar os elementos */
+            flex-direction: column; /* Organizar os elementos em coluna */
+            overflow-y: auto; /* Adiciona rolagem vertical se houver muitos itens */
         }
 
         #bible a {
-                display: block; /* Faz cada link ocupar uma linha inteira */
-                margin: 5px 0; /* Adiciona espaço entre os links */
-                padding: 10px; /* Adiciona padding para aumentar a área de clique */
-            }
+            color: #007bff; /* Cor azul para os links */
+            text-decoration: none; /* Remover sublinhado padrão */
+            margin-left: 10px; /* Adicionar espaço entre os links */
+            cursor: pointer; /* Cursor de apontador para indicar que é clicável */
+        }
 
         #bible a:hover {
             text-decoration: underline; /* Sublinhar o link ao passar o mouse sobre ele */
         }
 
         #bible div {
-            padding: 5px 0; /* Adiciona padding vertical para os divs */
+            margin-bottom: 5px; /* Adicionar espaço entre os elementos */
         }
     </style>
 </head>
