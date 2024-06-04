@@ -257,7 +257,6 @@
             </a>
         </div>
     </div>
-   
     <footer>
         <p>&copy; 2024 Geração Eleita. Todos os direitos reservado.</p>
     </footer>
@@ -265,17 +264,8 @@
         document.getElementById('menu-toggle').addEventListener('click', () => {
             document.getElementById('menu').classList.toggle('showing');
         });
-
         document.querySelectorAll('.menu-link').forEach(link => {
             link.addEventListener('click', function (e) {
-                const data = `<?xml version="1.0" encoding="UTF-8"?>
-    <bible>
-        <livro nome="Gênesis" abbrev="gn" chapters="50">
-            <!-- Adicione alguns capítulos e versículos aqui -->
-        </livro>
-    </bible>`;
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(data, 'text/xml');
                 e.preventDefault();
                 const targetId = this.getAttribute('data-target');
                 document.querySelectorAll('.content').forEach(content => {
@@ -284,7 +274,6 @@
                 document.getElementById(targetId).classList.add('active');
             });
         });
-
         document.getElementById('gerar-versiculo').addEventListener('click', function () {
             fetch('versiculos.json')
                 .then(response => response.json())
@@ -294,17 +283,14 @@
                     document.getElementById('versiculo').value = versiculo.texto;
                 });
         });
-
         document.getElementById('enviar-whatsapp').addEventListener('click', function () {
             const versiculo = document.getElementById('versiculo').value;
             const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(versiculo)}`;
             window.open(url, '_blank');
         });
-
         document.addEventListener('DOMContentLoaded', function () {
             loadBible();
         });
-
         function loadBible() {
             fetch('biblia.xml')
                 .then(response => response.text())
@@ -314,7 +300,6 @@
                     const xmlDoc = parser.parseFromString(data, 'text/xml');
                     const books = xmlDoc.getElementsByTagName('livro');
                     const bookList = document.getElementById('book-list');
-
                     for (let i = 0; i < books.length; i++) {
                         const book = books[i];
                         const listItem = document.createElement('li');
@@ -324,14 +309,12 @@
                         bookLink.setAttribute('data-book-id', i);
                         listItem.appendChild(bookLink);
                         bookList.appendChild(listItem);
-
                         bookLink.addEventListener('click', function (e) {
                             e.preventDefault();
                             const bookId = this.getAttribute('data-book-id');
                             const chapters = books[bookId].getElementsByTagName('capitulo');
                             const chapterList = document.getElementById('chapter-list');
                             chapterList.innerHTML = '';
-
                             for (let j = 0; j < chapters.length; j++) {
                                 const chapter = chapters[j];
                                 const chapterLink = document.createElement('a');
@@ -340,7 +323,6 @@
                                 chapterLink.setAttribute('data-book-id', bookId);
                                 chapterLink.setAttribute('data-chapter-id', j);
                                 chapterList.appendChild(chapterLink);
-
                                 chapterLink.addEventListener('click', function (e) {
                                     e.preventDefault();
                                     const bookId = this.getAttribute('data-book-id');
@@ -348,7 +330,6 @@
                                     const verses = books[bookId].getElementsByTagName('capitulo')[chapterId].getElementsByTagName('versiculo');
                                     const verseList = document.getElementById('verse-list');
                                     verseList.innerHTML = '';
-
                                     for (let k = 0; k < verses.length; k++) {
                                         const verse = verses[k];
                                         const verseItem = document.createElement('p');
