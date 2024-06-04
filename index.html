@@ -68,9 +68,11 @@
         }
 
         @media (max-width: 768px) {
-        nav ul {
-            flex-direction: column;
-        
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
             }
 
             nav ul {
@@ -174,6 +176,8 @@
             display: flex; /* Usar flexbox para organizar os elementos */
             flex-direction: column; /* Organizar os elementos em coluna */
             overflow-y: auto; /* Adiciona rolagem vertical se houver muitos itens */
+            max-height: 500px;
+            margin: 0 10px;
         }
 
         #bible a {
@@ -181,6 +185,9 @@
             text-decoration: none; /* Remover sublinhado padrão */
             margin-left: 10px; /* Adicionar espaço entre os links */
             cursor: pointer; /* Cursor de apontador para indicar que é clicável */
+            display: block;
+            margin: 5px 0;
+            padding: 10px;
         }
 
         #bible a:hover {
