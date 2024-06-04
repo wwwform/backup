@@ -38,7 +38,7 @@
         }
 
         nav .menu-toggle {
-            display: none;
+            display: block;
             cursor: pointer;
             font-size: 24px;
         }
@@ -68,9 +68,11 @@
         }
 
         @media (max-width: 768px) {
-        nav ul {
-            flex-direction: column;
-        
+            nav ul {
+                display: none; /* Esconde o menu por padrão em telas pequenas */
+                flex-direction: column; /* Organiza os itens do menu em coluna */
+                width: 100%; /* Ocupa a largura total */
+                text-align: center; /* Centraliza o texto dos itens do menu */
             }
 
             nav ul {
@@ -86,7 +88,7 @@
 
             nav ul.showing {
                 display: flex;
-            }
+            
         }
 
         main {
@@ -171,24 +173,23 @@
         }
 
         #bible {
-            display: flex; /* Usar flexbox para organizar os elementos */
-            flex-direction: column; /* Organizar os elementos em coluna */
-            overflow-y: auto; /* Adiciona rolagem vertical se houver muitos itens */
+            display: block; /* Usar flexbox para organizar os elementos */
+            max-height: 500px; /* Define uma altura máxima para o container da Bíblia */
+            margin: 0 10px; /* Adiciona margem nas laterais */
         }
 
         #bible a {
-            color: #007bff; /* Cor azul para os links */
-            text-decoration: none; /* Remover sublinhado padrão */
-            margin-left: 10px; /* Adicionar espaço entre os links */
-            cursor: pointer; /* Cursor de apontador para indicar que é clicável */
-        }
+                display: block; /* Faz cada link ocupar uma linha inteira */
+                margin: 5px 0; /* Adiciona espaço entre os links */
+                padding: 10px; /* Adiciona padding para aumentar a área de clique */
+            }
 
         #bible a:hover {
             text-decoration: underline; /* Sublinhar o link ao passar o mouse sobre ele */
         }
 
         #bible div {
-            margin-bottom: 5px; /* Adicionar espaço entre os elementos */
+            padding: 5px 0; /* Adiciona padding vertical para os divs */
         }
     </style>
 </head>
