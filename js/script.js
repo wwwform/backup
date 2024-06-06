@@ -1,6 +1,4 @@
 <script>
-// TODO O CÓDIGO ABAIXO DEVE ESTAR ENTRE AS TAGS <script> e </script>
-
 document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('menu');
