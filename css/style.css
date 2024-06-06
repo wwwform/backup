@@ -206,5 +206,14 @@ footer {
 .btn:hover {
   background-color: #0056b3;
 }
+/* Ocultar o menu por padrão */
+#menu {
+    display: none;
+}
+
+/* Exibir o menu quando a classe 'showing' for adicionada */
+#menu.showing {
+    display: block;
+}
 
 </style>
