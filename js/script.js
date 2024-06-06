@@ -1,5 +1,9 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+// Adicionar evento de clique ao menuToggle
+    menuToggle.addEventListener('click', () => {
+        menu.classList.toggle('showing');
+    });
         const menuToggle = document.getElementById('menu-toggle');
         const menu = document.getElementById('menu');
         const versiculoTextarea = document.getElementById('versiculo');
