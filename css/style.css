@@ -103,7 +103,7 @@ main {
 
 /* Estilos para o conteúdo (textos, imagens, vídeos, etc.) */
 .content p {
-  color: var(--cor-texto);
+  color: var(#fff);
   text-shadow: black 0.1em 0.1em 0.2em;
 }
 
