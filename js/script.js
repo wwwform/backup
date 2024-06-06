@@ -6,19 +6,35 @@
     // Sinta-se à vontade para adicionar mais versículos conforme necessário
 ];
 
-        document.getElementById('menu-toggle').addEventListener('click', () => {
-            document.getElementById('menu').classList.toggle('showing');
-        });
-        document.querySelectorAll('.menu-link').forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('data-target');
-                document.querySelectorAll('.content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                document.getElementById(targetId).classList.add('active');
-            });
-        });
+        document.addEventListener('DOMContentLoaded', () => {
+  // Função para mostrar/ocultar o menu
+  const menuToggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('menu');
+
+  menuToggle.addEventListener('click', () => {
+    menu.classList.toggle('showing');
+  });
+
+  // Função para mostrar a seção clicada no menu
+  const menuLinks = document.querySelectorAll('.menu-link');
+
+  menuLinks.forEach(link => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const targetId = link.getAttribute('data-target');
+      const targetSection = document.getElementById(targetId);
+
+      // Ocultar todas as seções
+      document.querySelectorAll('.content').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      // Mostrar a seção clicada
+      targetSection.classList.add('active');
+    });
+  });
+
+  // Função para gerar versículo (código omitido, pois você já o forneceu)
         document.getElementById('gerar-versiculo').addEventListener('click', function () {
             fetch('versiculos.json')
                 .then(response => response.json())
