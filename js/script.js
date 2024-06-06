@@ -1,5 +1,4 @@
-<script>
-        document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('menu');
     const versiculoTextarea = document.getElementById('versiculo');
@@ -7,7 +6,7 @@
     // Carregar versículos de um arquivo JSON
     async function carregarVersiculos() {
         try {
-            const response = await fetch('versiculos.json');
+            const response = await fetch('js/versiculos.json'); // Corrigido o caminho para versiculos.json
             return await response.json();
         } catch (error) {
             console.error('Erro ao carregar versículos:', error);
@@ -34,8 +33,12 @@
     // Funcionalidade de gerar versículo
     document.getElementById('gerar-versiculo').addEventListener('click', async () => {
         const versiculos = await carregarVersiculos();
-        const randomIndex = Math.floor(Math.random() * versiculos.length);
-        versiculoTextarea.value = versiculos[randomIndex];
+        if (versiculos.length > 0) {
+            const randomIndex = Math.floor(Math.random() * versiculos.length);
+            versiculoTextarea.value = versiculos[randomIndex];
+        } else {
+            versiculoTextarea.value = "Erro ao carregar versículos.";
+        }
     });
 
     // Funcionalidade de enviar para o WhatsApp
@@ -71,9 +74,9 @@
     }
 
     // Carregar capítulos de um livro
-    async function loadChapters(bookName) {
-        chapterList.innerHTML = ''; // Limpa a lista de capítulos
-        verseList.innerHTML = '';  // Limpa a lista de versículos
+    function loadChapters(bookName) {
+        chapterList.innerHTML = '';
+        verseList.innerHTML = '';
 
         for (const chapterNum in bibleData[bookName]) {
             const chapterLink = document.createElement('a');
@@ -85,8 +88,8 @@
     }
 
     // Carregar versículos de um capítulo
-    async function loadVerses(bookName, chapterNum) {
-        verseList.innerHTML = ''; // Limpa a lista de versículos
+    function loadVerses(bookName, chapterNum) {
+        verseList.innerHTML = '';
 
         const verses = bibleData[bookName][chapterNum];
         for (const verseNum in verses) {
@@ -99,5 +102,3 @@
     // Iniciar o carregamento da Bíblia
     loadBible();
 });
-
-</script>
