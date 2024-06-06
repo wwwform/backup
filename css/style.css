@@ -58,11 +58,11 @@ nav a:hover {
   background-color: rgba(85, 85, 85, 0.8);
 }
 
-/* Menu responsivo (oculto por padrão) */
+/* Menu responsivo (oculto por padrão em telas maiores) */
 nav .menu-toggle {
-  display: none;
-  cursor: pointer;
-  font-size: 24px;
+    display: none; /* Oculto em telas maiores */
+    cursor: pointer;
+    font-size: 24px;
 }
 
 @media (max-width: 768px) {
