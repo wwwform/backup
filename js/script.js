@@ -1,4 +1,11 @@
 <script>
+        const versiculos = [
+            "João 3:16 - Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.",
+            "Romanos 8:28 - E sabemos que todas as coisas contribuem juntamente para o bem daqueles que amam a Deus, daqueles que são chamados segundo o seu propósito.",
+                        "Eis que estou convosco todos os dias, até à consumação dos séculos. - Mateus 28:20",
+    // Sinta-se à vontade para adicionar mais versículos conforme necessário
+];
+
         document.getElementById('menu-toggle').addEventListener('click', () => {
             document.getElementById('menu').classList.toggle('showing');
         });
