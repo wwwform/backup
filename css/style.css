@@ -1,10 +1,17 @@
 <style>
+/* Variáveis CSS */
+:root {
+  --cor-fundo: #1a1a1a;
+  --cor-texto: #fff;
+  --cor-destaque: #007bff;
+}
+
 /* Estilos gerais */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  color: #fff;
-  background: url('assets/Logo GE') no-repeat center center fixed; /* Certifique-se de que o caminho da imagem está correto */
+  color: var(--cor-texto);
+  background: url('assets/Logo GE') no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -16,16 +23,13 @@ header {
 }
 
 h1, h2 {
-  color: #fff; /* Cor do texto dos títulos */
+  color: var(--cor-texto);
   margin: 0;
 }
 
 /* Navegação */
 nav {
   background-color: rgba(68, 68, 68, 0.8);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 10px 20px;
 }
 
@@ -34,6 +38,8 @@ nav ul {
   padding: 0;
   margin: 0;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 nav li {
@@ -41,7 +47,7 @@ nav li {
 }
 
 nav a {
-  color: #fff;
+  color: var(--cor-texto);
   text-decoration: none;
   padding: 10px;
   display: block;
@@ -52,7 +58,7 @@ nav a:hover {
   background-color: rgba(85, 85, 85, 0.8);
 }
 
-/* Menu responsivo */
+/* Menu responsivo (oculto por padrão) */
 nav .menu-toggle {
   display: none;
   cursor: pointer;
@@ -60,12 +66,12 @@ nav .menu-toggle {
 }
 
 @media (max-width: 768px) {
+  /* Exibe o botão de menu em telas menores */
   nav .menu-toggle {
     display: block;
-  nav ul {
-    flex-direction: column; /* Muda o menu para vertical */
   }
 
+  /* Oculta o menu e o exibe em formato vertical ao clicar no botão */
   nav ul {
     display: none;
     flex-direction: column;
@@ -73,12 +79,12 @@ nav .menu-toggle {
     text-align: center;
   }
 
-  nav ul li {
-    margin: 10px 0;
-  }
-
   nav ul.showing {
     display: flex;
+  }
+
+  nav ul li {
+    margin: 10px 0;
   }
 }
 
@@ -88,15 +94,16 @@ main {
 }
 
 .content {
-  display: none;
+  display: none; /* Oculta todo o conteúdo por padrão */
 }
 
 .content.active {
-  display: block;
+  display: block; /* Exibe o conteúdo ativo */
 }
 
+/* Estilos para o conteúdo (textos, imagens, vídeos, etc.) */
 .content p {
-  color: #fff;
+  color: var(--cor-texto);
   text-shadow: black 0.1em 0.1em 0.2em;
 }
 
@@ -129,10 +136,10 @@ main {
 /* Rodapé */
 footer {
   background-color: transparent;
-  color: #fff;
+  color: var(--cor-texto);
   text-align: center;
   padding: 10px 0;
-  position: absolute;
+  position: absolute; /* Fixar o rodapé na parte inferior */
   bottom: 0;
   width: 100%;
 }
@@ -182,14 +189,14 @@ footer {
 }
 
 #bible a {
-  color: #fff;
+  color: var(--cor-texto);
   text-decoration: none;
 }
 
 /* Botões */
 .btn {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--cor-destaque);
+  color: var(--cor-texto);
   padding: 10px 20px;
   border: none;
   cursor: pointer;
@@ -199,4 +206,5 @@ footer {
 .btn:hover {
   background-color: #0056b3;
 }
+
 </style>
