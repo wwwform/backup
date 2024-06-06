@@ -99,4 +99,5 @@
     // Iniciar o carregamento da Bíblia
     loadBible();
 });
+
 </script>
