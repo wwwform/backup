@@ -60,8 +60,8 @@ nav .menu-toggle {
 }
 
 @media (max-width: 768px) {
-  nav .menu-toggle {
-    display: block;
+  nav ul {
+    flex-direction: column; /* Muda o menu para vertical */
   }
 
   nav ul {
