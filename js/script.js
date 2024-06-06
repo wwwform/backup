@@ -73,3 +73,4 @@
                 console.error('Erro ao carregar a Bíblia:', error);
             }
         }
+</script>
