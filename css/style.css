@@ -10,7 +10,7 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  color: var(#fff);
+  color: #fff;
   background: url('../assets/Logo GE') no-repeat center center fixed;
   background-size: cover;
 }
@@ -47,7 +47,7 @@ nav li {
 }
 
 nav a {
-  color: var(--cor-texto);
+  color: #fff;
   text-decoration: none;
   padding: 10px;
   display: block;
@@ -103,7 +103,7 @@ main {
 
 /* Estilos para o conteúdo (textos, imagens, vídeos, etc.) */
 .content p {
-  color: var(#fff);
+  color: #fff;
   text-shadow: black 0.1em 0.1em 0.2em;
 }
 
@@ -136,7 +136,7 @@ main {
 /* Rodapé */
 footer {
   background-color: transparent;
-  color: var(--cor-texto);
+  color: #fff;
   text-align: center;
   padding: 10px 0;
   position: absolute; /* Fixar o rodapé na parte inferior */
@@ -189,14 +189,14 @@ footer {
 }
 
 #bible a {
-  color: var(--cor-texto);
+  color: #fff;
   text-decoration: none;
 }
 
 /* Botões */
 .btn {
-  background-color: var(--cor-destaque);
-  color: var(--cor-texto);
+  background-color: transparent ;
+  color: #fff;
   padding: 10px 20px;
   border: none;
   cursor: pointer;
