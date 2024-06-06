@@ -1,105 +1,102 @@
 <script>
-        const versiculos = [
-            "João 3:16 - Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.",
-            "Romanos 8:28 - E sabemos que todas as coisas contribuem juntamente para o bem daqueles que amam a Deus, daqueles que são chamados segundo o seu propósito.",
-                        "Eis que estou convosco todos os dias, até à consumação dos séculos. - Mateus 28:20",
-    // Sinta-se à vontade para adicionar mais versículos conforme necessário
-];
-
         document.addEventListener('DOMContentLoaded', () => {
-  // Função para mostrar/ocultar o menu
-  const menuToggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('menu');
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    const versiculoTextarea = document.getElementById('versiculo');
 
-  menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('showing');
-  });
-
-  // Função para mostrar a seção clicada no menu
-  const menuLinks = document.querySelectorAll('.menu-link');
-
-  menuLinks.forEach(link => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      const targetId = link.getAttribute('data-target');
-      const targetSection = document.getElementById(targetId);
-
-      // Ocultar todas as seções
-      document.querySelectorAll('.content').forEach(section => {
-        section.classList.remove('active');
-      });
-
-      // Mostrar a seção clicada
-      targetSection.classList.add('active');
-    });
-  });
-
-  // Função para gerar versículo (código omitido, pois você já o forneceu)
-        document.getElementById('gerar-versiculo').addEventListener('click', function () {
-            fetch('versiculos.json')
-                .then(response => response.json())
-                .then(data => {
-                    const randomIndex = Math.floor(Math.random() * data.versiculos.length);
-                    const versiculo = data.versiculos[randomIndex];
-                    document.getElementById('versiculo').value = versiculo.texto;
-                });
-        });
-        document.getElementById('enviar-whatsapp').addEventListener('click', function () {
-            const versiculo = document.getElementById('versiculo').value;
-            const url = `https://wa.me/?text=${encodeURIComponent(versiculo)}`;
-            window.open(url, '_blank');
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-            loadBible();
-        });
-        function loadBible() {
-            fetch('https://raw.githubusercontent.com/thiagobodruk/biblia/master/xml/nvi.min.xml')
-                .then(response => response.text())
-                .then(data => {
-                    const parser = new DOMParser();
-                    const xmlDoc = parser.parseFromString(data, 'text/xml');
-                    const books = xmlDoc.getElementsByTagName('book');
-                    const bookList = document.getElementById('book-list');
-                    for (let i = 0; i < books.length; i++) {
-                        const book = books[i];
-                        const listItem = document.createElement('li');
-                        const bookLink = document.createElement('a');
-                        bookLink.href = '#';
-                        bookLink.textContent = book.getAttribute('name');
-                        bookLink.setAttribute('data-book-id', i);
-                        listItem.appendChild(bookLink);
-                        bookList.appendChild(listItem);
-                        bookLink.addEventListener('click', function (e) {
-                            e.preventDefault();
-                            const bookId = this.getAttribute('data-book-id');
-                            const chapters = book.getElementsByTagName('c');
-                            const chapterList = document.getElementById('chapter-list');
-                            chapterList.innerHTML = '';
-                            for (let j = 0; j < chapters.length; j++) {
-                                const chapter = chapters[j];
-                                const chapterLink = document.createElement('a');
-                                chapterLink.href = '#';
-                                chapterLink.textContent = `Capítulo ${chapter.getAttribute('n')}`;
-                                chapterLink.setAttribute('data-book-id', bookId);
-                                chapterLink.setAttribute('data-chapter-id', j);
-                                chapterList.appendChild(chapterLink);
-                                chapterLink.addEventListener('click', function (e) {
-                                    e.preventDefault();
-                                    const bookId = this.getAttribute('data-book-id');
-                                    const chapterId = this.getAttribute('data-chapter-id');
-                                    const verses = chapter.getElementsByTagName('v');
-                                    const verseList = document.getElementById('verse-list');
-                                    verseList.innerHTML = '';
-                                    for (let k = 0; k < verses.length; k++) {
-                                        const verse = verses[k];
-                                        const verseItem = document.createElement('p');
-                                        verseItem.textContent = `${verse.getAttribute('n')}: ${verse.textContent}`;
-                                        verseList.appendChild(verseItem);
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
+    // Carregar versículos de um arquivo JSON
+    async function carregarVersiculos() {
+        try {
+            const response = await fetch('versiculos.json');
+            return await response.json();
+        } catch (error) {
+            console.error('Erro ao carregar versículos:', error);
+            return [];
         }
-    </script>
+    }
+
+    // Funcionalidade do menu
+    menuToggle.addEventListener('click', () => {
+        menu.classList.toggle('showing');
+    });
+
+    document.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('data-target');
+            document.querySelectorAll('.content').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+
+    // Funcionalidade de gerar versículo
+    document.getElementById('gerar-versiculo').addEventListener('click', async () => {
+        const versiculos = await carregarVersiculos();
+        const randomIndex = Math.floor(Math.random() * versiculos.length);
+        versiculoTextarea.value = versiculos[randomIndex];
+    });
+
+    // Funcionalidade de enviar para o WhatsApp
+    document.getElementById('enviar-whatsapp').addEventListener('click', () => {
+        const versiculo = versiculoTextarea.value;
+        const url = `https://wa.me/?text=${encodeURIComponent(versiculo)}`;
+        window.open(url, '_blank');
+    });
+
+    // Carregar a Bíblia (usando JSON para melhor desempenho)
+    async function loadBible() {
+        try {
+            const response = await fetch('https://raw.githubusercontent.com/thiagobodruk/biblia/master/json/nvi.json');
+            const bibleData = await response.json();
+
+            const bookList = document.getElementById('book-list');
+            const chapterList = document.getElementById('chapter-list');
+            const verseList = document.getElementById('verse-list');
+
+            // Popular a lista de livros
+            for (const bookName in bibleData) {
+                const listItem = document.createElement('li');
+                const bookLink = document.createElement('a');
+                bookLink.href = '#';
+                bookLink.textContent = bookName;
+                bookLink.addEventListener('click', () => loadChapters(bookName));
+                listItem.appendChild(bookLink);
+                bookList.appendChild(listItem);
+            }
+        } catch (error) {
+            console.error('Erro ao carregar a Bíblia:', error);
+        }
+    }
+
+    // Carregar capítulos de um livro
+    async function loadChapters(bookName) {
+        chapterList.innerHTML = ''; // Limpa a lista de capítulos
+        verseList.innerHTML = '';  // Limpa a lista de versículos
+
+        for (const chapterNum in bibleData[bookName]) {
+            const chapterLink = document.createElement('a');
+            chapterLink.href = '#';
+            chapterLink.textContent = `Capítulo ${chapterNum}`;
+            chapterLink.addEventListener('click', () => loadVerses(bookName, chapterNum));
+            chapterList.appendChild(chapterLink);
+        }
+    }
+
+    // Carregar versículos de um capítulo
+    async function loadVerses(bookName, chapterNum) {
+        verseList.innerHTML = ''; // Limpa a lista de versículos
+
+        const verses = bibleData[bookName][chapterNum];
+        for (const verseNum in verses) {
+            const verseItem = document.createElement('p');
+            verseItem.textContent = `${verseNum}: ${verses[verseNum]}`;
+            verseList.appendChild(verseItem);
+        }
+    }
+
+    // Iniciar o carregamento da Bíblia
+    loadBible();
+});
+</script>
