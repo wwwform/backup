@@ -4,6 +4,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
+  background: url('../assets/Logo GE') no-repeat center center fixed;
 }
 
 /* Estilo do cabeçalho */
@@ -60,6 +61,8 @@ nav a:hover {
 .content {
   display: none;
   padding: 2em;
+  color: #fff;
+  text-shadow: black 0.1em 0.1em 0.2em;
 }
 
 .content.active {
