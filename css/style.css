@@ -1,118 +1,113 @@
-/* Adicionei comentários onde fiz alterações */
-
-/* Estilo geral */
+@charset "UTF-8";
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
 }
 
 /* Estilo do cabeçalho */
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 1em 0;
-    text-align: center;
+  background-color: #333;
+  color: #fff;
+  padding: 1em 0;
+  text-align: center;
 }
 
 /* Estilo do menu */
 nav {
-    background-color: #444;
-    overflow: hidden;
+  background-color: #444;
+  overflow: hidden;
 }
 
 .menu-toggle {
-    display: none; /* Tornar visível em telas menores */
-    cursor: pointer;
-    font-size: 2em;
-    padding: 0.5em 1em;
-    color: #fff;
+  display: none; /* Tornar visível em telas menores */
+  cursor: pointer;
+  font-size: 2em;
+  padding: 0.5em 1em;
+  color: #fff;
 }
 
 nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
 }
 
 nav li {
-    margin: 0;
+  margin: 0;
 }
 
 nav a {
-    display: block;
-    padding: 1em;
-    color: #fff;
-    text-decoration: none;
+  display: block;
+  padding: 1em;
+  color: #fff;
+  text-decoration: none;
 }
 
 nav a:hover {
-    background-color: #555;
+  background-color: #555;
 }
 
 /* Adicionei este estilo para mostrar o menu em telas menores */
 .showing {
-    display: block;
+  display: block;
 }
 
 /* Estilo das seções de conteúdo */
 .content {
-    display: none;
-    padding: 2em;
+  display: none;
+  padding: 2em;
 }
 
 .content.active {
-    display: block;
+  display: block;
 }
 
 /* Estilo para a área social */
 .social-section {
-    background-color: #333;
-    color: #fff;
-    padding: 2em;
-    text-align: center;
+  background-color: #333;
+  color: #fff;
+  padding: 2em;
+  text-align: center;
 }
 
 .social-section .photos {
-    display: flex;
-    justify-content: center;
-    gap: 1em;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
 }
 
 .social-section img {
-    max-width: 100px;
-    border-radius: 10px;
+  max-width: 100px;
+  border-radius: 10px;
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1em 0;
-    margin-top: 2em;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1em 0;
+  margin-top: 2em;
 }
 
 /* Adicionei media queries para responsividade */
 @media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-
-    nav ul {
-        flex-direction: column;
-        display: none; /* Ocultar menu em telas menores */
-    }
-
-    nav ul.showing {
-        display: flex; /* Mostrar menu quando o toggle for clicado */
-    }
+  .menu-toggle {
+    display: block;
+  }
+  nav ul {
+    flex-direction: column;
+    display: none; /* Ocultar menu em telas menores */
+  }
+  nav ul.showing {
+    display: flex; /* Mostrar menu quando o toggle for clicado */
+  }
 }
-
 @media (max-width: 480px) {
-    .content {
-        padding: 1em;
-    }
+  .content {
+    padding: 1em;
+  }
 }
