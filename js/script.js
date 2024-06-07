@@ -1,4 +1,3 @@
-<script>
 document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('menu');
@@ -75,4 +74,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadBible();
 });
-</script>
