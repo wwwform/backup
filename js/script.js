@@ -4,14 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const versiculoTextarea = document.getElementById('versiculo');
 
     async function carregarVersiculos() {
-        try {
-            const response = await fetch('versiculos.json');
-            return await response.json();
-        } catch (error) {
-            console.error('Erro ao carregar versículos:', error);
-            return [];
+    try {
+        const response = await fetch('https://wwwform.github.io/VEGeracaoE/js/versiculos.json');
+        if (!response.ok) { // Verificar se a resposta do fetch foi bem-sucedida
+            throw new Error('Erro ao carregar versículos: ' + response.statusText);
         }
+        return await response.json();
+    } catch (error) {
+        console.error('Erro ao carregar versículos:', error);
+        versiculoTextarea.value = "Erro ao carregar versículos."; // Exibir erro na textarea
+        return [];
     }
+}
 
     menuToggle.addEventListener('click', () => {
         menu.classList.toggle('showing');
