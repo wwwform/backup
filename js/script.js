@@ -1,9 +1,9 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-// Adicionar evento de clique ao menuToggle
-    menuToggle.addEventListener('click', () => {
-        menu.classList.toggle('showing');
-    });
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    const versiculoTextarea = document.getElementById('versiculo');
+
         const menuToggle = document.getElementById('menu-toggle');
         const menu = document.getElementById('menu');
         const versiculoTextarea = document.getElementById('versiculo');
@@ -21,8 +21,8 @@
 
         // Funcionalidade do menu
         menuToggle.addEventListener('click', () => {
-            menu.classList.toggle('showing');
-        });
+        menu.classList.toggle('showing'); // Alternar a classe 'showing' no menu
+    });
 
         document.querySelectorAll('.menu-link').forEach(link => {
             link.addEventListener('click', (e) => {
