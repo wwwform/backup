@@ -1,101 +1,95 @@
-/* Reset básico e estilos do body */
+/* Reset básico */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  background-image: url('../assets/Logo\ GE.jpeg'); /* Correção no caminho da imagem */
-  color: #333;
-  line-height: 1.6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
 /* Cabeçalho */
 header {
-  background-color: #333;
-  color: #fff;
-  padding: 1em;
-  text-align: center;
-  position: relative;
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    display: flex; /* Flexbox para alinhar logo e texto */
+    align-items: center; /* Alinhar verticalmente */
 }
 
-header h1 {
-  margin: 0;
-  font-size: 2em;
+.logo-container {
+    margin-right: 1rem; /* Espaçamento entre logo e texto */
 }
 
-header::before {
-  content: "";
-  background-image: url('../assets/Logo\ GE.jpeg'); /* Correção no caminho da imagem */
-  background-size: cover;
-  background-position: center;
-  opacity: 0.3;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
+.logo-container img {
+    max-width: 80px; /* Tamanho máximo da logo */
 }
 
 /* Menu de navegação */
 nav {
-  background-color: #444;
-  padding: 1em;
+    background-color: #444;
+    padding: 1rem;
 }
 
 .menu-toggle {
-  display: none;
-  cursor: pointer;
-  font-size: 1.5em;
-  padding: 0.5em 1em;
-  color: #fff;
+    display: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    padding: 0.5em 1em;
+    color: #fff;
 }
 
 nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
 }
 
 nav li {
-  margin: 0 0.5em;
+    margin: 0 0.5em;
 }
 
 nav a {
-  display: block;
-  padding: 1em;
-  color: #fff;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
+    display: block;
+    padding: 1em;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
-nav a:hover {
-  background-color: #555;
+nav a:hover,
+nav a.active { /* Adiciona estilo para link ativo */
+    background-color: #555;
 }
 
 /* Conteúdo */
 .content {
-  display: none;
-  padding: 2em;
-  margin-bottom: 2em;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: none; /* Esconde as seções inicialmente */
+    padding: 2em;
+    margin: 2em auto; /* Centraliza horizontalmente */
+    max-width: 800px; /* Largura máxima do conteúdo */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .content.active {
-  display: block;
+    display: block;
 }
 
 .content h2 {
-  margin-bottom: 1em;
+    margin-bottom: 1em;
+    color: #333;
 }
+
+/* ... (resto do CSS para Palavra do dia, Galeria, Bíblia, Rodapé e Seção Social) ... */
 
 /* Palavra do dia */
 #palavra-do-dia textarea {
