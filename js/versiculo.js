@@ -17,6 +17,7 @@ export function initVersiculo() {
   }
 
   function atualizarLinkWhatsApp(versiculo) {
-    btnCompartilhar.href = `https://wa.me/?text=${encodeURIComponent(versiculo)}`;
+    const mensagem = encodeURIComponent(versiculo);
+    btnCompartilhar.href = `https://wa.me/?text=${mensagem}`;
   }
 }
