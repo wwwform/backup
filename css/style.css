@@ -123,13 +123,12 @@ nav a:hover {
 }
 
 .moment {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: calc(50% - 1em); /* Duas fotos por linha */
+  margin-bottom: 1em;
 }
 
 .moment-item {
-  margin-bottom: 1em;
+  width: 100%; /* Ocupa toda a largura da coluna */
 }
 
 .moment-item img,
@@ -146,7 +145,7 @@ nav a:hover {
 
 /* Bíblia */
 #biblia {
-  display: flex; /* Exibe livros, capítulos e versículos em linha */
+  display: flex;
   flex-wrap: wrap;
   gap: 1em;
 }
@@ -155,8 +154,8 @@ nav a:hover {
   background-color: rgba(255, 255, 255, 0.9);
   padding: 1em;
   border-radius: 5px;
-  flex: 1; /* Distribui o espaço igualmente entre as listas */
-  min-width: 150px; /* Largura mínima para evitar que as listas fiquem muito estreitas */
+  flex: 1;
+  min-width: 150px;
 }
 
 #book-list ul, #chapter-list ul {
@@ -171,12 +170,12 @@ nav a:hover {
 #book-list a, #chapter-list a {
   color: #333;
   text-decoration: none;
-  display: block; /* Ocupa toda a largura do item da lista */
-  padding: 0.5em; /* Adiciona um pouco de padding para melhor visualização */
+  display: block;
+  padding: 0.5em;
 }
 
 #book-list a:hover, #chapter-list a:hover {
-  background-color: #f0f0f0; /* Efeito de hover */
+  background-color: #f0f0f0;
 }
 
 #verse-list p {
@@ -207,7 +206,7 @@ footer {
 }
 
 .social-section img {
-  max-width: 150px;
+  max-width: 100px; /* Reduzido o tamanho das imagens */
   border-radius: 10px;
 }
 
@@ -226,11 +225,7 @@ footer {
     display: flex;
   }
 
-  .gallery {
-    flex-direction: column;
-  }
-
-  #biblia {
-    flex-direction: column; /* Em telas menores, as listas ficam em coluna */
+  .gallery .moment {
+    width: 100%; /* Uma foto por linha em telas menores */
   }
 }
