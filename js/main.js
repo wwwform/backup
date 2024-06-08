@@ -1,4 +1,5 @@
-import versiculos from './versiculos.json';
+import { initVersiculo } from './versiculo.js';
+import { initMenu } from './menu.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initVersiculo();
@@ -9,55 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('home').classList.add('active');
 });
 
-function initVersiculo() {
-  const btnGerarVersiculo = document.getElementById('gerar-versiculo');
-  const versiculoTextarea = document.getElementById('versiculo');
-  const btnCompartilhar = document.getElementById('enviar-whatsapp');
-
-  btnGerarVersiculo.addEventListener('click', () => {
-    const versiculoAleatorio = gerarVersiculoAleatorio();
-    versiculoTextarea.value = versiculoAleatorio;
-    atualizarLinkWhatsApp(versiculoAleatorio);
-  });
-
-  function gerarVersiculoAleatorio() {
-    const indiceAleatorio = Math.floor(Math.random() * versiculos.length);
-    return versiculos[indiceAleatorio];
-  }
-
-  function atualizarLinkWhatsApp(versiculo) {
-    btnCompartilhar.href = `https://wa.me/?text=${encodeURIComponent(versiculo)}`;
-  }
-}
-
-function initMenu() {
-  const menuToggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('menu');
-  const menuLinks = document.querySelectorAll('.menu-link');
-
-  menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('showing');
-  });
-
-  menuLinks.forEach(link => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      const targetId = link.getAttribute('data-target');
-      document.querySelectorAll('.content').forEach(section => {
-        section.classList.remove('active');
-      });
-      document.getElementById(targetId).classList.add('active');
-      menu.classList.remove('showing');
-    });
-  });
-}
-
 function initBiblia() {
   fetch('https://raw.githubusercontent.com/thiagobodruk/biblia/master/xml/nvi.min.xml')
     .then(response => response.text())
     .then(data => {
       const parser = new DOMParser();
-      const xmlDoc = parser.
+      const xmlDoc = parser.parseFromString(data, 'application/xml');
+      const books = xmlDoc.getElementsByTagName('b');
       const bookList = document.getElementById('book-list');
       const chapterList = document.getElementById('chapter-list');
       const verseList = document.getElementById('verse-list');
