@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initVersiculo();
   initMenu();
   initBiblia();
+  showSection('home'); // Exibe a seção "Home" inicialmente
+  document.getElementById('home-link').classList.add('active'); // Marca o link "Home" como ativo
 });
 
 function showSection(sectionId) {
@@ -19,7 +21,7 @@ function showSection(sectionId) {
     link.classList.remove('active');
   });
 
-  event.target.classList.add('active'); // Corrigido: adiciona a classe "active" ao link clicado
+  document.getElementById(sectionId + '-link').classList.add('active'); 
 }
 
 function initMenu() {
