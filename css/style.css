@@ -1,44 +1,55 @@
-@charset "UTF-8";
-body {
-  font-family: Arial, sans-serif;
+/* Reset básico */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
-  background: url('../assets/Logo GE') no-repeat center center fixed;
 }
 
-/* Estilo do cabeçalho */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4; /* Cor de fundo mais clara */
+  background-image: url('../assets/Logo\ GE.png'); /* Imagem de fundo */
+  background-size: cover; /* Ajusta a imagem para cobrir todo o fundo */
+  background-position: center; /* Centraliza a imagem */
+  color: #333; /* Cor do texto */
+}
+
+/* Cabeçalho */
 header {
-  background-color: #333;
+  background-color: rgba(51, 51, 51, 0.8); /* Cor de fundo com transparência */
   color: #fff;
   padding: 1em 0;
   text-align: center;
 }
 
-/* Estilo do menu */
+header h1 {
+  margin-bottom: 0.5em; /* Espaçamento entre o título e o texto */
+}
+
+/* Menu de navegação */
 nav {
-  background-color: #444;
+  background-color: rgba(68, 68, 68, 0.8); /* Cor de fundo com transparência */
   overflow: hidden;
 }
 
 .menu-toggle {
-  display: none; /* Tornar visível em telas menores */
+  display: none;
   cursor: pointer;
-  font-size: 2em;
+  font-size: 1.5em; /* Tamanho do ícone do menu */
   padding: 0.5em 1em;
   color: #fff;
 }
 
 nav ul {
-  list-style-type: none;
+  list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
+  display: flex; /* Exibe os itens do menu em linha */
   justify-content: center;
 }
 
 nav li {
-  margin: 0;
+  margin: 0 0.5em; /* Espaçamento entre os itens do menu */
 }
 
 nav a {
@@ -46,32 +57,114 @@ nav a {
   padding: 1em;
   color: #fff;
   text-decoration: none;
+  transition: background-color 0.3s ease; /* Efeito de transição suave */
 }
 
 nav a:hover {
   background-color: #555;
 }
 
-/* Adicionei este estilo para mostrar o menu em telas menores */
-.showing {
-  display: block;
-}
-
-/* Estilo das seções de conteúdo */
+/* Conteúdo */
 .content {
   display: none;
   padding: 2em;
-  color: #fff;
-  text-shadow: black 0.1em 0.1em 0.2em;
+  margin-bottom: 2em; /* Espaçamento entre as seções */
+  background-color: rgba(255, 255, 255, 0.8); /* Cor de fundo com transparência */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
 .content.active {
   display: block;
 }
 
-/* Estilo para a área social */
+.content h2 {
+  margin-bottom: 1em;
+}
+
+.content p {
+  line-height: 1.6; /* Espaçamento entre as linhas do texto */
+}
+
+/* Palavra do dia */
+#palavra-do-dia textarea {
+  width: 100%;
+  height: 100px;
+  resize: vertical; /* Permite redimensionar apenas na vertical */
+  margin-bottom: 1em;
+}
+
+#palavra-do-dia button {
+  background-color: #4CAF50; /* Cor de fundo do botão */
+  color: white;
+  padding: 0.8em 1.2em;
+  border: none;
+  cursor: pointer;
+  margin-right: 1em; /* Espaçamento entre os botões */
+  border-radius: 5px; /* Bordas arredondadas */
+}
+
+/* Galeria de fotos */
+.gallery {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os itens quebrem a linha */
+  justify-content: center;
+  gap: 1em;
+}
+
+.moment {
+  display: flex;
+  flex-direction: column; /* Exibe os itens da seção em coluna */
+  align-items: center;
+}
+
+.moment-item {
+  margin-bottom: 1em; /* Espaçamento entre os itens da seção */
+}
+
+.moment-item img,
+.moment-item video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px; /* Bordas arredondadas */
+}
+
+.caption {
+  text-align: center;
+  margin-top: 0.5em;
+}
+
+/* Bíblia */
+#biblia nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+#biblia nav li {
+  margin-bottom: 0.5em;
+}
+
+#biblia nav a {
+  color: #333;
+  text-decoration: none;
+}
+
+#chapter-list,
+#verse-list {
+  margin-top: 1em;
+}
+
+/* Rodapé */
+footer {
+  background-color: rgba(51, 51, 51, 0.8); /* Cor de fundo com transparência */
+  color: #fff;
+  text-align: center;
+  padding: 1em 0;
+}
+
+/* Seção Social */
 .social-section {
-  background-color: #333;
+  background-color: rgba(51, 51, 51, 0.8); /* Cor de fundo com transparência */
   color: #fff;
   padding: 2em;
   text-align: center;
@@ -81,36 +174,30 @@ nav a:hover {
   display: flex;
   justify-content: center;
   gap: 1em;
+  flex-wrap: wrap; /* Permite que as fotos quebrem a linha em telas menores */
 }
 
 .social-section img {
-  max-width: 100px;
+  max-width: 150px; /* Tamanho máximo da imagem */
   border-radius: 10px;
 }
 
-footer {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 1em 0;
-  margin-top: 2em;
-}
-
-/* Adicionei media queries para responsividade */
+/* Responsividade */
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
   }
+
   nav ul {
     flex-direction: column;
-    display: none; /* Ocultar menu em telas menores */
+    display: none;
   }
+
   nav ul.showing {
-    display: flex; /* Mostrar menu quando o toggle for clicado */
+    display: flex;
   }
-}
-@media (max-width: 480px) {
-  .content {
-    padding: 1em;
+
+  .gallery {
+    flex-direction: column; /* Exibe os itens da galeria em coluna em telas menores */
   }
 }
