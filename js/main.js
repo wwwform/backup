@@ -1,8 +1,8 @@
-import { initVersiculo } from './versiculo.js';
+import { initMenu } from './menu.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  initVersiculo();
   initMenu();
+  initVersiculo();
   initBiblia();
   showSection('home'); 
   document.getElementById('home-link').classList.add('active'); 
@@ -22,28 +22,6 @@ function showSection(sectionId) {
   });
 
   document.getElementById(sectionId + '-link').classList.add('active'); 
-}
-
-function initMenu() {
-  const menuToggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('menu');
-
-  menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('show'); 
-  });
-
-  const menuLinks = document.querySelectorAll('nav a');
-  menuLinks.forEach(link => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      const sectionId = link.getAttribute('href').substring(1);
-      showSection(sectionId);
-
-      if (window.innerWidth <= 768) {
-        menu.classList.remove('show');
-      }
-    });
-  });
 }
 
 async function initBiblia() {
