@@ -11,17 +11,17 @@ document.addEventListener('DOMContentLoaded', () => {
 function showSection(sectionId) {
   const sections = document.querySelectorAll('.content');
   sections.forEach(section => {
-    section.style.display = 'none'; 
+    section.style.display = 'none';
   });
 
-  document.getElementById(sectionId).style.display = 'block'; 
+  document.getElementById(sectionId).style.display = 'block';
 
   const menuLinks = document.querySelectorAll('nav a');
   menuLinks.forEach(link => {
     link.classList.remove('active');
   });
 
-  document.getElementById(sectionId + '-link').classList.add('active');
+  document.getElementById(sectionId + '-link').classList.add('active'); 
 }
 
 function initMenu() {
@@ -38,44 +38,41 @@ function initMenu() {
       event.preventDefault();
       const sectionId = link.getAttribute('href').substring(1);
       showSection(sectionId);
+
+      if (window.innerWidth <= 768) {
+        menu.classList.remove('show');
+      }
     });
   });
 }
 
-function initBiblia() {
-  fetch('https://raw.githubusercontent.com/thiagobodruk/biblia/master/xml/nvi.min.xml')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Erro ao carregar a Bíblia: ' + response.statusText);
-      }
-      return response.text();
-    })
-    .then(data => {
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(data, 'application/xml');
-      const books = xmlDoc.getElementsByTagName('b');
-      const bookList = document.getElementById('book-list');
-      const chapterList = document.getElementById('chapter-list');
-      const verseList = document.getElementById('verse-list');
+async function initBiblia() {
+  try {
+    const response = await fetch('js/nvi.xml'); // Carrega o XML localmente
+    const data = await response.text();
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(data, 'application/xml');
+    const books = xmlDoc.getElementsByTagName('b');
+    const bookList = document.getElementById('book-list');
+    const chapterList = document.getElementById('chapter-list');
+    const verseList = document.getElementById('verse-list');
 
-      for (let i = 0; i < books.length; i++) {
-        const book = books[i];
-        const bookName = book.getAttribute('name');
-        const bookItem = document.createElement('li');
-        const bookLink = document.createElement('a');
-        bookLink.href = '#';
-        bookLink.textContent = bookName;
-        bookLink.addEventListener('click', () => loadChapters(book, chapterList, verseList));
-        bookItem.appendChild(bookLink);
-        bookList.appendChild(bookItem);
-      }
-    })
-    .catch(error => {
-      console.error('Erro ao carregar a Bíblia:', error);
-      verseList.innerHTML = '<p>Erro ao carregar a Bíblia. Por favor, tente novamente mais tarde.</p>';
-    });
+    for (let i = 0; i < books.length; i++) {
+      const book = books[i];
+      const bookName = book.getAttribute('name');
+      const bookItem = document.createElement('li');
+      const bookLink = document.createElement('a');
+      bookLink.href = '#';
+      bookLink.textContent = bookName;
+      bookLink.addEventListener('click', () => loadChapters(book, chapterList, verseList));
+      bookItem.appendChild(bookLink);
+      bookList.appendChild(bookItem);
+    }
+  } catch (error) {
+    console.error('Erro ao carregar a Bíblia:', error);
+    verseList.innerHTML = '<p>Erro ao carregar a Bíblia. Por favor, tente novamente mais tarde.</p>';
+  }
 }
-
 
 function loadChapters(book, chapterList, verseList) {
   chapterList.innerHTML = '';
