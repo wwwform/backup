@@ -1,6 +1,6 @@
 import versiculos from './versiculos.json';
 
-export function initVersiculo() {
+function initVersiculo() { 
   const btnGerarVersiculo = document.getElementById('gerar-versiculo');
   const versiculoTextarea = document.getElementById('versiculo');
   const btnCompartilhar = document.getElementById('enviar-whatsapp');
