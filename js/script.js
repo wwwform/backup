@@ -77,4 +77,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     loadBible();
+fetch('https://raw.githubusercontent.com/thiagobodruk/biblia/master/xml/nvi.min.xml')
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(data, 'text/xml');
+                    const books = xmlDoc.getElementsByTagName('book');
+                    const bookList = document.getElementById('book-list');
+                    for (let i = 0; i < books.length; i++) {
+                        const book = books[i];
+                        const listItem = document.createElement('li');
+                        const bookLink = document.createElement('a');
+                        bookLink.href = '#';
+                        bookLink.textContent = book.getAttribute('name');
+                        bookLink.setAttribute('data-book-id', i);
+                        listItem.appendChild(bookLink);
+                        bookList.appendChild(listItem);
+                        bookLink.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            const bookId = this.getAttribute('data-book-id');
+                            const chapters = book.getElementsByTagName('c');
+                            const chapterList = document.getElementById('chapter-list');
+                            chapterList.innerHTML = '';
+                            for (let j = 0; j < chapters.length; j++) {
+                                const chapter = chapters[j];
+                                const chapterLink = document.createElement('a');
+                                chapterLink.href = '#';
+                                chapterLink.textContent = `Capítulo ${chapter.getAttribute('n')}`;
+                                chapterLink.setAttribute('data-book-id', bookId);
+                                chapterLink.setAttribute('data-chapter-id', j);
+                                chapterList.appendChild(chapterLink);
+                                chapterLink.addEventListener('click', function (e) {
+                                    e.preventDefault();
+                                    const bookId = this.getAttribute('data-book-id');
+                                    const chapterId = this.getAttribute('data-chapter-id');
+                                    const verses = chapter.getElementsByTagName('v');
+                                    const verseList = document.getElementById('verse-list');
+                                    verseList.innerHTML = '';
+                                    for (let k = 0; k < verses.length; k++) {
+                                        const verse = verses[k];
+                                        const verseItem = document.createElement('p');
+                                        verseItem.textContent = `${verse.getAttribute('n')}: ${verse.textContent}`;
+                                        verseList.appendChild(verseItem);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+       }
 });
