@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initVersiculo();
   initMenu();
   initBiblia();
-  showSection('home'); // Exibe a seção "Home" inicialmente
-  document.getElementById('home-link').classList.add('active'); // Marca o link "Home" como ativo
+  showSection('home'); 
+  document.getElementById('home-link').classList.add('active'); 
 });
 
 function showSection(sectionId) {
@@ -21,7 +21,7 @@ function showSection(sectionId) {
     link.classList.remove('active');
   });
 
-  document.getElementById(sectionId + '-link').classList.add('active'); 
+  document.getElementById(sectionId + '-link').classList.add('active');
 }
 
 function initMenu() {
@@ -44,7 +44,12 @@ function initMenu() {
 
 function initBiblia() {
   fetch('https://raw.githubusercontent.com/thiagobodruk/biblia/master/xml/nvi.min.xml')
-    .then(response => response.text())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erro ao carregar a Bíblia: ' + response.statusText);
+      }
+      return response.text();
+    })
     .then(data => {
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(data, 'application/xml');
@@ -53,7 +58,6 @@ function initBiblia() {
       const chapterList = document.getElementById('chapter-list');
       const verseList = document.getElementById('verse-list');
 
-      // Carregar livros
       for (let i = 0; i < books.length; i++) {
         const book = books[i];
         const bookName = book.getAttribute('name');
@@ -71,6 +75,7 @@ function initBiblia() {
       verseList.innerHTML = '<p>Erro ao carregar a Bíblia. Por favor, tente novamente mais tarde.</p>';
     });
 }
+
 
 function loadChapters(book, chapterList, verseList) {
   chapterList.innerHTML = '';
