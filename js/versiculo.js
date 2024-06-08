@@ -1,6 +1,6 @@
 import versiculos from './versiculos.json';
 
-function initVersiculo() { 
+function initVersiculo() {
   const btnGerarVersiculo = document.getElementById('gerar-versiculo');
   const versiculoTextarea = document.getElementById('versiculo');
   const btnCompartilhar = document.getElementById('enviar-whatsapp');
@@ -21,3 +21,5 @@ function initVersiculo() {
     btnCompartilhar.href = `https://wa.me/?text=${mensagem}`;
   }
 }
+
+initVersiculo();
