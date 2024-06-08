@@ -28,7 +28,7 @@ header h1 {
 
 header::before {
   content: "";
-  background-image: url('../assets/Logo\ GE.png'); 
+  background-image: url('../assets/Logo GE'); 
   background-size: cover;
   background-position: center;
   opacity: 0.3;
