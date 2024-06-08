@@ -1,4 +1,4 @@
-/* Reset básico */
+/* Reset básico e estilos do body */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -28,7 +28,7 @@ header h1 {
 
 header::before {
   content: "";
-  background-image: url('../assets/Logo GE'); 
+  background-image: url('../assets/Logo\ GE.png'); 
   background-size: cover;
   background-position: center;
   opacity: 0.3;
@@ -128,7 +128,7 @@ nav a:hover {
 }
 
 .moment-item {
-  width: 100%; /* Ocupa toda a largura da coluna */
+  width: 100%;
 }
 
 .moment-item img,
@@ -150,7 +150,9 @@ nav a:hover {
   gap: 1em;
 }
 
-#book-list, #chapter-list, #verse-list {
+#book-list,
+#chapter-list,
+#verse-list {
   background-color: rgba(255, 255, 255, 0.9);
   padding: 1em;
   border-radius: 5px;
@@ -158,23 +160,27 @@ nav a:hover {
   min-width: 150px;
 }
 
-#book-list ul, #chapter-list ul {
+#book-list ul,
+#chapter-list ul {
   list-style: none;
   padding: 0;
 }
 
-#book-list li, #chapter-list li {
+#book-list li,
+#chapter-list li {
   margin-bottom: 0.5em;
 }
 
-#book-list a, #chapter-list a {
+#book-list a,
+#chapter-list a {
   color: #333;
   text-decoration: none;
   display: block;
   padding: 0.5em;
 }
 
-#book-list a:hover, #chapter-list a:hover {
+#book-list a:hover,
+#chapter-list a:hover {
   background-color: #f0f0f0;
 }
 
@@ -206,7 +212,7 @@ footer {
 }
 
 .social-section img {
-  max-width: 100px; /* Reduzido o tamanho das imagens */
+  max-width: 100px;
   border-radius: 10px;
 }
 
@@ -226,6 +232,10 @@ footer {
   }
 
   .gallery .moment {
-    width: 100%; /* Uma foto por linha em telas menores */
+    width: 100%;
+  }
+
+  #biblia {
+    flex-direction: column;
   }
 }
