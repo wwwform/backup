@@ -4,24 +4,22 @@ document.addEventListener('DOMContentLoaded', () => {
   initVersiculo();
   initMenu();
   initBiblia();
-  showSection('home'); // Exibe a seção "Home" inicialmente
 });
 
 function showSection(sectionId) {
   const sections = document.querySelectorAll('.content');
   sections.forEach(section => {
-    section.style.display = 'none'; // Esconde todas as seções
+    section.style.display = 'none'; 
   });
-  document.getElementById(sectionId).style.display = 'block'; // Exibe a seção selecionada
 
-  // Remove a classe "active" de todos os links do menu
+  document.getElementById(sectionId).style.display = 'block'; 
+
   const menuLinks = document.querySelectorAll('nav a');
   menuLinks.forEach(link => {
     link.classList.remove('active');
   });
 
-  // Adiciona a classe "active" ao link da seção selecionada
-  event.target.classList.add('active');
+  event.target.classList.add('active'); // Corrigido: adiciona a classe "active" ao link clicado
 }
 
 function initMenu() {
@@ -29,16 +27,15 @@ function initMenu() {
   const menu = document.getElementById('menu');
 
   menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('show'); // Alterna a classe "show" para mostrar/esconder o menu
+    menu.classList.toggle('show'); 
   });
 
-  // Adiciona um ouvinte de eventos para cada link do menu
   const menuLinks = document.querySelectorAll('nav a');
   menuLinks.forEach(link => {
     link.addEventListener('click', (event) => {
-      event.preventDefault(); // Impede o comportamento padrão do link
-      const sectionId = link.getAttribute('href').substring(1); // Obtém o ID da seção do atributo href
-      showSection(sectionId); // Chama a função para mostrar a seção correspondente
+      event.preventDefault();
+      const sectionId = link.getAttribute('href').substring(1);
+      showSection(sectionId);
     });
   });
 }
