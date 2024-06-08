@@ -7,35 +7,49 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4; /* Cor de fundo mais clara */
-  background-image: url('../assets/Logo\ GE.png'); /* Imagem de fundo */
-  background-size: cover; /* Ajusta a imagem para cobrir todo o fundo */
-  background-position: center; /* Centraliza a imagem */
-  color: #333; /* Cor do texto */
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
 }
 
 /* Cabeçalho */
 header {
-  background-color: rgba(51, 51, 51, 0.8); /* Cor de fundo com transparência */
+  background-color: #333;
   color: #fff;
-  padding: 1em 0;
+  padding: 1em;
   text-align: center;
+  position: relative;
 }
 
 header h1 {
-  margin-bottom: 0.5em; /* Espaçamento entre o título e o texto */
+  margin: 0;
+  font-size: 2em;
+}
+
+header::before {
+  content: "";
+  background-image: url('../assets/Logo\ GE.png'); 
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
 }
 
 /* Menu de navegação */
 nav {
-  background-color: rgba(68, 68, 68, 0.8); /* Cor de fundo com transparência */
-  overflow: hidden;
+  background-color: #444;
+  padding: 1em;
 }
 
 .menu-toggle {
   display: none;
   cursor: pointer;
-  font-size: 1.5em; /* Tamanho do ícone do menu */
+  font-size: 1.5em;
   padding: 0.5em 1em;
   color: #fff;
 }
@@ -44,12 +58,12 @@ nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex; /* Exibe os itens do menu em linha */
+  display: flex;
   justify-content: center;
 }
 
 nav li {
-  margin: 0 0.5em; /* Espaçamento entre os itens do menu */
+  margin: 0 0.5em;
 }
 
 nav a {
@@ -57,7 +71,7 @@ nav a {
   padding: 1em;
   color: #fff;
   text-decoration: none;
-  transition: background-color 0.3s ease; /* Efeito de transição suave */
+  transition: background-color 0.3s ease;
 }
 
 nav a:hover {
@@ -68,10 +82,10 @@ nav a:hover {
 .content {
   display: none;
   padding: 2em;
-  margin-bottom: 2em; /* Espaçamento entre as seções */
-  background-color: rgba(255, 255, 255, 0.8); /* Cor de fundo com transparência */
-  border-radius: 10px; /* Bordas arredondadas */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  margin-bottom: 2em;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .content.active {
@@ -82,51 +96,47 @@ nav a:hover {
   margin-bottom: 1em;
 }
 
-.content p {
-  line-height: 1.6; /* Espaçamento entre as linhas do texto */
-}
-
 /* Palavra do dia */
 #palavra-do-dia textarea {
   width: 100%;
   height: 100px;
-  resize: vertical; /* Permite redimensionar apenas na vertical */
+  resize: vertical;
   margin-bottom: 1em;
 }
 
 #palavra-do-dia button {
-  background-color: #4CAF50; /* Cor de fundo do botão */
+  background-color: #4CAF50;
   color: white;
   padding: 0.8em 1.2em;
   border: none;
   cursor: pointer;
-  margin-right: 1em; /* Espaçamento entre os botões */
-  border-radius: 5px; /* Bordas arredondadas */
+  margin-right: 1em;
+  border-radius: 5px;
 }
 
 /* Galeria de fotos */
 .gallery {
   display: flex;
-  flex-wrap: wrap; /* Permite que os itens quebrem a linha */
+  flex-wrap: wrap;
   justify-content: center;
   gap: 1em;
 }
 
 .moment {
   display: flex;
-  flex-direction: column; /* Exibe os itens da seção em coluna */
+  flex-direction: column;
   align-items: center;
 }
 
 .moment-item {
-  margin-bottom: 1em; /* Espaçamento entre os itens da seção */
+  margin-bottom: 1em;
 }
 
 .moment-item img,
 .moment-item video {
   max-width: 100%;
   height: auto;
-  border-radius: 10px; /* Bordas arredondadas */
+  border-radius: 10px;
 }
 
 .caption {
@@ -135,28 +145,47 @@ nav a:hover {
 }
 
 /* Bíblia */
-#biblia nav ul {
+#biblia {
+  display: flex; /* Exibe livros, capítulos e versículos em linha */
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+#book-list, #chapter-list, #verse-list {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 1em;
+  border-radius: 5px;
+  flex: 1; /* Distribui o espaço igualmente entre as listas */
+  min-width: 150px; /* Largura mínima para evitar que as listas fiquem muito estreitas */
+}
+
+#book-list ul, #chapter-list ul {
   list-style: none;
   padding: 0;
 }
 
-#biblia nav li {
+#book-list li, #chapter-list li {
   margin-bottom: 0.5em;
 }
 
-#biblia nav a {
+#book-list a, #chapter-list a {
   color: #333;
   text-decoration: none;
+  display: block; /* Ocupa toda a largura do item da lista */
+  padding: 0.5em; /* Adiciona um pouco de padding para melhor visualização */
 }
 
-#chapter-list,
-#verse-list {
-  margin-top: 1em;
+#book-list a:hover, #chapter-list a:hover {
+  background-color: #f0f0f0; /* Efeito de hover */
+}
+
+#verse-list p {
+  margin-bottom: 0.5em;
 }
 
 /* Rodapé */
 footer {
-  background-color: rgba(51, 51, 51, 0.8); /* Cor de fundo com transparência */
+  background-color: rgba(51, 51, 51, 0.8);
   color: #fff;
   text-align: center;
   padding: 1em 0;
@@ -164,7 +193,7 @@ footer {
 
 /* Seção Social */
 .social-section {
-  background-color: rgba(51, 51, 51, 0.8); /* Cor de fundo com transparência */
+  background-color: rgba(51, 51, 51, 0.8);
   color: #fff;
   padding: 2em;
   text-align: center;
@@ -174,11 +203,11 @@ footer {
   display: flex;
   justify-content: center;
   gap: 1em;
-  flex-wrap: wrap; /* Permite que as fotos quebrem a linha em telas menores */
+  flex-wrap: wrap;
 }
 
 .social-section img {
-  max-width: 150px; /* Tamanho máximo da imagem */
+  max-width: 150px;
   border-radius: 10px;
 }
 
@@ -198,6 +227,10 @@ footer {
   }
 
   .gallery {
-    flex-direction: column; /* Exibe os itens da galeria em coluna em telas menores */
+    flex-direction: column;
+  }
+
+  #biblia {
+    flex-direction: column; /* Em telas menores, as listas ficam em coluna */
   }
 }
