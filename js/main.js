@@ -1,6 +1,8 @@
 import { initMenu } from './menu.js';
+import { initVersiculo } from './versiculo.js'; // Corrigir o caminho se necessário
 
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOMContentLoaded');
   initMenu();
   initVersiculo();
   initBiblia();
@@ -48,6 +50,7 @@ async function initBiblia() {
     }
   } catch (error) {
     console.error('Erro ao carregar a Bíblia:', error);
+    const verseList = document.getElementById('verse-list');
     verseList.innerHTML = '<p>Erro ao carregar a Bíblia. Por favor, tente novamente mais tarde.</p>';
   }
 }
