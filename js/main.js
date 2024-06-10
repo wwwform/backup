@@ -1,5 +1,5 @@
 import { initMenu } from './menu.js';
-import { initVersiculo } from './versiculo.js'; // Certifique-se de que o caminho está correto
+import { initVersiculo } from './versiculo.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOMContentLoaded event triggered');
@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('initVersiculo called');
   initBiblia();
   console.log('initBiblia called');
-  showSection('home'); 
-  document.getElementById('home-link').classList.add('active'); 
+  showSection('home');
+  document.getElementById('home-link').classList.add('active');
   console.log('Home section shown and home link activated');
 });
 
@@ -20,22 +20,19 @@ function showSection(sectionId) {
     section.style.display = 'none';
   });
   console.log(`Section ${sectionId} will be shown`);
-
   document.getElementById(sectionId).style.display = 'block';
-
   const menuLinks = document.querySelectorAll('nav a');
   menuLinks.forEach(link => {
     link.classList.remove('active');
   });
-
-  document.getElementById(sectionId + '-link').classList.add('active'); 
+  document.getElementById(sectionId + '-link').classList.add('active');
   console.log(`${sectionId} link activated`);
 }
 
 async function initBiblia() {
   try {
     console.log('Fetching nvi.xml');
-    const response = await fetch('biblia.xml'); // Carrega o XML localmente
+    const response = await fetch('js/nvi.xml');
     const data = await response.text();
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(data, 'application/xml');
@@ -67,7 +64,6 @@ function loadChapters(book, chapterList, verseList) {
   console.log(`Loading chapters for book ${book.getAttribute('name')}`);
   chapterList.innerHTML = '';
   verseList.innerHTML = '';
-
   const chapters = book.getElementsByTagName('c');
   for (let i = 0; i < chapters.length; i++) {
     const chapter = chapters[i];
@@ -86,7 +82,6 @@ function loadChapters(book, chapterList, verseList) {
 function loadVerses(chapter, verseList) {
   console.log(`Loading verses for chapter ${chapter.getAttribute('n')}`);
   verseList.innerHTML = '';
-
   const verses = chapter.getElementsByTagName('v');
   for (let i = 0; i < verses.length; i++) {
     const verse = verses[i];
