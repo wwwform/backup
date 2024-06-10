@@ -6,8 +6,10 @@ function initVersiculo() {
   const btnCompartilhar = document.getElementById('enviar-whatsapp');
 
   btnGerarVersiculo.addEventListener('click', () => {
+    console.log('Gerar Versículo button clicked');
     const versiculoAleatorio = gerarVersiculoAleatorio();
     versiculoTextarea.value = versiculoAleatorio;
+    console.log(`Generated verse: ${versiculoAleatorio}`);
     atualizarLinkWhatsApp(versiculoAleatorio);
   });
 
@@ -19,7 +21,8 @@ function initVersiculo() {
   function atualizarLinkWhatsApp(versiculo) {
     const mensagem = encodeURIComponent(versiculo);
     btnCompartilhar.href = `https://wa.me/?text=${mensagem}`;
+    console.log(`WhatsApp link updated: ${btnCompartilhar.href}`);
   }
 }
 
-initVersiculo();
+export { initVersiculo };
