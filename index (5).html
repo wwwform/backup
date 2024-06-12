@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geração Eleita</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="assets/Logo GE.jpeg" alt="Logo Geração Eleita">
+        </div>
+        <h1>Geração Eleita</h1>
+    </header>
+
+    <nav id="navbar">
+        <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+        <ul id="menu">
+            <li><a href="#home" id="home-link" class="menu-link" data-target="home">Home</a></li>
+            <li><a href="#palavra-do-dia" id="palavra-do-dia-link" class="menu-link" data-target="palavra-do-dia">Palavra do Dia</a></li>
+            <li><a href="#nossas-fotos" id="nossas-fotos-link" class="menu-link" data-target="nossas-fotos">Nossas Fotos</a></li>
+            <li><a href="#programacoes" id="programacoes-link" class="menu-link" data-target="programacoes">Programações</a></li>
+            <li><a href="#biblia" id="biblia-link" class="menu-link" data-target="biblia">Bíblia</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="home" class="content active">
+            <h2>Bem-vindo ao Site do Geração Eleita</h2>
+            <p>Aqui vamos estar mostrando todos os assuntos referentes ao conjunto Geração Eleita da Igreja Evangélica Assembléia de Deus ministério Criação de Deus. Nosso Pastor Presidente é o Clóvis de Carvalho Bassani.</p>
+        </section>
+
+        <section id="palavra-do-dia" class="content">
+            <h2>Palavra do Dia</h2>
+            <p>Nós preparamos para todos a palavra do dia por favor clique em gerar no botão abaixo e receba o que o Senhor preparou para hoje.</p>
+            <div class="form-group">
+                <textarea id="versiculo" readonly></textarea>
+            </div>
+            <div class="form-group">
+                <button id="gerar-versiculo">Gerar Versículo</button>
+                <a id="enviar-whatsapp" href="#" target="_blank">
+                    <button>Enviar para o WhatsApp</button>
+                </a>
+            </div>
+        </section>
+
+        <section id="nossas-fotos" class="content">
+            <h2>Nossas Fotos</h2>
+            <div class="gallery">
+                <div class="moment">
+                    <div class="moment-item">
+                        <img src="assets/foto1.jpg" alt="Legenda da Foto 1">
+                    </div>
+                    <div class="caption">Legenda da Foto 1</div>
+                </div>
+                <div class="moment">
+                    <div class="moment-item">
+                        <video controls>
+                            <source src="assets/video1.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    </div>
+                    <div class="caption">Legenda do Vídeo 1</div>
+                </div>
+            </div>
+        </section>
+        <section id="programacoes" class="content">
+            <h2>Programações</h2>
+            <p>Nosso ensaio é toda Segunda-Feira às 19:30.</p>
+            <p>Todo primeiro domingo do mês temos a consagração com a direção dos Jovens às 08:00 todos estão convidados.</p>
+            <p>A cada 15 dias temos um estudo bíblico na quinta-feira às 19:30.</p>
+        </section>
+        <section id="biblia" class="content">
+            <h2>Bíblia</h2>
+            <div id="book-container">
+                <ul id="book-list"></ul>
+            </div>
+            <div id="chapter-container">
+                <ul id="chapter-list"></ul>
+            </div>
+            <div id="verse-container">
+                <ul id="verse-list"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-section">
+            <div class="photos">
+                <img src="assets/Logo Igreja.jpeg" alt="Igreja">
+                <img src="assets/Foto Pastor.jpeg" alt="Pastor">
+                <a href="https://www.instagram.com/geracao.eleita2024?igsh=MzNlNGNkZWQ4Mg==" target="_blank">
+                    <img src="assets/instagram.jpeg" alt="Instagram">
+                    Siga-nos no Instagram
+                </a>
+            </div>
+        </div>
+        <p>&copy; 2024 Geração Eleita. Todos os direitos reservados.</p>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
