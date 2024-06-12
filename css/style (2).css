@@ -1,0 +1,200 @@
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.logo-container {
+    margin-right: 1rem;
+}
+
+.logo-container img {
+    max-width: 80px;
+}
+
+/* Menu de navegação */
+nav {
+    background-color: #444;
+    padding: 1rem;
+}
+
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    padding: 0.5em 1em;
+    color: #fff;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    margin: 0 0.5em;
+}
+
+nav a {
+    display: block;
+    padding: 1em;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover, nav a.active {
+    background-color: #555;
+}
+
+/* Conteúdo */
+.content {
+    display: none;
+    padding: 2em;
+    margin: 2em auto;
+    max-width: 800px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.content.active {
+    display: block;
+}
+
+.content h2 {
+    margin-bottom: 1em;
+    color: #333;
+}
+
+/* Palavra do dia */
+#palavra-do-dia textarea {
+    width: 100%;
+    height: 100px;
+    resize: vertical;
+    margin-bottom: 1em;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+}
+
+#palavra-do-dia button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.8em 1.2em;
+    border: none;
+    cursor: pointer;
+    margin-right: 1em;
+    border-radius: 5px;
+}
+
+/* Galeria de fotos */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+}
+
+.moment {
+    width: calc(50% - 1em); 
+    margin-bottom: 1em;
+}
+
+.moment-item {
+    width: 100%;
+}
+
+.moment-item img,
+.moment-item video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.caption {
+    text-align: center;
+    margin-top: 0.5em;
+}
+
+/* Bíblia */
+#biblia {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+#book-container, #chapter-container, #verse-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+#book-container, #chapter-container {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#verse-container {
+  display: block;
+  clear: both;
+}
+
+#book-list, #chapter-list, #verse-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#book-list li, #chapter-list li, #verse-list li {
+  cursor: pointer;
+  padding: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 2px;
+}
+
+#book-list li:hover, #chapter-list li:hover, #verse-list li:hover {
+  background-color: #eb0a15;
+}
+
+/* Rodapé */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+footer .social-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+
+footer .social-section img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 10px;
+}
