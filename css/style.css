@@ -34,6 +34,15 @@ header {
 nav {
     background-color: #444;
     padding: 1rem;
+
+}
+* Botão de toggle do menu para dispositivos móveis */
+.menu-toggle {
+    display: none; /* Inicialmente escondido */
+    cursor: pointer;
+    font-size: 1.5em;
+    padding: 0.5em 1em;
+    color: #fff;  
 }
 
 .menu-toggle {
@@ -68,6 +77,31 @@ nav a:hover, nav a.active {
     background-color: #555;
 }
 
+/* Estilos para dispositivos móveis */
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Mostra o botão de toggle em dispositivos móveis */
+    }
+    
+    nav ul {
+        display: none; /* Esconde o menu inicialmente */
+        flex-direction: column; /* Disposição em coluna */
+        width: 100%; /* Largura total do container */
+    }
+
+    nav ul.show {
+        display: flex; /* Mostra o menu quando .show é adicionado */
+    }
+
+    nav li {
+        margin: 0; /* Remove margem horizontal */
+    }
+
+    nav a {
+        padding: 0.5em 1em; /* Ajusta o padding */
+    }
+}    
+    
 /* Conteúdo */
 .content {
     display: none;
