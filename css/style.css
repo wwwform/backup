@@ -211,6 +211,11 @@ nav a:hover, nav a.active {
   background-color: #eb0a15;
 }
 
+/* Ajuste para tornar o texto visível */
+#book-list li, #chapter-list li, #verse-list li {
+  color: #333; /* Ajusta a cor do texto para ser visível */
+}
+
 /* Rodapé */
 footer {
     background-color: #333;
