@@ -28,8 +28,12 @@ export function initializeMenu() {
         });
     });
 
-    // Menu toggle para dispositivos móveis
+    document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navUl = document.querySelector('nav ul');
+
     menuToggle.addEventListener('click', () => {
-        navbar.classList.toggle('open');
+        navUl.classList.toggle('show');
     });
+});
 }
