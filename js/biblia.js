@@ -5,7 +5,7 @@ export function initializeBiblia() {
     const bibliaSection = document.getElementById('biblia');
 
     async function fetchBiblia() {
-        const response = await fetch('biblia.json');
+        const response = await fetch('acf.json');
         const biblia = await response.json();
         return biblia;
     }
