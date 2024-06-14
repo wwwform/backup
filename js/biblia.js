@@ -48,8 +48,9 @@ export function initializeBiblia() {
         });
     }
 
-    fetchBiblia().then(biblia => {
-        bibliaSection.addEventListener('click', () => {
+    // Adiciona um listener ao botão de carregar livros
+    document.getElementById('load-books-button').addEventListener('click', () => {
+        fetchBiblia().then(biblia => {
             showBooks(biblia);
         });
     });
