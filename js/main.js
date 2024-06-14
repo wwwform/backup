@@ -13,6 +13,13 @@ document.getElementById('load-books-button').addEventListener('click', () => {
         // Supondo que a função loadBooks está definida em biblia.js e carregará os livros no container
         loadBooks();
     });
+
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('nav ul');
+
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('showing');
+    });
 });
 
 function setupNavigation() {
