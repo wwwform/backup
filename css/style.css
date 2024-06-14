@@ -216,6 +216,23 @@ nav a:hover, nav a.active {
   color: #333; /* Ajusta a cor do texto para ser visível */
 }
 
+/* Adicione um estilo para o botão de carregar livros */
+#load-books-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.8em 1.2em;
+    border: none;
+    cursor: pointer;
+    margin: 1em;
+    border-radius: 5px;
+    display: block;
+}
+
+/* Ajuste a visibilidade inicial do container de livros */
+#book-container {
+    display: none; /* Inicialmente escondido */
+}
+
 /* Rodapé */
 footer {
     background-color: #333;
