@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeVersiculo();
     initializeBiblia();
     setupNavigation();
+    // Adiciona um listener para o botão de carregar livros
+document.getElementById('load-books-button').addEventListener('click', () => {
+        document.getElementById('book-container').style.display = 'block';
+        // Supondo que a função loadBooks está definida em biblia.js e carregará os livros no container
+        loadBooks();
+    });
 });
 
 function setupNavigation() {
