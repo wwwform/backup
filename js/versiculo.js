@@ -1,3 +1,4 @@
+
 export function initializeVersiculo() {
     const gerarVersiculoButton = document.getElementById('gerar-versiculo');
     const versiculoTextArea = document.getElementById('versiculo');
