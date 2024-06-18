@@ -1,6 +1,7 @@
+
 import { initializeMenu } from './menu.js';
 import { initializeVersiculo } from './versiculo.js';
-import { initializeBiblia } from './biblia.js';
+import { initializeBiblia, loadBooks } from './biblia.js'; // Certifique-se de importar loadBooks
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeMenu();
@@ -8,12 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeBiblia();
     setupNavigation();
     // Adiciona um listener para o botão de carregar livros
-document.getElementById('load-books-button').addEventListener('click', () => {
+    document.getElementById('load-books-button').addEventListener('click', () => {
         document.getElementById('book-container').style.display = 'block';
         // Supondo que a função loadBooks está definida em biblia.js e carregará os livros no container
         loadBooks();
     });
-
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('nav ul');
 
@@ -33,6 +33,10 @@ function setupNavigation() {
             sections.forEach(section => {
                 section.style.display = section.id === targetId ? 'block' : 'none';
             });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            link.classList.add('active');
         });
     });
 }
