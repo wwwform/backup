@@ -1,3 +1,4 @@
+
 export function initializeMenu() {
     const menuLinks = document.querySelectorAll('.menu-link');
     const contents = document.querySelectorAll('.content');
