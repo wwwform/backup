@@ -20,6 +20,7 @@ header {
     text-align: center;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .logo-container {
@@ -34,15 +35,6 @@ header {
 nav {
     background-color: #444;
     padding: 1rem;
-
-}
-* Botão de toggle do menu para dispositivos móveis */
-.menu-toggle {
-    display: none; /* Inicialmente escondido */
-    cursor: pointer;
-    font-size: 1.5em;
-    padding: 0.5em 1em;
-    color: #fff;  
 }
 
 .menu-toggle {
@@ -77,31 +69,28 @@ nav a:hover, nav a.active {
     background-color: #555;
 }
 
-/* Estilos para dispositivos móveis */
-@media screen and (max-width: 768px) {
+/* Responsividade para menu de navegação */
+@media (max-width: 768px) {
     .menu-toggle {
-        display: block; /* Mostra o botão de toggle em dispositivos móveis */
-    }
-    
-    nav ul {
-        display: none; /* Esconde o menu inicialmente */
-        flex-direction: column; /* Disposição em coluna */
-        width: 100%; /* Largura total do container */
+        display: block;
     }
 
-    nav ul.show {
-        display: flex; /* Mostra o menu quando .show é adicionado */
+    nav ul {
+        flex-direction: column;
+        display: none;
+        width: 100%;
+    }
+
+    nav ul.showing {
+        display: flex;
     }
 
     nav li {
-        margin: 0; /* Remove margem horizontal */
+        text-align: center;
+        margin: 0;
     }
+}
 
-    nav a {
-        padding: 0.5em 1em; /* Ajusta o padding */
-    }
-}    
-    
 /* Conteúdo */
 .content {
     display: none;
@@ -179,58 +168,36 @@ nav a:hover, nav a.active {
 }
 
 #book-container, #chapter-container, #verse-container {
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
 }
 
 #book-container, #chapter-container {
-  display: inline-block;
-  vertical-align: top;
+    display: inline-block;
+    vertical-align: top;
 }
 
 #verse-container {
-  display: block;
-  clear: both;
+    display: block;
+    clear: both;
 }
 
 #book-list, #chapter-list, #verse-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 #book-list li, #chapter-list li, #verse-list li {
-  cursor: pointer;
-  padding: 5px;
-  border: 1px solid #ccc;
-  margin-bottom: 2px;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 2px;
 }
 
 #book-list li:hover, #chapter-list li:hover, #verse-list li:hover {
-  background-color: #eb0a15;
-}
-
-/* Ajuste para tornar o texto visível */
-#book-list li, #chapter-list li, #verse-list li {
-  color: #333; /* Ajusta a cor do texto para ser visível */
-}
-
-/* Adicione um estilo para o botão de carregar livros */
-#load-books-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 0.8em 1.2em;
-    border: none;
-    cursor: pointer;
-    margin: 1em;
-    border-radius: 5px;
-    display: block;
-}
-
-/* Ajuste a visibilidade inicial do container de livros */
-#book-container {
-    display: none; /* Inicialmente escondido */
+    background-color: #eb0a15;
 }
 
 /* Rodapé */
@@ -253,4 +220,151 @@ footer .social-section img {
     max-width: 100px;
     height: auto;
     border-radius: 10px;
+}
+/* Adicione aqui o novo estilo para os livros, capítulos e versículos da Bíblia */
+
+/* Botão Carregar Livros */
+#load-books-button {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+    background-color: #0066cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+#load-books-button:hover {
+    background-color: #005bb5;
+}
+
+/* Listas de Livros, Capítulos e Versículos */
+#book-list, #chapter-list, #verse-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+#book-list li, #chapter-list li, #verse-list li {
+    background-color: #fff;
+    margin: 0.5rem 0;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#book-list li:hover, #chapter-list li:hover, #verse-list li:hover {
+    background-color: #f0f0f0;
+}
+
+#book-list li {
+    text-align: center;
+    font-weight: bold;
+    color: #444;
+}
+
+#chapter-list li, #verse-list li {
+    text-align: left;
+    color: #666;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul.showing {
+        display: block;
+    }
+
+    #book-list, #chapter-list, #verse-list {
+        padding: 0;
+    }
+
+    #book-list li, #chapter-list li, #verse-list li {
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Ajustes adicionais */
+#book-container {
+    display: none;
+}
+
+.biblia-section {
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+.biblia-section h2 {
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #333;
+}
+/* Botão Voltar */
+button {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+    background-color: #0066cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+/* Esconder inicialmente as listas */
+#chapter-list, #verse-list {
+    display: none;
+}
+
+/* Estilos para os livros, capítulos e versículos da Bíblia */
+#book-list, #chapter-list, #verse-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+#book-list li, #chapter-list li, #verse-list li {
+    background-color: #fff;
+    margin: 0.5rem 0;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#book-list li:hover, #chapter-list li:hover, #verse-list li:hover {
+    background-color: #f0f0f0;
+}
+
+#book-list li {
+    text-align: center;
+    font-weight: bold;
+    color: #444;
+}
+
+#chapter-list li, #verse-list li {
+    text-align: left;
+    color: #666;
 }
