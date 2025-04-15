@@ -1,26 +1,37 @@
 export function initializeAniversariantes() {
     const aniversariantes = [
         { nome: "Breno", dataAniversario: "2025-07-03", foto: "assets/foto_breno.jpg" },
-        { nome: "Will", dataAniversario: "2025-04-14", foto: "assets/foto_will.jpeg" }
+        { nome: "Will", dataAniversario: "2025-04-15", foto: "assets/foto_will.jpeg" }
+    ];
+
+    const mensagens = [
+        "🎉 Aproveite o seu dia especial!",
+        "🎂 Que este seja o melhor aniversário da sua vida!",
+        "🥳 Celebre com muita alegria e amor hoje!",
+        "🎈 Parabéns pelo seu dia maravilhoso!"
     ];
 
     function exibirAniversariante() {
         const hoje = new Date().toISOString().split("T")[0];
-        console.log("Data de hoje:", hoje); // Depuração: verifica a data atual
         const aniversariante = aniversariantes.find(pessoa => pessoa.dataAniversario === hoje);
-        console.log("Aniversariante encontrado:", aniversariante); // Depuração: verifica aniversariante encontrado
-
         const container = document.getElementById("aniversarianteDoDia");
-        if (!container) {
-            console.error("Elemento #aniversarianteDoDia não encontrado!");
-            return;
-        }
+
+        if (!container) return;
 
         if (aniversariante) {
+            const mensagemAleatoria = mensagens[Math.floor(Math.random() * mensagens.length)];
+            const mensagemCompartilhar = `Hoje é aniversário de ${aniversariante.nome}! 🎉 Desejamos a ele(a) muitas felicidades!`;
+            const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(mensagemCompartilhar)}`;
+            
             container.innerHTML = `
-                <h3>🎉 Feliz Aniversário! 🎉</h3>
-                <img src="${aniversariante.foto}" alt="Foto de ${aniversariante.nome}" width="200">
-                <p>${aniversariante.nome}</p>
+                <h3>${mensagemAleatoria}</h3>
+                <img src="${aniversariante.foto}" alt="Foto de ${aniversariante.nome}" width="200" style="border-radius: 50%; margin: 10px;">
+                <p><strong>${aniversariante.nome}</strong></p>
+                <a href="${whatsappLink}" target="_blank" style="text-decoration: none;">
+                    <button style="background: #25d366; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Compartilhar no WhatsApp
+                    </button>
+                </a>
             `;
         } else {
             container.innerHTML = `
@@ -29,6 +40,5 @@ export function initializeAniversariantes() {
         }
     }
 
-    exibirAniversariante(); // Chama a função para exibir o aniversariante
+    exibirAniversariante();
 }
-
