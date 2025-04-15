@@ -1,19 +1,21 @@
-
 import { initializeMenu } from './menu.js';
 import { initializeVersiculo } from './versiculo.js';
-import { initializeBiblia, loadBooks } from './biblia.js'; // Certifique-se de importar loadBooks
+import { initializeBiblia, loadBooks } from './biblia.js';
+import { initializeAniversariantes } from './aniversariantes.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeMenu();
     initializeVersiculo();
     initializeBiblia();
+    initializeAniversariantes(); // Adiciona o módulo de aniversariantes
     setupNavigation();
+
     // Adiciona um listener para o botão de carregar livros
     document.getElementById('load-books-button').addEventListener('click', () => {
         document.getElementById('book-container').style.display = 'block';
-        // Supondo que a função loadBooks está definida em biblia.js e carregará os livros no container
         loadBooks();
     });
+
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('nav ul');
 
