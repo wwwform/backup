@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geração Eleita</title>
-    <link rel="stylesheet" href="css/style.css"> <!-- Chamada do CSS externo -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Chama o CSS externo -->
 </head>
 <body>
     <header>
@@ -22,6 +22,7 @@
             <li><a href="#nossas-fotos" id="nossas-fotos-link" class="menu-link" data-target="nossas-fotos">Nossas Fotos</a></li>
             <li><a href="#programacoes" id="programacoes-link" class="menu-link" data-target="programacoes">Programações</a></li>
             <li><a href="#biblia" id="biblia-link" class="menu-link" data-target="biblia">Bíblia</a></li>
+            <li><a href="#aniversariantes" id="aniversariantes-link" class="menu-link" data-target="aniversariantes">Aniversariantes</a></li>
         </ul>
     </nav>
 
@@ -86,8 +87,11 @@
             <div id="verse-container">
                 <ul id="verse-list"></ul>
             </div>
-            
-            <!-- Aniversariante do dia -->
+        </section>
+
+        <!-- Nova seção dos aniversariantes -->
+        <section id="aniversariantes" class="content">
+            <h2>Aniversariantes do Dia</h2>
             <div id="aniversarianteDoDia" style="text-align:center; margin-top:20px;">
                 <!-- O conteúdo será gerado automaticamente pelo JavaScript -->
             </div>
@@ -109,6 +113,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script type="module" src="js/main.js"></script> <!-- Chamada para o JS atualizado -->
+    <script type="module" src="js/main.js"></script> <!-- Chamada para o JS -->
 </body>
 </html>
