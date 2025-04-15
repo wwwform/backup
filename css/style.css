@@ -256,10 +256,12 @@ footer .social-section img {
 }
 
 #aniversarianteDoDia img {
-    border: 4px solid #ffeaa7;
+    max-width: 200px; /* Garante que a largura máxima seja de 200px */
+    height: auto; /* Mantém a proporção original da imagem */
+    border: 4px solid #ffeaa7; /* Mantém a borda */
     padding: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
+    border-radius: 10px; /* Deixa os cantos levemente arredondados, mas não totalmente redondos */
 }
 
 #aniversarianteDoDia h3 {
