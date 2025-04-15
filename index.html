@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geração Eleita</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css"> <!-- Chamada do CSS externo -->
 </head>
 <body>
     <header>
@@ -66,13 +65,14 @@
                 </div>
             </div>
         </section>
+        
         <section id="programacoes" class="content">
             <h2>Programações</h2>
             <p>Nosso ensaio é toda Segunda-Feira às 19:30.</p>
             <p>Todo primeiro domingo do mês temos a consagração com a direção dos Jovens às 08:00 todos estão convidados.</p>
             <p>A cada 15 dias temos um estudo bíblico na quinta-feira às 19:30.</p>
         </section>
-        <!-- Adicione este botão dentro da seção da Bíblia -->
+
         <section id="biblia" class="content">
             <h2>Bíblia</h2>
             <!-- Botão para carregar livros -->
@@ -86,9 +86,14 @@
             <div id="verse-container">
                 <ul id="verse-list"></ul>
             </div>
+            
+            <!-- Aniversariante do dia -->
+            <div id="aniversarianteDoDia" style="text-align:center; margin-top:20px;">
+                <!-- O conteúdo será gerado automaticamente pelo JavaScript -->
+            </div>
         </section>
-
     </main>
+    
     <footer>
         <div class="social-section">
             <div class="photos">
@@ -103,6 +108,7 @@
         <p>&copy; 2024 Geração Eleita. Todos os direitos reservados.</p>
     </footer>
 
-    <script type="module" src="js/main.js"></script>
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script> <!-- Chamada para o JS atualizado -->
 </body>
 </html>
