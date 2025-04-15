@@ -6,7 +6,7 @@ const aniversariantes = [
     { nome: "Larissa", dataAniversario: "2025-03-25", foto: "assets/foto_maria.jpg" },
     { nome: "Lorenzo", dataAniversario: "2025-10-16", foto: "assets/foto_maria.jpg" },
     { nome: "Tainá", dataAniversario: "2025-10-16", foto: "assets/foto_maria.jpg" },
-    { nome: "Will", dataAniversario: "2025-04-15", foto: "assets/foto_will.jpg" }
+    { nome: "Will", dataAniversario: "2025-04-15", foto: "assets/foto_will.jpeg" }
 ];
 
 // Função para exibir o aniversariante do dia
