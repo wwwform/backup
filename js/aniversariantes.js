@@ -6,10 +6,15 @@ export function initializeAniversariantes() {
 
     function exibirAniversariante() {
         const hoje = new Date().toISOString().split("T")[0];
+        console.log("Data de hoje:", hoje); // Depuração: verifica a data atual
         const aniversariante = aniversariantes.find(pessoa => pessoa.dataAniversario === hoje);
-        const container = document.getElementById("aniversarianteDoDia");
+        console.log("Aniversariante encontrado:", aniversariante); // Depuração: verifica aniversariante encontrado
 
-        if (!container) return;
+        const container = document.getElementById("aniversarianteDoDia");
+        if (!container) {
+            console.error("Elemento #aniversarianteDoDia não encontrado!");
+            return;
+        }
 
         if (aniversariante) {
             container.innerHTML = `
@@ -24,5 +29,6 @@ export function initializeAniversariantes() {
         }
     }
 
-    exibirAniversariante();
+    exibirAniversariante(); // Chama a função para exibir o aniversariante
 }
+
