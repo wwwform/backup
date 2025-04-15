@@ -9,24 +9,33 @@ const aniversariantes = [
     { nome: "Will", dataAniversario: "2025-04-15", foto: "assets/foto_will.jpeg" }
 ];
 
+// Função para alternar entre as seções do menu
+function alternarSeções() {
+    const menuLinks = document.querySelectorAll('.menu-link');
+    const contents = document.querySelectorAll('.content');
+
+    menuLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+
+            // Ativa a seção correspondente
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+}
+
 // Função para exibir o aniversariante do dia
 function exibirAniversariante() {
-    // Obtém a data de hoje no formato ISO (YYYY-MM-DD)
     const hoje = new Date().toISOString().split("T")[0];
-    console.log("Hoje é:", hoje); // Log para depuração
-
-    // Busca o aniversariante correspondente à data atual
     const aniversariante = aniversariantes.find(pessoa => pessoa.dataAniversario === hoje);
-    console.log("Aniversariante encontrado:", aniversariante); // Log para verificar o resultado
 
-    // Verifica se o elemento #aniversarianteDoDia existe no HTML
     const container = document.getElementById("aniversarianteDoDia");
-    if (!container) {
-        console.error("Elemento #aniversarianteDoDia não encontrado no HTML!");
-        return;
-    }
+    if (!container) return;
 
-    // Atualiza o conteúdo do container com as informações do aniversariante
     if (aniversariante) {
         container.innerHTML = `
             <h3>🎉 Feliz Aniversário! 🎉</h3>
@@ -34,12 +43,14 @@ function exibirAniversariante() {
             <p>${aniversariante.nome}</p>
         `;
     } else {
-        // Caso não haja aniversariantes para o dia atual
         container.innerHTML = `
             <h3>🎂 Nenhum aniversariante hoje</h3>
         `;
     }
 }
 
-// Executa a função ao carregar a página
-window.onload = exibirAniversariante;
+// Executa as funções ao carregar a página
+window.onload = () => {
+    alternarSeções();
+    exibirAniversariante();
+};
