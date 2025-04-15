@@ -221,7 +221,6 @@ footer .social-section img {
     height: auto;
     border-radius: 10px;
 }
-/* Adicione aqui o novo estilo para os livros, capítulos e versículos da Bíblia */
 
 /* Botão Carregar Livros */
 #load-books-button {
@@ -240,36 +239,56 @@ footer .social-section img {
     background-color: #005bb5;
 }
 
-/* Listas de Livros, Capítulos e Versículos */
-#book-list, #chapter-list, #verse-list {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-}
-
-#book-list li, #chapter-list li, #verse-list li {
-    background-color: #fff;
-    margin: 0.5rem 0;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#book-list li:hover, #chapter-list li:hover, #verse-list li:hover {
-    background-color: #f0f0f0;
-}
-
-#book-list li {
+/* Estilo para aniversariante */
+#aniversarianteDoDia {
     text-align: center;
-    font-weight: bold;
-    color: #444;
+    margin-top: 20px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-#chapter-list li, #verse-list li {
-    text-align: left;
-    color: #666;
+#aniversarianteDoDia:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+#aniversarianteDoDia img {
+    border: 4px solid #ffeaa7;
+    padding: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+}
+
+#aniversarianteDoDia h3 {
+    color: #6c5ce7;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+#aniversarianteDoDia p {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #2d3436;
+}
+
+/* Animação de fade-in */
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Responsividade */
@@ -295,76 +314,4 @@ footer .social-section img {
         padding: 1rem;
         font-size: 1.1rem;
     }
-}
-
-/* Ajustes adicionais */
-#book-container {
-    display: none;
-}
-
-.biblia-section {
-    margin: 1rem;
-    padding: 1rem;
-    background-color: #fafafa;
-    border: 1px solid #eee;
-    border-radius: 5px;
-}
-
-.biblia-section h2 {
-    margin-bottom: 1rem;
-    text-align: center;
-    color: #333;
-}
-/* Botão Voltar */
-button {
-    display: block;
-    margin: 1rem auto;
-    padding: 0.5rem 1rem;
-    background-color: #0066cc;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-button:hover {
-    background-color: #005bb5;
-}
-
-/* Esconder inicialmente as listas */
-#chapter-list, #verse-list {
-    display: none;
-}
-
-/* Estilos para os livros, capítulos e versículos da Bíblia */
-#book-list, #chapter-list, #verse-list {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-}
-
-#book-list li, #chapter-list li, #verse-list li {
-    background-color: #fff;
-    margin: 0.5rem 0;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#book-list li:hover, #chapter-list li:hover, #verse-list li:hover {
-    background-color: #f0f0f0;
-}
-
-#book-list li {
-    text-align: center;
-    font-weight: bold;
-    color: #444;
-}
-
-#chapter-list li, #verse-list li {
-    text-align: left;
-    color: #666;
 }
