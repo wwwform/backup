@@ -1,11 +1,6 @@
 // Lista de aniversariantes
 const aniversariantes = [
     { nome: "Breno", dataAniversario: "2025-07-03", foto: "assets/foto_joao.jpg" },
-    { nome: "Enaily", dataAniversario: "2025-01-01", foto: "assets/foto_maria.jpg" },
-    { nome: "Eversson", dataAniversario: "2025-08-04", foto: "assets/foto_maria.jpg" },
-    { nome: "Larissa", dataAniversario: "2025-03-25", foto: "assets/foto_maria.jpg" },
-    { nome: "Lorenzo", dataAniversario: "2025-10-16", foto: "assets/foto_maria.jpg" },
-    { nome: "Tainá", dataAniversario: "2025-10-16", foto: "assets/foto_maria.jpg" },
     { nome: "Will", dataAniversario: "2025-04-15", foto: "assets/foto_will.jpeg" }
 ];
 
@@ -54,3 +49,4 @@ window.onload = () => {
     alternarSeções();
     exibirAniversariante();
 };
+
