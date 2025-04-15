@@ -1,7 +1,7 @@
 export function initializeAniversariantes() {
     const aniversariantes = [
         { nome: "Breno", dataAniversario: "2025-07-03", foto: "assets/foto_breno.jpg" },
-        { nome: "Will", dataAniversario: "2025-04-15", foto: "assets/foto_will.jpeg" } // Alterei a data para testar ontem
+        { nome: "Will", dataAniversario: "2025-04-15", foto: "assets/foto_will.jpeg" }
     ];
 
     const mensagens = [
@@ -12,26 +12,26 @@ export function initializeAniversariantes() {
     ];
 
     function exibirAniversariante() {
-        // Obtenha a data de hoje no formato correto (YYYY-MM-DD)
-        const hoje = new Date().toISOString().split("T")[0];
-        console.log("Data de hoje:", hoje); // Depuração: Verifique a data atual
+        // Obtemos a data no formato correto, considerando horário local
+        const hoje = new Date().toLocaleDateString("en-CA"); // Formato ISO: YYYY-MM-DD
+        console.log("Data de hoje:", hoje); // Depuração: Mostra a data atual no console
 
-        // Encontre o aniversariante correspondente à data atual
+        // Buscamos o aniversariante correspondente à data
         const aniversariante = aniversariantes.find(pessoa => pessoa.dataAniversario === hoje);
-        console.log("Aniversariante encontrado:", aniversariante); // Depuração: Verifique o aniversariante encontrado
+        console.log("Aniversariante encontrado:", aniversariante); // Depuração: Verifica o aniversariante encontrado
 
         const container = document.getElementById("aniversarianteDoDia");
 
         if (!container) {
-            console.error("Elemento #aniversarianteDoDia não encontrado!");
+            console.error("Elemento #aniversarianteDoDia não foi encontrado!");
             return;
         }
 
-        // Limpe o conteúdo antes de atualizar
+        // Limpa o conteúdo do container antes de atualizá-lo
         container.innerHTML = "";
 
         if (aniversariante) {
-            // Exiba o aniversariante com mensagem aleatória
+            // Exibe o aniversariante do dia com uma mensagem aleatória
             const mensagemAleatoria = mensagens[Math.floor(Math.random() * mensagens.length)];
             const mensagemCompartilhar = `Hoje é aniversário de ${aniversariante.nome}! 🎉 Desejamos a ele(a) muitas felicidades!`;
             const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(mensagemCompartilhar)}`;
@@ -47,7 +47,7 @@ export function initializeAniversariantes() {
                 </a>
             `;
         } else {
-            // Exiba mensagem padrão quando não houver aniversariante
+            // Exibe uma mensagem padrão se não houver aniversariante
             container.innerHTML = `
                 <h3>🎂 Nenhum aniversariante hoje</h3>
             `;
