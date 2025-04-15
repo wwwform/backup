@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geração Eleita</title>
-    <link rel="stylesheet" href="css/style.css"> <!-- Link para o CSS -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Chama o CSS externo -->
 </head>
 <body>
     <header>
@@ -76,6 +76,7 @@
 
         <section id="biblia" class="content">
             <h2>Bíblia</h2>
+            <!-- Botão para carregar livros -->
             <button id="load-books-button">Carregar Livros</button>
             <div id="book-container">
                 <ul id="book-list"></ul>
@@ -88,10 +89,10 @@
             </div>
         </section>
 
-        <!-- Seção dos aniversariantes -->
+        <!-- Nova seção dos aniversariantes -->
         <section id="aniversariantes" class="content">
             <h2>Aniversariantes do Dia</h2>
-            <div id="aniversarianteDoDia">
+            <div id="aniversarianteDoDia" style="text-align:center; margin-top:20px;">
                 <!-- O conteúdo será gerado automaticamente pelo JavaScript -->
             </div>
         </section>
@@ -111,6 +112,7 @@
         <p>&copy; 2024 Geração Eleita. Todos os direitos reservados.</p>
     </footer>
 
-    <script src="js/main.js"></script>
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script> <!-- Chamada para o JS -->
 </body>
 </html>
