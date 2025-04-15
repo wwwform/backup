@@ -11,18 +11,35 @@ const aniversariantes = [
 
 // Função para exibir o aniversariante do dia
 function exibirAniversariante() {
+    // Obtém a data de hoje no formato ISO (YYYY-MM-DD)
     const hoje = new Date().toISOString().split("T")[0];
-    const aniversariante = aniversariantes.find(pessoa => pessoa.dataAniversario === hoje);
+    console.log("Hoje é:", hoje); // Log para depuração
 
+    // Busca o aniversariante correspondente à data atual
+    const aniversariante = aniversariantes.find(pessoa => pessoa.dataAniversario === hoje);
+    console.log("Aniversariante encontrado:", aniversariante); // Log para verificar o resultado
+
+    // Verifica se o elemento #aniversarianteDoDia existe no HTML
+    const container = document.getElementById("aniversarianteDoDia");
+    if (!container) {
+        console.error("Elemento #aniversarianteDoDia não encontrado no HTML!");
+        return;
+    }
+
+    // Atualiza o conteúdo do container com as informações do aniversariante
     if (aniversariante) {
-        const container = document.getElementById("aniversarianteDoDia");
         container.innerHTML = `
             <h3>🎉 Feliz Aniversário! 🎉</h3>
             <img src="${aniversariante.foto}" alt="Foto de ${aniversariante.nome}" width="200">
             <p>${aniversariante.nome}</p>
         `;
+    } else {
+        // Caso não haja aniversariantes para o dia atual
+        container.innerHTML = `
+            <h3>🎂 Nenhum aniversariante hoje</h3>
+        `;
     }
 }
 
-// Executar a função ao carregar a página
+// Executa a função ao carregar a página
 window.onload = exibirAniversariante;
