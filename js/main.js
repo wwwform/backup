@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Evita recarregamento infinito e força atualização apenas uma vez
+    // Força o recarregamento automático sem gerar múltiplos parâmetros
     verificarRecarregamento();
 
     // Atualiza os recursos para evitar cache
@@ -66,14 +66,15 @@ function setupNavigation() {
     }
 }
 
-// Função para verificar e evitar recarregamento infinito
+// Função para verificar e evitar recarregamento múltiplo
 function verificarRecarregamento() {
-    const version = new Date().getTime();
-    const url = window.location.href;
+    const url = new URL(window.location.href);
 
-    if (!url.includes(`?v=`)) {
+    if (!url.searchParams.has('v')) {
+        const version = new Date().getTime();
         console.log("Adicionando parâmetro para atualização...");
-        location.href = `${url}?v=${version}`; // Adiciona o parâmetro dinâmico e recarrega a página uma única vez
+        url.searchParams.set('v', version); // Define o parâmetro 'v' na URL
+        window.location.href = url.toString(); // Recarrega apenas uma vez com o novo parâmetro
     } else {
         console.log("Já atualizado, não recarregar novamente.");
     }
