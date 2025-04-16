@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Força o recarregamento automático em mudanças relevantes
-    detectarMudancasERecarregar();
+    // Evita recarregamento infinito e força atualização apenas uma vez
+    verificarRecarregamento();
 
     // Atualiza os recursos para evitar cache
     atualizarRecursos();
@@ -66,14 +66,16 @@ function setupNavigation() {
     }
 }
 
-// Função para detectar mudanças e recarregar a página
-function detectarMudancasERecarregar() {
+// Função para verificar e evitar recarregamento infinito
+function verificarRecarregamento() {
     const version = new Date().getTime();
     const url = window.location.href;
 
-    if (!url.includes(`?v=${version}`)) {
-        console.log("Forçando recarregamento para atualizar os recursos...");
-        location.href = `${url}?v=${version}`;
+    if (!url.includes(`?v=`)) {
+        console.log("Adicionando parâmetro para atualização...");
+        location.href = `${url}?v=${version}`; // Adiciona o parâmetro dinâmico e recarrega a página uma única vez
+    } else {
+        console.log("Já atualizado, não recarregar novamente.");
     }
 }
 
