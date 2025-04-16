@@ -1,7 +1,7 @@
 export function initializeAniversariantes() {
     const aniversariantes = [
         { nome: "Breno", dataAniversario: "2025-07-03", foto: "assets/foto_breno.jpg" },
-        { nome: "Will", dataAniversario: "2025-04-16", foto: "assets/foto_will.jpeg" }
+        { nome: "Will", dataAniversario: "2025-04-15", foto: "assets/foto_will.jpeg" }
     ];
 
     const mensagensBiblicas = [
