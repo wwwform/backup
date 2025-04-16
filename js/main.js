@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeMenu();
     initializeVersiculo();
     initializeBiblia();
-    initializeAniversariantes(); // Inicializa a funcionalidade dos aniversariantes
+    initializeAniversariantes();
 
     // Configura a navegação entre as seções
     setupNavigation();
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const bookContainer = document.getElementById('book-container');
             if (bookContainer) {
                 bookContainer.style.display = 'block';
-                loadBooks(); // Função do módulo de Bíblia
+                loadBooks();
             }
         });
     }
@@ -35,37 +35,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Força a atualização dos recursos (CSS e JS)
+    // Força o recarregamento automático em mudanças relevantes
+    detectarMudancasERecarregar();
+
+    // Atualiza os recursos para evitar cache
     atualizarRecursos();
 });
 
 function setupNavigation() {
-    const sections = document.querySelectorAll('main .content'); // Todas as seções do site
-    const navLinks = document.querySelectorAll('nav ul li a'); // Links do menu
+    const sections = document.querySelectorAll('main .content');
+    const navLinks = document.querySelectorAll('nav ul li a');
 
     if (sections && navLinks) {
         navLinks.forEach(link => {
             link.addEventListener('click', (event) => {
-                event.preventDefault(); // Impede o comportamento padrão do link
-                const targetId = link.id.replace('-link', ''); // Obtém o ID do destino
+                event.preventDefault();
+                const targetId = link.id.replace('-link', '');
 
                 sections.forEach(section => {
-                    section.style.display = section.id === targetId ? 'block' : 'none'; // Mostra apenas a seção correspondente
+                    section.style.display = section.id === targetId ? 'block' : 'none';
                 });
 
                 navLinks.forEach(link => {
-                    link.classList.remove('active'); // Remove a classe ativa de todos os links
+                    link.classList.remove('active');
                 });
 
-                link.classList.add('active'); // Adiciona a classe ativa ao link clicado
+                link.classList.add('active');
             });
         });
     }
 }
 
+// Função para detectar mudanças e recarregar a página
+function detectarMudancasERecarregar() {
+    const version = new Date().getTime();
+    const url = window.location.href;
+
+    if (!url.includes(`?v=${version}`)) {
+        console.log("Forçando recarregamento para atualizar os recursos...");
+        location.href = `${url}?v=${version}`;
+    }
+}
+
 // Função para adicionar versão dinâmica nos recursos
 function atualizarRecursos() {
-    const version = new Date().getTime(); // Gera um identificador único baseado na hora atual
+    const version = new Date().getTime();
 
     // Atualiza o CSS
     const cssLink = document.querySelector("link[href*='style.css']");
