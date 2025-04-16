@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeMenu();
     initializeVersiculo();
     initializeBiblia();
-    initializeAniversariantes(); // Integra o módulo de aniversariantes
+    initializeAniversariantes(); // Inicializa a funcionalidade dos aniversariantes
 
     // Configura a navegação entre as seções
     setupNavigation();
@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.classList.toggle('showing');
         });
     }
+
+    // Força a atualização dos recursos (CSS e JS)
+    atualizarRecursos();
 });
 
 function setupNavigation() {
@@ -58,4 +61,23 @@ function setupNavigation() {
             });
         });
     }
+}
+
+// Função para adicionar versão dinâmica nos recursos
+function atualizarRecursos() {
+    const version = new Date().getTime(); // Gera um identificador único baseado na hora atual
+
+    // Atualiza o CSS
+    const cssLink = document.querySelector("link[href*='style.css']");
+    if (cssLink) {
+        cssLink.href = `css/style.css?v=${version}`;
+    }
+
+    // Atualiza o JS
+    const jsScript = document.querySelector("script[src*='main.js']");
+    if (jsScript) {
+        jsScript.src = `js/main.js?v=${version}`;
+    }
+
+    console.log("Recursos atualizados com versão:", version);
 }
